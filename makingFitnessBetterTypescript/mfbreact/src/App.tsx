@@ -33,9 +33,9 @@ function App() {
         //     exp-=601200;
         // }
         //it uses Milliseconds through the security
-        if(exp*1000 < Date.now()){
-            auth.logout();
-        }
+        // if(exp*1000 < Date.now()){
+        //     auth.logout();
+        // }
 
     }
 
@@ -51,7 +51,7 @@ function App() {
               <Router>
                 <Routes>
                     <Route path="/" element={<HomepageComponent/>} />
-                    <Route path="/login" element={<Login/>} />
+                    {/*<Route path="/login" element={<Login/>} />*/}
                 </Routes>
               </Router>
 
