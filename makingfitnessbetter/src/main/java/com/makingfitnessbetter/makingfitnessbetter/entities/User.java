@@ -3,6 +3,7 @@ package com.makingfitnessbetter.makingfitnessbetter.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -21,9 +22,32 @@ public class User {
     private String password;
     @Column
     private String email;
+    private String role;
+    //only two options : ROLE_ADMIN, ROLE_DEV, ROLE_USER
+    private Integer failedAttempt;
+    private Boolean accountNotLocked;
+    private Date lockTime;
+    @Column(name = "verifcation_code", length = 64)
+    private String verifcationCode;
 
     @OneToMany
     List<EntryLog> entryLogList;
+
+    public User( String email, String password, String username, String role) {
+
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.role = role;
+    }
+
+    public User(Integer memberId, String email, String password, String username, String role) {
+        this.memberId = memberId;
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.role = role;
+    }
 
 
 }
