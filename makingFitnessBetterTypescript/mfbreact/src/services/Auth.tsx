@@ -18,10 +18,6 @@ class Auth {
         localStorage.removeItem("remember-me");
     }
 
-    isLoggedIn():boolean{
-        return localStorage.getItem("token")!=undefined;
-    }
-
 }
 
 export default Auth;

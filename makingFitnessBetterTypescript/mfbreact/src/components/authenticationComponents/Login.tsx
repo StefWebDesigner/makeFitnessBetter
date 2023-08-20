@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Auth from "../../services/Auth";
@@ -18,15 +18,6 @@ const Login = () => {
     const [message,setMessage]=useState("")
     const navigate=useNavigate();
 
-    //it prevents you from entering the login menu
-    let isloggedIn=auth.isLoggedIn();
-    useEffect(()=>{
-            if(isloggedIn){
-                navigate("/");
-            }
-        }
-    )
-
     function loginUser(e:any){
         e.preventDefault();
         auth.login(username,password).then((response)=>{
@@ -35,7 +26,9 @@ const Login = () => {
                 console.log(localStorage.getItem("token"));
 
                 localStorage.setItem("id",response.data.id);
-                console.log(localStorage.getItem("id"));
+                console.log(response.data.id);
+
+                localStorage.setItem("email", response.data.email);
 
                 localStorage.setItem("role",response.data.role);
                 console.log(localStorage.getItem("role"));
