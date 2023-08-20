@@ -3,6 +3,7 @@ package com.makingfitnessbetter.makingfitnessbetter.service;
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.UserException;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.UserRepository;
+import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.UserVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,27 @@ public class UserServiceImp implements UserService {
                 throw new BadCredentialsException("user not found exception");
             }
             return user.get();
+        }catch(UserException e){
+            throw new UserException("NO USER FOUND. CHECK IF THE USERNAME IS CORRECT");
+        }
+
+    }
+
+    @Override
+    public UserLoginVO getUserVOByUsername(String username) {
+        try {
+            Optional<User> user=userRepository.findUserVOByUsername(username);
+            UserLoginVO userLoginVO = new UserLoginVO();
+            userLoginVO.setMemberId(user.get().getMemberId());
+            userLoginVO.setUsername(user.get().getUsername());
+            userLoginVO.setFailedAttempt(user.get().getFailedAttempt());
+            userLoginVO.setLockTime(user.get().getLockTime());
+            userLoginVO.setRole(user.get().getRole());
+
+            if (!user.isPresent()){
+                throw new BadCredentialsException("user not found exception");
+            }
+            return userLoginVO;
         }catch(UserException e){
             throw new UserException("NO USER FOUND. CHECK IF THE USERNAME IS CORRECT");
         }

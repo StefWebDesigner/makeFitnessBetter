@@ -2,6 +2,7 @@ package com.makingfitnessbetter.makingfitnessbetter.service;
 
 
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
+import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.UserVO;
 
 public interface UserService {
@@ -36,6 +37,8 @@ public interface UserService {
 
     // *****  GET USER BY USERNAME *****
     public User getUserByUsername(String username);
+    public UserLoginVO getUserVOByUsername(String username);
+
 
     // ***** UDPATE FAILED ATTEMPTS *****
     public void updateFailedAttempts(int failAttempts, String email);

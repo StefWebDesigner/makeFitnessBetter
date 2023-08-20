@@ -3,6 +3,7 @@ package com.makingfitnessbetter.makingfitnessbetter.controller;
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.UserException;
 import com.makingfitnessbetter.makingfitnessbetter.service.UserService;
+import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,8 +30,8 @@ public class UserController {
     }
 
     @GetMapping("/getUser")
-    public User getUserViaUsername(@RequestParam String username){
-        User user = userService.getUserByUsername(username);
+    public UserLoginVO getUserViaUsername(@RequestParam String username){
+        UserLoginVO user = userService.getUserVOByUsername(username);
         return user;
 
     }
