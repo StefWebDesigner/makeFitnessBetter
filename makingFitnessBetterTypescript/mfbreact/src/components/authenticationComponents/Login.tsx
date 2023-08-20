@@ -21,14 +21,16 @@ const Login = () => {
     function loginUser(e:any){
         e.preventDefault();
         auth.login(username,password).then((response)=>{
+            console.log(response.data);
+
             if(response.data.token){
                 localStorage.setItem("token",response.data.token);
                 console.log(localStorage.getItem("token"));
 
-                localStorage.setItem("id",response.data.id);
-                console.log(response.data.id);
+                // localStorage.setItem("id",response.data.id);
+                // console.log(response.data.id);
 
-                localStorage.setItem("email", response.data.email);
+                // localStorage.setItem("email", response.data.email);
 
                 localStorage.setItem("role",response.data.role);
                 console.log(localStorage.getItem("role"));
