@@ -1,0 +1,22 @@
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Fahkwang';
+}
+
+
+.main-nav-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-nav-brand-container {
+    display: flex;
+    flex-direction: row
+}
+
+.brand-logo {
+    width: 40px;
+}
