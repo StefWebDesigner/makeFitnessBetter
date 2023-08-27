@@ -1,12 +1,14 @@
 import React, {useState, Suspense} from 'react';
 import HomepageComponent from "./components/layout/HomepageComponent";
 import {BrowserRouter as Router, Routes, Route, BrowserRouter, useNavigate} from "react-router-dom";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import Auth from "./services/Auth";
 import axios from "axios";
 import { AuthContext } from './dataStore';
 import jwtDecode from "jwt-decode";
 import Login from "./components/authenticationComponents/Login";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './stylesheets/customCSS.css';
 
 
 function App() {

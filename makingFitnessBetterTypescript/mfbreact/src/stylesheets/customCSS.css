@@ -1,0 +1,68 @@
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Fahkwang';
+}
+
+.progress-warning {
+    color : red
+}
+
+
+.main-nav-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.main-nav-brand-container {
+    display: flex;
+    flex-direction: row
+}
+
+.main-nav-link-container {
+    display: none;
+}
+
+.main-nav-link {
+    text-align: center;
+}
+
+.brand-logo {
+    width: 40px;
+}
+
+/*   Home Components     */
+
+.home-title {
+    text-align: center;
+    margin-top: 20px;
+
+}
+
+.home-card{
+    border-radius: 25px;
+}
+
+.home-description {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.home-signin {
+    /*margin-top: 50px;*/
+    text-align: center;
+}
+
+.home-signup-button {
+    background-color: red;
+    color : blue;
+}
+
+.home-signup-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
