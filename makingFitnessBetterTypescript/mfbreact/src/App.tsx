@@ -7,6 +7,7 @@ import { AuthContext } from './dataStore';
 import jwtDecode from "jwt-decode";
 import Login from "./components/authenticationComponents/Login";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheets/customCSS.css';
 
 

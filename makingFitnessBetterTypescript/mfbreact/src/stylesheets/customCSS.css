@@ -17,6 +17,14 @@
     flex-direction: row
 }
 
+.main-nav-link-container {
+    display: none;
+}
+
+.main-nav-link {
+    text-align: center;
+}
+
 .brand-logo {
     width: 40px;
 }
