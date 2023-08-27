@@ -28,3 +28,13 @@
 .brand-logo {
     width: 40px;
 }
+
+/*   Home Components     */
+
+.home-title {
+    text-align: center;
+}
+
+.home-card{
+    border-radius: 25px;
+}
