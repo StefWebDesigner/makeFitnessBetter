@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from "../authenticationComponents/Login";
 import MainNavigation from "../navigationComponents/MainNavigation";
-import {Card, Container} from "react-bootstrap";
+import {Button, Card, Container} from "react-bootstrap";
 
 const HomepageComponent = () => {
     return (
@@ -11,7 +11,15 @@ const HomepageComponent = () => {
 
 
             <Container>
+
+                {/* Warning label....Frontend Section is a work on progress. Backend read for binding content*/}
+                <cite className="progress-warning"> *Frontend application is still undergoing progress. Backend ready for round one of binding endpoints *</cite>
+
                 <h1 className="home-title"> Making Fitness Better</h1>
+
+                <p className="home-description">
+                    Designed to make tracking exerise logs faster, organized with easy search features, and back up capabilites
+                </p>
 
                 <Card className = "home-card">
                     <Card.Body>
@@ -24,8 +32,17 @@ const HomepageComponent = () => {
                             </footer>
                         </blockquote>
                     </Card.Body>
-
                 </Card>
+
+
+                <div className="home-signup-button-container">
+                    <Button className="home-signup-button">
+                        <h2 className="home-signin"> Sign up NOW!</h2>
+                    </Button>
+                </div>
+
+
+
             </Container>
 
 
