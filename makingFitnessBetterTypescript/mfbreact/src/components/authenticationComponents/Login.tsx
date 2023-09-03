@@ -25,18 +25,17 @@ const Login = () => {
 
             if(response.data.token){
                 localStorage.setItem("token",response.data.token);
-                console.log(localStorage.getItem("token"));
-
-                // localStorage.setItem("id",response.data.id);
-                // console.log(response.data.id);
-
                 localStorage.setItem("email", response.data.email);
-
                 localStorage.setItem("role",response.data.role);
-                console.log(localStorage.getItem("role"));
-
                 authContext.setToken(response.data.token);
             }
+
+            const currentUser = auth.getUser(username).then((response) => {
+                if(response.data){
+                    localStorage.setItem("id",response.data.memberId);
+                    localStorage.setItem("username",response.data.username);
+                }
+            });
 
             navigate("/");
 

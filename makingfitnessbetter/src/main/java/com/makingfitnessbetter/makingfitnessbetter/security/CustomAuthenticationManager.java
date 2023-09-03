@@ -31,7 +31,6 @@ public class CustomAuthenticationManager implements AuthenticationManager {
         PasswordEncoder encoder = (PasswordEncoder) SpringApplicationContext.getBean("passwordEncoder");
         User user = userService.getUserByUsername(username);
 
-        System.out.println(" User is " + user.getUsername());
 
         if (user != null) {
             if (user.getAccountNotLocked()) {
