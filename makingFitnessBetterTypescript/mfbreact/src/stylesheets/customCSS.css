@@ -52,6 +52,66 @@
     text-align: center;
 }
 
+.me-auto {
+    margin-right : auto;
+}
+
+.main-nav-link-group{
+    display: none;
+}
+
+/*.me-auto {*/
+/*    margin-right: unset;*/
+/*}*/
+
+/*.navbar-nav {*/
+/*    justify-content: center;*/
+/*    justify-items: center;*/
+/*    align-items: center;*/
+/*    align-content: center;*/
+/*    color : red;*/
+/*}*/
+
+
+
+@media only screen and (min-width: 768px) {
+
+    /*.me-auto {*/
+    /*    margin-right: unset;*/
+    /*    display: flex;*/
+    /*    justify-content: center;*/
+    /*}*/
+
+    .navbar-nav{
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        align-content: center;
+        color : red;
+    }
+
+    /*.main-nav-link {*/
+    /*    justify-content: flex-end;*/
+    /*}*/
+    .main-nav-link-group{
+        display: flex;
+        justify-items: center;
+        /*justify-content: flex-end;*/
+        gap: 20px;
+
+    }
+}
+
+.main-nav-link-login {
+    text-align: center;
+}
+
+/*@media only screen and (min-width: 768px) {*/
+/*    main-nav-link-login {*/
+/*        flex-direction: row-reverse;*/
+/*    }*/
+/*}*/
+
 .brand-logo {
     width: 40px;
 }

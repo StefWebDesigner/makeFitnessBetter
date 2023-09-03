@@ -49,7 +49,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-
+        //This is fetching the username
         String email = ( auth.getName());
         String token = Jwts.builder()
                 .setSubject(email)
@@ -58,7 +58,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET )
                 .compact();
 
-        System.out.println("auth email is : " + email);
+        System.out.println("local username is : " + email);
 
 
 

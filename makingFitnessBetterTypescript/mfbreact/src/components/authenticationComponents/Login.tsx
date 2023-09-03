@@ -30,7 +30,7 @@ const Login = () => {
                 // localStorage.setItem("id",response.data.id);
                 // console.log(response.data.id);
 
-                // localStorage.setItem("email", response.data.email);
+                localStorage.setItem("email", response.data.email);
 
                 localStorage.setItem("role",response.data.role);
                 console.log(localStorage.getItem("role"));
@@ -68,26 +68,26 @@ const Login = () => {
         {/*</Form>*/}
         {/*</Navbar>*/}
 
-            {/*<Form className="login-form-container" onSubmit={loginUser}>*/}
-            {/*    <div className="login-form-background">*/}
-            {/*        <FormGroup>*/}
-            {/*            <FormLabel className="login-form-label"> Username</FormLabel>*/}
-            {/*            <FormControl*/}
-            {/*                type="text"*/}
-            {/*                name="username"*/}
-            {/*                placeholder="username"*/}
-            {/*                onChange={(e) => (setUsername(e.target.value))}*/}
-            {/*            />*/}
-            {/*        </FormGroup>*/}
-            {/*        <FormGroup>*/}
-            {/*            <FormLabel className="login-form-label">Password</FormLabel>*/}
-            {/*            <FormControl*/}
-            {/*                type="password"*/}
-            {/*                name="password"*/}
-            {/*                placeholder="password"*/}
-            {/*                onChange={(e) => (setPassword(e.target.value))}*/}
-            {/*            />*/}
-            {/*        </FormGroup>*/}
+            <Form className="login-form-container" onSubmit={loginUser}>
+                <div className="login-form-background">
+                    <FormGroup>
+                        <FormLabel className="login-form-label"> Username</FormLabel>
+                        <FormControl
+                            type="text"
+                            name="username"
+                            placeholder="username"
+                            onChange={(e) => (setUsername(e.target.value))}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel className="login-form-label">Password</FormLabel>
+                        <FormControl
+                            type="password"
+                            name="password"
+                            placeholder="password"
+                            onChange={(e) => (setPassword(e.target.value))}
+                        />
+                    </FormGroup>
 
                     {/*<FormCheck*/}
                     {/*    className="login-form-label"*/}
@@ -97,24 +97,24 @@ const Login = () => {
                     {/*    onChange={(e) => setRemember(!remember)}*/}
                     {/*/>*/}
 
-            {/*        <div className="login-form-button-group">*/}
-            {/*            <Button*/}
-            {/*                className="login-form-button"*/}
-            {/*                type="submit"*/}
-            {/*            >*/}
-            {/*                Enter*/}
-            {/*            </Button>*/}
-            {/*        </div>*/}
+                    <div className="login-form-button-group">
+                        <Button
+                            className="login-form-button"
+                            type="submit"
+                        >
+                            Enter
+                        </Button>
+                    </div>
 
 
-            {/*        <div>*/}
-            {/*            {error && (<>{message}</>)}*/}
-            {/*        </div>*/}
+                    <div>
+                        {error && (<>{message}</>)}
+                    </div>
 
-            {/*    </div>*/}
+                </div>
 
 
-            {/*</Form>*/}
+            </Form>
             
         </>
     );
