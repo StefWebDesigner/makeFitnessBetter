@@ -1,16 +1,21 @@
 package com.makingfitnessbetter.makingfitnessbetter.utility;
 
-public class transactionCode {
+import com.makingfitnessbetter.makingfitnessbetter.service.TransactionLogServiceImp;
 
+public class transactionCode extends TransactionLogServiceImp {
+
+    public static final String USR_EXT = "User ALREADY EXIST";
     //User CD
-    final String USR_CRE = "New User Created";
+    public static final String USR_CRE = "New User Created";
+//    final static String USR_EXT = "User ALREADY EXIST";
+
 
 
     //Entry CD
-    final String ENT_CRE = "New Entry Creation";
+    public static final String ENT_CRE = "New Entry Creation";
 
     //Exercise LOG CD
-    final String ADD_LOG = "Add Exercise Log";
-    final String MOD_LOG = "Modify Exercise Log";
+    public static final String ADD_LOG = "Add Exercise Log";
+    public static final String MOD_LOG = "Modify Exercise Log";
 
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Data
@@ -21,7 +22,7 @@ public class TransactionLog {
     private Integer exerciseId;
     private String transCd;
     private String transDescription;
-    private Date logDateMade;
+    private LocalTime logDateMade;
     private String userMod;
 
 }

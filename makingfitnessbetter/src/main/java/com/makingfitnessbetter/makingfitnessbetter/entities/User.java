@@ -31,6 +31,8 @@ public class User {
     private Date lockTime;
     @Column(name = "verifcation_code", length = 64)
     private String verifcationCode;
+    private String actionCd;
+
 
 
     @OneToMany
