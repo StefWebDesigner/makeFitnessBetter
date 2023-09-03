@@ -3,8 +3,27 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: 'Fahkwang';
+
+    /*font-family: 'Dancing Script', cursive;*/
+
+    font-family: 'Raleway', sans-serif;
+
 }
+
+/*All fonts*/
+/*font-family: 'Dancing Script', cursive;*/
+
+/*font-family: 'Raleway', sans-serif;*/
+
+/*font-family: 'Tulpen One', cursive;*/
+
+
+.page-container {
+    background-color: #fbfbfd;
+}
+
+
+
 
 .progress-warning {
     color : red
@@ -25,6 +44,10 @@
     display: none;
 }
 
+.main-nav-brand-title {
+    /*font-family: 'Tulpen One', cursive;*/
+}
+
 .main-nav-link {
     text-align: center;
 }
@@ -38,17 +61,38 @@
 .home-title {
     text-align: center;
     margin-top: 20px;
+    /*font-family: 'Tulpen One', cursive;*/
 
 }
 
 .home-card{
     border-radius: 25px;
+    border-color: #435334;
+    background-color: #fff;
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+
 }
 
+.home-description-first {
+    text-align: center;
+    color : #435334;
+
+}
+
+
+.home-description-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
 .home-description {
     margin-top: 20px;
     margin-bottom: 20px;
+    text-align: center;
 }
+
+
 
 .home-signin {
     /*margin-top: 50px;*/
@@ -56,8 +100,8 @@
 }
 
 .home-signup-button {
-    background-color: red;
-    color : blue;
+    background-color: #A2C579;
+    color : white;
 }
 
 .home-signup-button-container {

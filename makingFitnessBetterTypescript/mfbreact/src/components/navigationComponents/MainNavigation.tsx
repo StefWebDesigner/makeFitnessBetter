@@ -42,7 +42,7 @@ const MainNavigation = () => {
                             src={brandLogo}
                             width="30"
                             height="30"
-                            className="d-inline-block align-top"
+                            className=" main-nav-brand-title d-inline-block align-top "
                         />
                         Make Fitness Better
                     </Navbar.Brand>
