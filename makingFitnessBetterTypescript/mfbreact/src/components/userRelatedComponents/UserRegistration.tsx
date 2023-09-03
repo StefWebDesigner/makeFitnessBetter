@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
 import {Button, Form, FormControl, FormGroup, FormLabel} from "react-bootstrap";
 import UserService from "../../services/UserService";
+import {useNavigate} from "react-router-dom";
 
 const UserRegistration = () => {
     let userService : UserService = new UserService();
+
+    const navigate = useNavigate()
+
 
 
     // interface FormData {
@@ -39,6 +43,9 @@ const UserRegistration = () => {
                 setEmail(response.data.email);
                 setRole(response.data.role);
                 console.log("Regiration was successful")
+
+                navigate("/")
+
             } else {
                 console.log("not sucessful")
             }
