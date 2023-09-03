@@ -3,8 +3,19 @@ import Login from "../authenticationComponents/Login";
 // @ts-ignore
 import MainNavigation from "../navigationComponents/MainNavigation";
 import {Button, Card, Container} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
 
 const HomepageComponent = () => {
+
+    const navigate=useNavigate();
+
+
+    function NavigateToRegistrationForm(){
+        navigate("/registration");
+
+    }
+
+
     return (
         <>
             <MainNavigation/>
@@ -58,7 +69,10 @@ const HomepageComponent = () => {
 
 
                 <div className="home-signup-button-container">
-                    <Button className="home-signup-button">
+                    <Button
+                        className="home-signup-button"
+                        onClick={NavigateToRegistrationForm}
+                    >
                         <h2 className="home-signin"> Sign up NOW!</h2>
                     </Button>
                 </div>

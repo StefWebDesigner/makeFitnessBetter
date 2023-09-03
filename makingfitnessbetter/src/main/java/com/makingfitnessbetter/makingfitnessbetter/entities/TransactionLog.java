@@ -22,7 +22,7 @@ public class TransactionLog {
     private Integer exerciseId;
     private String transCd;
     private String transDescription;
-    private LocalTime logDateMade;
+    private Date logDateMade;
     private String userMod;
 
 }

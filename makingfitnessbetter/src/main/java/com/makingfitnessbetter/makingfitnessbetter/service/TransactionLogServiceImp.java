@@ -26,7 +26,8 @@ public class TransactionLogServiceImp implements TransactionLogService{
             transactionLog.setEntryId(null);
             transactionLog.setExerciseId(null);
             transactionLog.setTransDescription(transactionCode.USR_EXT);
-            transactionLog.setLogDateMade(LocalTime.now());
+//            transactionLog.setLogDateMade(LocalTime.now());
+            transactionLog.setLogDateMade(null);
             transactionLog.setUserMod(user.getUsername());
 
             TransactionLog sumbitedLog = transactionLogRepository.save(transactionLog);
@@ -38,7 +39,8 @@ public class TransactionLogServiceImp implements TransactionLogService{
             transactionLog.setEntryId(null);
             transactionLog.setExerciseId(null);
             transactionLog.setTransDescription(transactionCode.USR_CRE);
-            transactionLog.setLogDateMade(LocalTime.now());
+//            transactionLog.setLogDateMade(LocalTime.now());
+            transactionLog.setLogDateMade(null);
             transactionLog.setUserMod(user.getUsername());
 
             TransactionLog sumbitedLog = transactionLogRepository.save(transactionLog);

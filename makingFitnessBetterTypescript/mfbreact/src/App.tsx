@@ -10,6 +10,7 @@ import Login from "./components/authenticationComponents/Login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheets/customCSS.css';
 import Logs from "./components/logsComponents/Logs";
+import UserRegistration from "./components/userRelatedComponents/UserRegistration";
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<HomepageComponent/>} />
                     <Route path="/logs" element={<Logs/>}/>
+                    <Route path="/registration" element={<UserRegistration/>}/>
                     {/*<Route path="/login" element={<Login/>} />*/}
                 </Routes>
               </Router>
