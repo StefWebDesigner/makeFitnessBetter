@@ -31,7 +31,7 @@ public class User {
     private Date lockTime;
     @Column(name = "verifcation_code", length = 64)
     private String verifcationCode;
-    private
+
 
     @OneToMany
     List<EntryLog> entryLogList;

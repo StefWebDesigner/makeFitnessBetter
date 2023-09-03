@@ -43,10 +43,15 @@ public class EntryLogController {
     }
 
     // Going to have to create a processEntryLogCreation
-    //Going to steps to check if there is already an entry
-        // create one
-    // 2) it will make it null
+    //1) Going to steps to check if there is already an entry
+        // a.  create one
+        // b. modify an existing one
+                // add th exersice to the esisting entry log
+                // modify the exervise log for the existing entry log
+                // delete the exsting exercise log for the entry log
     // 4) create a transaction log for it
+
+
 
 
 

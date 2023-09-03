@@ -41,6 +41,9 @@ public class UserController {
     //1) Ask if the if the user exist
         //2)    Craete the user
         // Stop process
+        // Add a validation feild
+    //2) Will add a later conditon for they have existing user
+        //Get them to log in
     //3) Make transaction log
 
 
