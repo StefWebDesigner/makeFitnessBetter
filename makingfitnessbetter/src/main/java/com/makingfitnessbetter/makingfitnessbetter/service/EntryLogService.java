@@ -6,5 +6,7 @@ import com.makingfitnessbetter.makingfitnessbetter.vo.CreateEntryLogVO;
 public interface EntryLogService{
 
     //CREATE ENTRYLOG
-    EntryLog createEntry(CreateEntryLogVO entryLogVo);
+    EntryLog createEntry(CreateEntryLogVO entryLogVo, Integer id);
+
+    EntryLog fetchAllEntryRecords(Integer id);
 }

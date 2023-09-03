@@ -35,6 +35,7 @@ public class ExerciseLogController {
         }
     }
 
+
     @GetMapping("/allExercisesInLog")
     public ResponseEntity<Object> findAllExerciseLogPerEntry(@RequestParam Integer id, @RequestParam Integer entryId){
         try{
@@ -44,6 +45,13 @@ public class ExerciseLogController {
             throw new EntryLogException("Unable to fetch your exercises for this entry. Please try again");
         }
     }
+
+    // make a processingExeriseLog
+    //1) Check the log is existing or not
+    // 2) check if the entnry exists or not
+        // add the log
+    // 3) check if the exercise is to be modified instead of a new entry
+    // 4) create a transaction log for it
 
 
 }

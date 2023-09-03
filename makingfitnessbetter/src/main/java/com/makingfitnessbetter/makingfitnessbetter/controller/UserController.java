@@ -36,4 +36,12 @@ public class UserController {
 
     }
 
+    // Create a larger class called User Registration
+    // ---- I wil require the translong model and modifation to the existin tbale
+    //1) Ask if the if the user exist
+        //2)    Craete the user
+        // Stop process
+    //3) Make transaction log
+
+
 }
