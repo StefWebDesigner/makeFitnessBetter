@@ -9,6 +9,8 @@ import {ImHome} from "react-icons/im";
 import {GrLogin} from "react-icons/gr";
 import {LuLogOut} from "react-icons/lu";
 import {GiHamburgerMenu} from "react-icons/gi";
+import {FaClipboardList} from "react-icons/fa";
+
 
 
 
@@ -36,41 +38,49 @@ const MainNavigation = () => {
         <>
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
-                    <Navbar.Brand href="#home">
+                    {/*<Navbar.Brand href="#home">*/}
                         <img
                             alt=""
                             src={brandLogo}
                             width="30"
                             height="30"
-                            className="d-inline-block align-top"
+                            className=" main-nav-brand-title d-inline-block align-top "
                         />
                         Make Fitness Better
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        {/*<Nav className="me-auto">*/}
-                        <Nav className="me-auto">
+                    {/*</Navbar.Brand>*/}
+                    {/*<Navbar.Toggle aria-controls="basic-navbar-nav" />*/}
+                    {/*<Navbar.Collapse id="basic-navbar-nav">*/}
+                    {/*    /!*<Nav className="me-auto">*!/*/}
+                    {/*    <Nav className="me-auto">*/}
 
+                        <div className="main-nav-link-group">
+                            <Link to="/" className="main-nav-link">
+                                <ImHome
+                                    size={35}
+                                    color="green"
+                                />
+                            </Link>
+                            <Link
+                                to="/register"
+                                className="main-nav-link"
+                            >
+                                <MdOutlineAssignmentInd size = {35} color="green"
+                                />
+                            </Link>
+                            <Link
+                                to="/logs"
+                                className="main-nav-link"
+                            >
+                                <FaClipboardList size={35} color="green"/>
+                            </Link>
+                            <Link
+                                to="/login"
+                                className="main-nav-link"
+                            >
+                                <GrLogin size={35} color="green"/>
+                            </Link>
+                        </div>
 
-                        <Link to="/" className="main-nav-link">
-                            <ImHome
-                                size={35}
-                                color="blue"
-                            />
-                        </Link>
-                        <Link
-                            to="/register"
-                            className="main-nav-link"
-                        >
-                            <MdOutlineAssignmentInd size = {35} color="blue"
-                            />
-                        </Link>
-                                <Link
-                                    to="/login"
-                                    className="main-nav-link"
-                                >
-                                    <GrLogin size={35} color="red"/>
-                                </Link>
 
                                 {/*To be added after optomiozing the menu*/}
                                 {/*<Link*/}
@@ -93,8 +103,8 @@ const MainNavigation = () => {
                             {/*        Separated link*/}
                             {/*    </NavDropdown.Item>*/}
                             {/*</NavDropdown>*/}
-                        </Nav>
-                    </Navbar.Collapse>
+                        {/*</Nav>*/}
+                    {/*</Navbar.Collapse>*/}
                 </Container>
             </Navbar>
 

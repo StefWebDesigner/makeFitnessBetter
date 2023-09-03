@@ -3,8 +3,27 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: 'Fahkwang';
+
+    /*font-family: 'Dancing Script', cursive;*/
+
+    font-family: 'Raleway', sans-serif;
+
 }
+
+/*All fonts*/
+/*font-family: 'Dancing Script', cursive;*/
+
+/*font-family: 'Raleway', sans-serif;*/
+
+/*font-family: 'Tulpen One', cursive;*/
+
+
+.page-container {
+    background-color: #fbfbfd;
+}
+
+
+
 
 .progress-warning {
     color : red
@@ -25,9 +44,73 @@
     display: none;
 }
 
+.main-nav-brand-title {
+    /*font-family: 'Tulpen One', cursive;*/
+}
+
 .main-nav-link {
     text-align: center;
 }
+
+.me-auto {
+    margin-right : auto;
+}
+
+.main-nav-link-group{
+    display: none;
+}
+
+/*.me-auto {*/
+/*    margin-right: unset;*/
+/*}*/
+
+/*.navbar-nav {*/
+/*    justify-content: center;*/
+/*    justify-items: center;*/
+/*    align-items: center;*/
+/*    align-content: center;*/
+/*    color : red;*/
+/*}*/
+
+
+
+@media only screen and (min-width: 768px) {
+
+    /*.me-auto {*/
+    /*    margin-right: unset;*/
+    /*    display: flex;*/
+    /*    justify-content: center;*/
+    /*}*/
+
+    .navbar-nav{
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        align-content: center;
+        color : red;
+    }
+
+    /*.main-nav-link {*/
+    /*    justify-content: flex-end;*/
+    /*}*/
+    .main-nav-link-group{
+        display: flex;
+        justify-items: center;
+        /*justify-content: flex-end;*/
+        gap: 20px;
+
+    }
+}
+
+.main-nav-link-login {
+    text-align: center;
+}
+
+/*@media only screen and (min-width: 768px) {*/
+/*    main-nav-link-login {*/
+/*        flex-direction: row-reverse;*/
+/*    }*/
+/*}*/
 
 .brand-logo {
     width: 40px;
@@ -38,17 +121,38 @@
 .home-title {
     text-align: center;
     margin-top: 20px;
+    /*font-family: 'Tulpen One', cursive;*/
 
 }
 
 .home-card{
     border-radius: 25px;
+    border-color: #435334;
+    background-color: #fff;
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+
 }
 
+.home-description-first {
+    text-align: center;
+    color : #435334;
+
+}
+
+
+.home-description-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
 .home-description {
     margin-top: 20px;
     margin-bottom: 20px;
+    text-align: center;
 }
+
+
 
 .home-signin {
     /*margin-top: 50px;*/
@@ -56,8 +160,8 @@
 }
 
 .home-signup-button {
-    background-color: red;
-    color : blue;
+    background-color: #A2C579;
+    color : white;
 }
 
 .home-signup-button-container {

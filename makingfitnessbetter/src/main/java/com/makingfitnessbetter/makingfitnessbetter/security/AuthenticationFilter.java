@@ -2,9 +2,12 @@ package com.makingfitnessbetter.makingfitnessbetter.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.makingfitnessbetter.makingfitnessbetter.entities.User;
 import com.makingfitnessbetter.makingfitnessbetter.requests.UserLoginRequest;
+import com.makingfitnessbetter.makingfitnessbetter.service.UserService;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -19,6 +22,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    @Autowired
+    private UserService userService;
+
     private CustomAuthenticationManager authenticationManager;
 
     public AuthenticationFilter(CustomAuthenticationManager authenticationManager) {
@@ -49,8 +56,19 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-
+        //This is fetching the username
         String email = ( auth.getName());
+
+        // Enter a method to get the
+//        User selectedUser = userService.getUserByUsername(username);
+//        Integer id = selectedUser.getMemberId();
+//        String email = selectedUser.getEmail();
+
+//        System.out.println("id " + selectedUser.getMemberId());
+//        System.out.println("email " + selectedUser.getEmail());
+
+
+
         String token = Jwts.builder()
                 .setSubject(email)
                 //REQURIES SECURITY CONSTRANT CLASS
@@ -58,13 +76,14 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET )
                 .compact();
 
-        System.out.println("auth email is : " + email);
+        System.out.println("local username is : " + email);
 
 
 
         //One you login, the token knows who you are
 //        res.getWriter().write("{\"token\": \"" + token + "\", \"role\": \""+ auth.getAuthorities().stream().findFirst().get().getAuthority() + "\" }");
-        res.getWriter().write("{\"token\": \"" + token + "\", \"role\": \""+ auth.getAuthorities().stream().findFirst().get().getAuthority() + "\", \"email\": \"" + email + "\" }");
+//        res.getWriter().write("{\"token\": \"" + token + "\", \"role\": \""+ auth.getAuthorities().stream().findFirst().get().getAuthority() + "\", \"email\": \"" + username + "\" + \"id\": \"" + id + "\" }");
+        res.getWriter().write("{\"token\": \"" + token + "\", \"role\": \""+ auth.getAuthorities().stream().findFirst().get().getAuthority() + "\", \"email\": \"" + email + "\"}");
 
     }
 

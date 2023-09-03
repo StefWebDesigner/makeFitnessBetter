@@ -1,11 +1,14 @@
 package com.makingfitnessbetter.makingfitnessbetter.service;
 
 import com.makingfitnessbetter.makingfitnessbetter.entities.EntryLog;
+import com.makingfitnessbetter.makingfitnessbetter.entities.ExerciseLog;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.EntryLogException;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.EntryLogRepository;
 import com.makingfitnessbetter.makingfitnessbetter.vo.CreateEntryLogVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EntryLogServiceImp implements EntryLogService {
@@ -14,7 +17,20 @@ public class EntryLogServiceImp implements EntryLogService {
     EntryLogRepository entryLogRepository;
 
     //CREATE ENTRYLOG
-    public EntryLog createEntry(CreateEntryLogVO entryLogVo){
+//    public EntryLog createEntry(CreateEntryLogVO entryLogVo){
+//        try{
+//            EntryLog newEntry = new EntryLog();
+//            newEntry.setEntryName(entryLogVo.getEntryName());
+//            newEntry.setOverallComments(entryLogVo.getOverallComments());
+//            entryLogRepository.save(newEntry);
+//            return newEntry;
+//        } catch(EntryLogException e){
+//            throw new EntryLogException("All indicated fields not properly filled in");
+//        }
+//
+//    }
+
+    public EntryLog createEntry(CreateEntryLogVO entryLogVo, Integer id){
         try{
             EntryLog newEntry = new EntryLog();
             newEntry.setEntryName(entryLogVo.getEntryName());
@@ -26,6 +42,17 @@ public class EntryLogServiceImp implements EntryLogService {
         }
 
     }
+
+    public EntryLog fetchAllEntryRecords(Integer id){
+        //find the entry id with the memeber Id
+
+
+        //get all the experces
+
+        return null;
+
+    }
+
 
 
 }

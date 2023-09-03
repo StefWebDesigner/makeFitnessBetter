@@ -13,6 +13,7 @@ import java.util.Map;
 public class CreateEntryLogVO {
 
     private Integer entryId;
+    private Integer memberId;
     private String entryName;
     private String overallComments;
 

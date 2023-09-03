@@ -2,6 +2,7 @@ package com.makingfitnessbetter.makingfitnessbetter.service;
 
 
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
+import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitRegistrationVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.UserVO;
 
@@ -22,6 +23,9 @@ public interface UserService {
 
     //CREATE A NEW USER
     User create(User user);
+
+    User submitRegistration(SubmitRegistrationVO submitRegistrationVO);
+
 
 
     // ============== SECURITY RELATED REQUESTS ==============
@@ -54,9 +58,6 @@ public interface UserService {
 
     // ***** UNLOCKED USER ACCESS TO LOGIN AFTER CERTAIN TIME *****
     public boolean unlockWhenTimeExpired(User user) ;
-
-
-
 
 
 }

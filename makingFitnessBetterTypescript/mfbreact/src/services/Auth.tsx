@@ -11,6 +11,13 @@ class Auth {
             });
     }
 
+    async getUser(username : string){
+        return await axios.get("http://localhost:8080/user/getUser?username=" + username);
+    }
+
+
+
+
     logout():void{
         localStorage.removeItem("token");
         localStorage.removeItem("id");

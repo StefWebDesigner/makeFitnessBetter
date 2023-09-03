@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
 
+
+    //
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer memberId;
@@ -29,6 +31,9 @@ public class User {
     private Date lockTime;
     @Column(name = "verifcation_code", length = 64)
     private String verifcationCode;
+    private String actionCd;
+
+
 
     @OneToMany
     List<EntryLog> entryLogList;

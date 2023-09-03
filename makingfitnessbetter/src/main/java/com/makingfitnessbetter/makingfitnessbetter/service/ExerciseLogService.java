@@ -16,4 +16,4 @@ public interface ExerciseLogService {
     //Find All Exercise logS FOR A SINGLE ENTRY
     public List<ExerciseLog> findAllExerciseLogPerEntry(Integer id, Integer entryId);
 
-    }
+}
