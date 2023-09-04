@@ -5,6 +5,7 @@ import com.makingfitnessbetter.makingfitnessbetter.entities.ExerciseLog;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.EntryLogException;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.EntryLogRepository;
 import com.makingfitnessbetter.makingfitnessbetter.vo.CreateEntryLogVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitEntryLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +53,23 @@ public class EntryLogServiceImp implements EntryLogService {
         return null;
 
     }
+
+    public EntryLog submitEntryLog(SubmitEntryLog submitEntryLog){
+        // Check if the post entry is already an entry
+
+        // If it is a new entry, go to the create new entry flow
+
+        // If it is an existing, go to the edit exisitn entry flow
+
+        // If it is an entry to be deleted, then enter delete entry flow
+
+        // Log according to the actionCd Status
+
+
+        return null;
+
+    }
+
 
 
 
