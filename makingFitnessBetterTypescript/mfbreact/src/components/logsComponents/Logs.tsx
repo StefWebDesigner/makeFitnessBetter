@@ -1,11 +1,47 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import MainNavigation from "../navigationComponents/MainNavigation";
 import axios from "axios";
 import {Button, Form, FormControl, FormGroup, FormLabel} from "react-bootstrap";
+import LogService from "../../services/LogService";
 
 const Logs = () => {
 
-    // const [logs, setLogs] = useState([]);
+    const memberId = Number(localStorage.getItem("id"));
+
+    let logService : LogService = new LogService();
+    // const [allLogs, setAllLogs] = useState([]);
+    const [allLogs, setAllLogs] = useState<any[]>([])
+
+    // async function getAllRecords(memberId : number) {
+    //
+    //  const data =  await axios.get("http://localhost:8080/entry/fetchAllExercises?id=" + memberId);
+    //
+    //
+    //
+    //
+    //     // logService.getAllEntryRecords(memberId).then(response => {
+    //     //     if(response.data){
+    //     //         // JSON.parse(response.data)
+    //     //
+    //     //         setAllLogs(response.data);
+    //     //
+    //     //         // data = JSON.parse(data)
+    //     //         console.log(response.data);
+    //     //
+    //     //     }
+    //     // })
+    //
+    //      // const data = logService.getAllEntryRecords(memberId);
+    //
+    //     // const response = logService.getAllEntryRecords(memberId);
+    //     setAllLogs(data.data);
+    //
+    //     }
+
+    useEffect( () => {
+        // getAllRecords(memberId);
+    }, [])
+
 
 
     // async function getAllLogs(){
@@ -46,7 +82,22 @@ const Logs = () => {
             </Form>
 
 
-            
+            {/*{allLogs}*/}
+
+            {
+                allLogs.map((entry, index) => {
+                    return (
+                         <aside key={entry.entryId}>
+                            {entry.entryId}
+                            {entry.entryName}
+                            {entry.overallComments}
+                         </aside>
+                    );
+                })
+            }
+
+
+
 
 
 

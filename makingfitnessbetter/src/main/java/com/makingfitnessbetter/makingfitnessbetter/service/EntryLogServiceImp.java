@@ -59,9 +59,13 @@ public class EntryLogServiceImp implements EntryLogService {
 
     public List<EntryLog> fetchAllEntryRecords(Integer id){
         //Find all entries by memeber Id
-        List<EntryLog> allEntries = entryLogRepository.findAllById(Collections.singleton(id));
+        try{
+            List<EntryLog> allEntries = entryLogRepository.findAllByMemberId(id);
+            return allEntries;
+        } catch(EntryLogException e){
+            throw new EntryLogException("No entries were found");
+        }
 
-        return allEntries;
 
 
     }

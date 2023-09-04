@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheets/customCSS.css';
 import Logs from "./components/logsComponents/Logs";
 import UserRegistration from "./components/userRelatedComponents/UserRegistration";
+// import UserRegistration from "./components/userRelatedComponents/UserRegistration";
 
 
 function App() {
