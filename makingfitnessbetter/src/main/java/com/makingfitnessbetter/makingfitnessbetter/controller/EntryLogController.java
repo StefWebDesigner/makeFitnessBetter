@@ -36,7 +36,7 @@ public class EntryLogController {
     @GetMapping("fetchAllExercises")
     public ResponseEntity<Object>fetchAllEntryRecords(@RequestParam Integer id){
         try{
-            EntryLog result = entryLogService.fetchAllEntryRecords(id);
+            List<EntryLog> result = entryLogService.fetchAllEntryRecords(id);
             return ExerciseLogVO.generateResponse("Retrieved all exercises", HttpStatus.OK, result);
         }catch(EntryLogException e){
             throw new EntryLogException("Unable to fetch your all your exercise records. Please try again");
