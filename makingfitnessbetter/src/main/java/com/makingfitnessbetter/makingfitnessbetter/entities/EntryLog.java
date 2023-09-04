@@ -15,6 +15,8 @@ public class EntryLog {
     private Integer memberId;
     private String entryName;
     private String overallComments;
+    private String actionCd;
+
 
     @OneToMany
     private List<ExerciseLog> exerciseLogList;

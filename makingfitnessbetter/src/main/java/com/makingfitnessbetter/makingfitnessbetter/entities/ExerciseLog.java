@@ -21,6 +21,8 @@ public class ExerciseLog {
     private Integer sets;
     private Integer reps;
     private String comments;
+    private String actionCd;
+
 //    private List<ExerciseLog> ExerciseId;
 //    private List<ExerciseLog> ExerciseName;
 //    private List<ExerciseLog> sets;

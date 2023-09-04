@@ -6,6 +6,7 @@ import com.makingfitnessbetter.makingfitnessbetter.exceptions.EntryLogException;
 import com.makingfitnessbetter.makingfitnessbetter.service.EntryLogService;
 import com.makingfitnessbetter.makingfitnessbetter.vo.CreateEntryLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.ExerciseLogVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitEntryLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,11 +36,24 @@ public class EntryLogController {
     @GetMapping("fetchAllExercises")
     public ResponseEntity<Object>fetchAllEntryRecords(@RequestParam Integer id){
         try{
-            EntryLog result = entryLogService.fetchAllEntryRecords(id);
+            List<EntryLog> result = entryLogService.fetchAllEntryRecords(id);
             return ExerciseLogVO.generateResponse("Retrieved all exercises", HttpStatus.OK, result);
         }catch(EntryLogException e){
             throw new EntryLogException("Unable to fetch your all your exercise records. Please try again");
         }
+    }
+
+
+    @PostMapping("submitEntryLog")
+    public ResponseEntity<Object>submitEntryLog(@RequestBody SubmitEntryLog submitEntryLog){
+        try{
+            EntryLog result = entryLogService.submitEntryLog(submitEntryLog);
+            return ExerciseLogVO.generateResponse("Retrieved all exercises", HttpStatus.OK, result);
+
+        }catch(EntryLogException e){
+        throw new EntryLogException("Posting log didn't go throuhg. Please try again");
+        }
+
     }
 
     // Going to have to create a processEntryLogCreation
