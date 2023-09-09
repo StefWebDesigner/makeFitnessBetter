@@ -8,6 +8,7 @@ import com.makingfitnessbetter.makingfitnessbetter.service.EntryLogService;
 import com.makingfitnessbetter.makingfitnessbetter.service.ExerciseLogService;
 import com.makingfitnessbetter.makingfitnessbetter.vo.AddingEntryLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.ExerciseLogVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitExerciseLogVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +46,17 @@ public class ExerciseLogController {
             throw new EntryLogException("Unable to fetch your exercises for this entry. Please try again");
         }
     }
+
+    @PostMapping("/submitExerciseSet")
+    public ResponseEntity<Object> submitExerciseLog(@RequestBody SubmitExerciseLogVO submitExerciseLogVO, @RequestParam Integer id){
+
+        try{
+            SubmitExerciseLogVO results = exerciseLogService.submitExerciseLog(submitExerciseLogVO, id);
+            return ExerciseLogVO.generateResponse("Post Exercise Set", HttpStatus.CREATED, results);
+        } catch(EntryLogException e){
+            throw new EntryLogException("Unable to submit the exercise log");
+        }
+
 
     // make a processingExeriseLog
     //1) Check the log is existing or not

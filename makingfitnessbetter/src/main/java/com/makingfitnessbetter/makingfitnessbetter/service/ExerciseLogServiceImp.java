@@ -10,6 +10,7 @@ import com.makingfitnessbetter.makingfitnessbetter.repositories.ExerciseLogRepos
 import com.makingfitnessbetter.makingfitnessbetter.repositories.UserRepository;
 import com.makingfitnessbetter.makingfitnessbetter.vo.AddingEntryLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.ExerciseLogVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitExerciseLogVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,27 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
         }
     }
 
+    //Submit Exercise flow
+    public SubmitExerciseLogVO submitExerciseLog(SubmitExerciseLogVO submitExerciseLogVO, Integer id){
+
+
+
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //Find All Exercise logS FOR A SINGLE ENTRY
     public List<ExerciseLog> findAllExerciseLogPerEntry(Integer id, Integer entryId) {
         try {
@@ -83,6 +105,8 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
             throw new ExerciseLogException("There was an issue, please try again");
         }
     }
+
+
 
 
 
