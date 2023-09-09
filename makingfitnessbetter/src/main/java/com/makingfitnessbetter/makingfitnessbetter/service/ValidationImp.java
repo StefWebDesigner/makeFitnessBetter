@@ -60,6 +60,7 @@ public class ValidationImp implements ValidationService {
                 submitExerciseLogVO.setActionCd(transactionCode.CRE_EXE_LOG);
             } else {
                 submitExerciseLogVO.setActionCd(transactionCode.EXE_EXE_LOG);
+                submitExerciseLogVO.setEntryId(finalList.get(0).getEntryId());
             }
 
             return  validationResults;

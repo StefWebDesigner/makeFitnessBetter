@@ -2,14 +2,17 @@ package com.makingfitnessbetter.makingfitnessbetter.service;
 
 import com.makingfitnessbetter.makingfitnessbetter.entities.EntryLog;
 import com.makingfitnessbetter.makingfitnessbetter.entities.ExerciseLog;
+import com.makingfitnessbetter.makingfitnessbetter.entities.TransactionLog;
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.EntryLogException;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.ExerciseLogException;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.EntryLogRepository;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.ExerciseLogRepository;
+import com.makingfitnessbetter.makingfitnessbetter.repositories.TransactionLogRepository;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.UserRepository;
 import com.makingfitnessbetter.makingfitnessbetter.utility.transactionCode;
 import com.makingfitnessbetter.makingfitnessbetter.vo.AddingEntryLogVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.EntryExecTransactionLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.ExerciseLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitExerciseLogVO;
 import org.modelmapper.ModelMapper;
@@ -39,6 +42,12 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TransactionLogService transactionLogService;
+
+    @Autowired
+    TransactionLogRepository transactionLogRepository;
 
     //CREATE AN EXERCISELOG
     public User createEntryLog(Integer entryId, ExerciseLogVO exerciseLogVO, Integer id) {
@@ -74,8 +83,36 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
 
     // Create Exercise Flow
 
-    public SubmitExerciseLogVO createExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
-        return null;
+    public EntryLog createExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
+
+        EntryLog submitEntry = new EntryLog();
+        ExerciseLog submitExerciseLog = new ExerciseLog();
+        EntryExecTransactionLogVO transLog = new EntryExecTransactionLogVO();
+
+        submitEntry = entryLogRepository.findById(submitExerciseLogVO.getEntryId()).get();
+
+        // continue with setting the thing
+        submitExerciseLog.setMemberId(submitExerciseLogVO.getMemberId());
+        submitExerciseLog.setExerciseName(submitExerciseLogVO.getExerciseName());
+        submitExerciseLog.setSets(submitExerciseLogVO.getSets());
+        submitExerciseLog.setComments(submitExerciseLogVO.getComments());
+        submitExerciseLog.setActionCd(transactionCode.CRE_EXE_LOG);
+
+        exerciseLogRepository.save(submitExerciseLog);
+
+        entryLogRepository.save(submitEntry);
+
+        transLog.setMemberId(submitExerciseLogVO.getMemberId());
+        transLog.setExerciseName(submitExerciseLogVO.getExerciseName());
+        transLog.setSets(submitExerciseLogVO.getSets());
+        transLog.setComments(submitExerciseLogVO.getComments());
+        transLog.setActionCd(transactionCode.CRE_EXE_LOG);
+
+        transactionLogService.createModifyExerciseTransactionLog(transLog);
+
+
+
+        return submitEntry;
     }
 
 
@@ -101,14 +138,18 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
 
         if(submitExerciseLogVO.getActionCd().equals(transactionCode.CRE_EXE_LOG)){
             // Go through the creation flow
-        } else {
+            EntryLog processedEntry = createExerciseLog(submitExerciseLogVO);
+
+            } else {
             // Go through the modifdy flow
+            modifyExerciseLog(submitExerciseLogVO);
+
         }
 
         // 4) create a transaction log for it
 
 
-        return null;
+        return submitExerciseLogVO;
     }
 
 

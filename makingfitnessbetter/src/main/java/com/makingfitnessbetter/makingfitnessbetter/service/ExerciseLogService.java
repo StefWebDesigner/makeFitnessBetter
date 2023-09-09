@@ -21,7 +21,7 @@ public interface ExerciseLogService {
     public SubmitExerciseLogVO submitExerciseLog(SubmitExerciseLogVO submitExerciseLogVO, Integer id);
 
     // Create Exercise Flow
-    public SubmitExerciseLogVO createExerciseLog(SubmitExerciseLogVO submitExerciseLogVO);
+    public EntryLog createExerciseLog(SubmitExerciseLogVO submitExerciseLogVO);
 
     // Modify/Update Exercise Flow
     public SubmitExerciseLogVO modifyExerciseLog(SubmitExerciseLogVO submitExerciseLogVO);

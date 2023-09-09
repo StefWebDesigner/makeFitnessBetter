@@ -1,17 +1,13 @@
 package com.makingfitnessbetter.makingfitnessbetter.vo;
 
 import com.makingfitnessbetter.makingfitnessbetter.entities.EntryLog;
+import com.makingfitnessbetter.makingfitnessbetter.entities.ExerciseLog;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Data
-public class SubmitExerciseLogVO {
-
+public class EntryExecTransactionLogVO {
     private Integer ExerciseId;
     private String ExerciseName;
     private Integer sets;
@@ -21,8 +17,10 @@ public class SubmitExerciseLogVO {
     private Integer entryId;
     private String actionCd;
     private List<EntryLog> liEntryExerciseLogs;
-
-
+    private String entryName;
+    private String overallComments;
+    private List<ExerciseLog> exerciseLogList;
+//    private EntryLog entryLog;
+//    private ExerciseLog exerciseLog;
 
 }
-
