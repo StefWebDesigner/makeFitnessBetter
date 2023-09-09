@@ -53,8 +53,11 @@ public class ValidationImp implements ValidationService {
         List<EntryLog> finalList = new ArrayList<>();
 
         try{
-            List<EntryLog> checkingList = submitExerciseLogVO.getLiEntryExerciseLogs();
+            //Reassigning the list of al the expercises for th entry
+            List<EntryLog> checkingList = submitExerciseLogVO.getLiExistingEntryLog();
             finalList = checkingList.stream().filter(valCheck -> Objects.equals(valCheck.getEntryId(), submitExerciseLogVO.getExerciseId())).collect(Collectors.toList());
+
+            System.out.println(finalList);
 
             if(finalList.isEmpty()){
                 submitExerciseLogVO.setActionCd(transactionCode.CRE_EXE_LOG);

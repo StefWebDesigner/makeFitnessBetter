@@ -87,50 +87,66 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
 
         EntryLog submitEntry = new EntryLog();
         ExerciseLog submitExerciseLog = new ExerciseLog();
+//        List<ExerciseLog> submitExerciseLog = null;
         EntryExecTransactionLogVO transLog = new EntryExecTransactionLogVO();
 
-        submitEntry = entryLogRepository.findById(submitExerciseLogVO.getEntryId()).get();
+        try {
+            submitEntry = entryLogRepository.findById(submitExerciseLogVO.getEntryId()).get();
 
-        // continue with setting the thing
-        submitExerciseLog.setMemberId(submitExerciseLogVO.getMemberId());
-        submitExerciseLog.setExerciseName(submitExerciseLogVO.getExerciseName());
-        submitExerciseLog.setSets(submitExerciseLogVO.getSets());
-        submitExerciseLog.setComments(submitExerciseLogVO.getComments());
-        submitExerciseLog.setActionCd(transactionCode.CRE_EXE_LOG);
+            // the exercise id isn't being generated
 
-        exerciseLogRepository.save(submitExerciseLog);
-
-        entryLogRepository.save(submitEntry);
-
-        transLog.setMemberId(submitExerciseLogVO.getMemberId());
-        transLog.setExerciseName(submitExerciseLogVO.getExerciseName());
-        transLog.setSets(submitExerciseLogVO.getSets());
-        transLog.setComments(submitExerciseLogVO.getComments());
-        transLog.setActionCd(transactionCode.CRE_EXE_LOG);
-
-        transactionLogService.createModifyExerciseTransactionLog(transLog);
+            // continue with setting the thing
+            submitExerciseLog.setMemberId(submitExerciseLogVO.getMemberId());
+            submitExerciseLog.setExerciseName(submitExerciseLogVO.getExerciseName());
+            submitExerciseLog.setSets(submitExerciseLogVO.getSets());
+            submitExerciseLog.setReps(submitExerciseLogVO.getReps());
+            submitExerciseLog.setEntryId(submitExerciseLogVO.getEntryId());
+            submitExerciseLog.setComments(submitExerciseLogVO.getComments());
+            submitExerciseLog.setActionCd(transactionCode.CRE_EXE_LOG);
 
 
+            List<ExerciseLog> allExistingExeForIndivEntry = submitEntry.getExerciseLogList();
+            allExistingExeForIndivEntry.add(submitExerciseLog);
 
-        return submitEntry;
+            exerciseLogRepository.save(submitExerciseLog);
+
+            submitEntry.setExerciseLogList(allExistingExeForIndivEntry);
+
+            entryLogRepository.save(submitEntry);
+
+            transLog.setMemberId(submitExerciseLogVO.getMemberId());
+            transLog.setExerciseName(submitExerciseLogVO.getExerciseName());
+            transLog.setSets(submitExerciseLogVO.getSets());
+            transLog.setComments(submitExerciseLogVO.getComments());
+            transLog.setActionCd(transactionCode.CRE_EXE_LOG);
+
+            transactionLogService.createModifyExerciseTransactionLog(transLog);
+
+            return submitEntry;
+        } catch(ExerciseLogException e){
+            throw new ExerciseLogException("something");
+        }
+
+
     }
 
 
     // Modify/Update Exercise Flow
-    public SubmitExerciseLogVO modifyExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
+    public EntryLog modifyExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
         return null;
     }
 
     //Submit Exercise flow
     public SubmitExerciseLogVO submitExerciseLog(SubmitExerciseLogVO submitExerciseLogVO, Integer id){
 
-        List<EntryLog> liEntryExerciseLog = new ArrayList<>();
+        List<EntryLog> liExistingEntryLog = new ArrayList<>();
 
+        //Set the member Id from the UI
         submitExerciseLogVO.setMemberId(id);
 
         // Find all the entry/Exercise logs and add the to the object
-        liEntryExerciseLog = entryLogService.fetchAllEntryRecords(submitExerciseLogVO.getMemberId());
-        submitExerciseLogVO.setLiEntryExerciseLogs(liEntryExerciseLog);
+        liExistingEntryLog = entryLogService.fetchAllEntryRecords(submitExerciseLogVO.getMemberId());
+        submitExerciseLogVO.setLiExistingEntryLog(liExistingEntryLog);
 
 
         // PUSHING TO A MODIFY OR CREATE FLOW - VALIDATION FLOW
@@ -139,17 +155,21 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
         if(submitExerciseLogVO.getActionCd().equals(transactionCode.CRE_EXE_LOG)){
             // Go through the creation flow
             EntryLog processedEntry = createExerciseLog(submitExerciseLogVO);
+//            submitExerciseLogVO.setProcessedEntry(processedEntry);
 
-            } else {
+        } else {
             // Go through the modifdy flow
-            modifyExerciseLog(submitExerciseLogVO);
+            EntryLog processedExercise = modifyExerciseLog(submitExerciseLogVO);
+//            submitExerciseLogVO.setProcessedEntry(processedExercise);
 
         }
+
+        return submitExerciseLogVO;
 
         // 4) create a transaction log for it
 
 
-        return submitExerciseLogVO;
+//        return submitExerciseLogVO;
     }
 
 
