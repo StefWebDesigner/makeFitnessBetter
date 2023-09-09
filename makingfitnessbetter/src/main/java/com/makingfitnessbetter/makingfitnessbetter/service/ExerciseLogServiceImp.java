@@ -8,6 +8,7 @@ import com.makingfitnessbetter.makingfitnessbetter.exceptions.ExerciseLogExcepti
 import com.makingfitnessbetter.makingfitnessbetter.repositories.EntryLogRepository;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.ExerciseLogRepository;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.UserRepository;
+import com.makingfitnessbetter.makingfitnessbetter.utility.transactionCode;
 import com.makingfitnessbetter.makingfitnessbetter.vo.AddingEntryLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.ExerciseLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitExerciseLogVO;
@@ -29,6 +30,12 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
 
     @Autowired
     EntryLogRepository entryLogRepository;
+
+    @Autowired
+    ValidationService validationService;
+
+    @Autowired
+    EntryLogService entryLogService;
 
     @Autowired
     UserRepository userRepository;
@@ -65,9 +72,40 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
         }
     }
 
+    // Create Exercise Flow
+
+    public SubmitExerciseLogVO createExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
+        return null;
+    }
+
+
+    // Modify/Update Exercise Flow
+    public SubmitExerciseLogVO modifyExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
+        return null;
+    }
+
     //Submit Exercise flow
     public SubmitExerciseLogVO submitExerciseLog(SubmitExerciseLogVO submitExerciseLogVO, Integer id){
 
+        List<EntryLog> liEntryExerciseLog = new ArrayList<>();
+
+        submitExerciseLogVO.setMemberId(id);
+
+        // Find all the entry/Exercise logs and add the to the object
+        liEntryExerciseLog = entryLogService.fetchAllEntryRecords(submitExerciseLogVO.getMemberId());
+        submitExerciseLogVO.setLiEntryExerciseLogs(liEntryExerciseLog);
+
+
+        // PUSHING TO A MODIFY OR CREATE FLOW - VALIDATION FLOW
+        validationService.validateExerciseLog(submitExerciseLogVO);
+
+        if(submitExerciseLogVO.getActionCd().equals(transactionCode.CRE_EXE_LOG)){
+            // Go through the creation flow
+        } else {
+            // Go through the modifdy flow
+        }
+
+        // 4) create a transaction log for it
 
 
         return null;

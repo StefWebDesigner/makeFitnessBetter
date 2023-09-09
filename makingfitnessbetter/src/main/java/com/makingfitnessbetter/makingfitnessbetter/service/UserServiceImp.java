@@ -1,12 +1,10 @@
 package com.makingfitnessbetter.makingfitnessbetter.service;
 
-import com.makingfitnessbetter.makingfitnessbetter.entities.TransactionLog;
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.UserException;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.UserRepository;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitRegistrationVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
-import com.makingfitnessbetter.makingfitnessbetter.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +20,7 @@ public class UserServiceImp implements UserService {
     UserRepository userRepository;
 
     @Autowired
-    UserValidationService userValidationService;
+    ValidationService validationService;
 
     @Autowired
     TransactionLogService transactionLogService;
@@ -47,7 +45,7 @@ public class UserServiceImp implements UserService {
         User user = new User();
 
         // validation layer --- found out if they have an already existing user
-        user =  userValidationService.userValidation(submitRegistrationVO);
+        user =  validationService.userValidation(submitRegistrationVO);
 
         //If they don't exist, create the user
          User submitUser = create(user);
