@@ -2,10 +2,7 @@ package com.makingfitnessbetter.makingfitnessbetter.entities;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
@@ -28,5 +25,10 @@ public class ExerciseLog {
 //    private List<ExerciseLog> sets;
 //    private List<ExerciseLog> reps;
 //    private List<ExerciseLog> comments;
+
+    @ManyToOne
+    @JoinColumn(name="entryLog_entryId")
+    private EntryLog entryLog;
+
 
 }

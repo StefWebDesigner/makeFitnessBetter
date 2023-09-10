@@ -153,6 +153,7 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
             List<ExerciseLog> allExistingExeForIndivEntry = submitEntry.getExerciseLogList();
             allExistingExeForIndivEntry.add(submitExerciseLog);
 
+
             exerciseLogRepository.save(submitExerciseLog);
 
             submitEntry.setExerciseLogList(allExistingExeForIndivEntry);

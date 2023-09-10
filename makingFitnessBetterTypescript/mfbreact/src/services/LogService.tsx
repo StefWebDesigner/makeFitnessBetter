@@ -11,9 +11,9 @@ class LogService {
         return await axios.get("http://localhost:8080/user/getUser?username=" + username);
     }
 
-    // async getAllEntryRecords(id : number){
-    //     return await axios.get("http://localhost:8080/entry/fetchAllExercises?id=" + id);
-    // }
+    async getAllEntryRecords(id : number){
+        return await axios.get("http://localhost:8080/entry/fetchAllExercises?id=" + id);
+    }
 
     //About to add get all exericses
     // aysnc getAllExpercises(id : number, entryId )
