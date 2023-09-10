@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Login from "../authenticationComponents/Login";
+
 // @ts-ignore
 import MainNavigation from "../navigationComponents/MainNavigation";
-import {Button, Card, Container} from "react-bootstrap";
+import {Button, Card, Container, Form, Modal} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
+import LoginModal from "../authenticationComponents/LoginModal";
+import styles from "./Modal.module.css";
+
 
 const HomepageComponent = () => {
 
@@ -15,17 +19,87 @@ const HomepageComponent = () => {
 
     }
 
+    const [show, setShow] = useState(false);
 
+
+    const handleClose = () => setShow(false);
+
+    const handleShow = () => setShow(true);
+
+
+    const onLoginFormSubmit = (e : any) => {
+
+        e.preventDefault();
+
+        handleClose();
+
+    };
+
+
+
+    // @ts-ignore
     return (
         <>
+
             <MainNavigation/>
             <Login/>
+            <div
+
+                // className="d-flex align-items-center justify-content-center"
+                //
+                // style={{ height: "100vh" }}
+
+            >
+
+                <Button variant="primary" onClick={handleShow}>
+
+                    Launch Form modal
+
+                </Button>
+
+            </div>
+
+            <Modal show={show} onHide={handleClose}>
+
+                <Modal.Header closeButton>
+
+                    <Modal.Title>Login Form</Modal.Title>
+
+                </Modal.Header>
+
+                <Modal.Body>
+
+                    <LoginModal onSubmit={onLoginFormSubmit} />
+
+                </Modal.Body>
+
+                <Modal.Footer>
+
+                    <Button variant="secondary" onClick={handleClose}>
+
+                        Close Modal
+
+                    </Button>
+
+                </Modal.Footer>
+
+            </Modal>
+
 
 
             <Container className = 'page-container'>
 
                 {/* Warning label....Frontend Section is a work on progress. Backend read for binding content*/}
                 <cite className="progress-warning"> *Frontend application is still undergoing progress. Backend ready for round one of binding endpoints *</cite>
+
+                <p>Test Login Modal</p>
+
+
+
+
+
+
+
 
                 <h1 className="home-title"> Making Fitness Better</h1>
 
@@ -82,8 +156,7 @@ const HomepageComponent = () => {
             </Container>
 
 
-
-        </>
+            </>
     );
 };
 
