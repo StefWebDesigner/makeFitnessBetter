@@ -17,6 +17,9 @@
 
 /*font-family: 'Tulpen One', cursive;*/
 
+/*Light Green : #A2C579;*/
+/* Dark Green : #435334*/
+
 
 .page-container {
     background-color: #fbfbfd;
@@ -123,6 +126,8 @@
 .home-title {
     text-align: center;
     margin-top: 20px;
+    font-weight: bold;
+    color : green;
     /*font-family: 'Tulpen One', cursive;*/
 
 }
@@ -131,7 +136,7 @@
     border-radius: 25px;
     border-color: #435334;
     background-color: #fff;
-    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+    box-shadow: 7px 5px 10px #bbbbbb;
 
 }
 
