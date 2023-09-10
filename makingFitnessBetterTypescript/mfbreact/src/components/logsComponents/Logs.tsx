@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import MainNavigation from "../navigationComponents/MainNavigation";
 import axios from "axios";
-import {Button, Card, Col, Container, Form, FormControl, FormGroup, FormLabel} from "react-bootstrap";
+import {Button, Card, CardGroup, Col, Container, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
 import LogService from "../../services/LogService";
 import CardHeader from "react-bootstrap/CardHeader";
 
@@ -55,6 +55,7 @@ const Logs = () => {
             <MainNavigation/>
             <h1 className="log-title">Logs</h1>
 
+            {/* FORM FOR THE ENTRY FORM SECTION */}
             <Container>
                 <Card className = "log-card">
                     <CardHeader className = "log-card-header" >Make an Entry</CardHeader>
@@ -90,10 +91,112 @@ const Logs = () => {
                                 Create New Entry
                             </Button>
                         </div>
-
                     </Form>
                 </Card>
+
+            {/* ENTRY FORMS */}
+
+                <Card className="log-entry-exercise-card">
+                    <CardHeader className="log-entry-exercise-title">Entry Title</CardHeader>
+                    <CardGroup className = "log-entry-group">
+                        <Row>
+                            <Col xs={8}>
+                                <p className="log-entry-set-label">Exercise Two</p>
+                            </Col>
+                            <Col>
+                                <Button>Edit</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={8}>
+                                <p className="log-entry-set-label">Sets</p>
+                            </Col>
+                            <Col>
+                                <Button>Edit</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={8}>
+                                <p className="log-entry-set-label">Reps</p>
+                            </Col>
+                            <Col>
+                                <Button>Edit</Button>
+                            </Col>
+                        </Row>
+                    </CardGroup>
+
+                    <span> _________________________</span>
+
+                    <CardGroup className = "log-entry-group">
+                        <Row>
+                            <Col xs={8}>
+                                <p className="log-entry-set-label">Exercise Two</p>
+                            </Col>
+                            <Col>
+                                <Button>Edit</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={8}>
+                                <p className="log-entry-set-label">Sets</p>
+                            </Col>
+                            <Col>
+                                <Button>Edit</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={8}>
+                                <p className="log-entry-set-label">Reps</p>
+                            </Col>
+                            <Col>
+                                <Button>Edit</Button>
+                            </Col>
+                        </Row>
+                    </CardGroup>
+
+                    <span> _________________________</span>
+
+                    <CardGroup className = "log-entry-group">
+                        <Row>
+                            <Col xs={8}>
+                                <p className="log-entry-set-label">Exercise Two</p>
+                            </Col>
+                            <Col>
+                                <Button>Edit</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={8}>
+                                <p className="log-entry-set-label">Sets</p>
+                            </Col>
+                            <Col>
+                                <Button>Edit</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={8}>
+                                <p className="log-entry-set-label">Reps</p>
+                            </Col>
+                            <Col>
+                                <Button>Edit</Button>
+                            </Col>
+                        </Row>
+                    </CardGroup>
+                    <span> _________________________</span>
+
+                    <Button>Add Another Exercise</Button>
+
+
+                    <p>OverAll Comments</p>
+                </Card>
+
+
+
+
             </Container>
+
+
+
 
 
 

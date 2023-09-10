@@ -219,4 +219,22 @@
     /*margin: auto;*/
 }
 
+.log-entry-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.log-entry-set-label{
+    text-align: center;
+    font-weight: bold;
+}
+
+.log-entry-exercise-title{
+    text-align: center;
+}
+
+.log-entry-exercise-card{
+    margin-top: 40px;
+}
+
 
