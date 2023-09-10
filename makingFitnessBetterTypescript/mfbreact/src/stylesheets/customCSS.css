@@ -164,6 +164,8 @@
 .home-signup-button {
     background-color: #A2C579;
     color : white;
+    border-color: #bbbbbb;
+    box-shadow: 7px 5px 10px #bbbbbb;
 }
 
 .home-signup-button-container {
@@ -206,6 +208,7 @@
 
 .log-card-label{
     text-align: center;
+    color: olivedrab;
 }
 
 .log-card-button-group {
@@ -239,12 +242,13 @@
 
 .log-entry-exercise-title{
     text-align: center;
-
+    color: olivedrab;
 }
 
 .log-entry-exercise-card{
     margin-top: 40px;
     box-shadow: 7px 5px 10px #bbbbbb;
+    border-color: #A2C579;
 
 }
 
@@ -271,4 +275,52 @@
 }
 
 
+/* Registration Componetns*/
 
+
+.registration-card-container{
+    margin-top: 40px;
+    box-shadow: 7px 5px 10px #bbbbbb;
+    border-color: #A2C579;
+
+}
+
+.registration-form-label{
+    text-align: center;
+    font-weight: bold;
+    color: olivedrab;
+
+}
+
+.registration-form-title{
+    text-align: center;
+    color: olivedrab;
+}
+
+.registration-form-button-group{
+    display : flex;
+    justify-content: center;
+
+}
+
+.registration-form-label{
+    text-align: center;
+}
+
+.registration-form-button{
+    background-color: #A2C579;
+    color : white;
+    border-color: #bbbbbb;
+    box-shadow: 7px 5px 10px #bbbbbb;
+    width: 100%;
+}
+
+.registration-title{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.registration-form-placeholder {
+    text-align: center;
+}

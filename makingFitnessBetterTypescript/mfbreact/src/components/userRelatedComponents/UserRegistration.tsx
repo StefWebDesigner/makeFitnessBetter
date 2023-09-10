@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {Button, Form, FormControl, FormGroup, FormLabel} from "react-bootstrap";
+import {Button, Card, Container, Form, FormControl, FormGroup, FormLabel} from "react-bootstrap";
 import UserService from "../../services/UserService";
 import {useNavigate} from "react-router-dom";
+import MainNavigation from "../navigationComponents/MainNavigation";
 
 const UserRegistration = () => {
     let userService : UserService = new UserService();
@@ -60,56 +61,88 @@ const UserRegistration = () => {
 
     return (
         <>
-            <h1>Let's Register For An Account</h1>
+            <Container>
 
-            <p>Form content to be added</p>
+                <MainNavigation/>
 
-            <Form onSubmit = {registerUserForm}>
-                <FormGroup>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl
-                        type="text"
-                        name="username"
-                        placeholder="username"
-                        onChange={(e) => (setUsername(e.target.value))}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <FormLabel> Password</FormLabel>
-                    <FormControl
-                        type="text"
-                        name="password"
-                        placeholder="password"
-                        onChange={e => (setPassword(e.target.value))}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <FormLabel> Email</FormLabel>
-                    <FormControl
-                        type="text"
-                        name="email"
-                        placeholder="Email"
-                        onChange={e => (setEmail(e.target.value))}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <FormLabel>role</FormLabel>
-                    <FormControl
-                        type="text"
-                        name="role"
-                        placeholder="Role"
-                        onChange={e => (setRole(e.target.value))}
-                    />
-                </FormGroup>
-                <Button
-                    type="submit"
-                >
-                    Enter
-                </Button>
+            <h1 className="registration-title">Let's Register For An Account</h1>
+
+            <Card className="registration-card-container">
+                <Form onSubmit = {registerUserForm}>
+                    <FormGroup className = "registration-form-container">
+                        <FormLabel className = "registration-form-label">
+                            <p>
+                                Username
+                            </p>
+
+                        </FormLabel>
+                        <FormControl
+                            className="registration-form-placeholder"
+                            type="text"
+                            name="username"
+                            placeholder="username"
+                            onChange={(e) => (setUsername(e.target.value))}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel className = "registration-form-label">
+                            <p>
+                                Password
+                            </p>
+                        </FormLabel>
+                        <FormControl
+                            className="registration-form-placeholder"
+                            type="text"
+                            name="password"
+                            placeholder="password"
+                            onChange={e => (setPassword(e.target.value))}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel className = "registration-form-label">
+                            <p>
+                                Email
+                            </p>
+                        </FormLabel>
+                        <FormControl
+                            className="registration-form-placeholder"
+                            type="text"
+                            name="email"
+                            placeholder="Email"
+                            onChange={e => (setEmail(e.target.value))}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel className = "registration-form-label">
+                            <p>
+                                role
+                            </p>
+                        </FormLabel>
+                        <FormControl
+                            className="registration-form-placeholder"
+                            type="text"
+                            name="role"
+                            placeholder="Role"
+                            onChange={e => (setRole(e.target.value))}
+                        />
+                    </FormGroup>
+                    <div className="registration-form-button-group">
+                        <Button
+                            className="registration-form-button"
+                            type="submit"
+                        >
+                            Enter
+                        </Button>
+                    </div>
 
 
 
-            </Form>
+
+                </Form>
+            </Card>
+
+            </Container>
+
 
 
 
