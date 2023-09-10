@@ -25,16 +25,13 @@ const HomepageComponent = () => {
     }
 
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     // const [remember, setRemember] = useState(false);
     const [error,setError]=useState(false);
     const [message,setMessage]=useState("")
-
 
     function loginUser(e:any){
         e.preventDefault();
@@ -56,6 +53,8 @@ const HomepageComponent = () => {
             });
 
             navigate("/");
+
+            handleClose();
 
         }).catch(err=>{
             setMessage(err.response.data.exception);

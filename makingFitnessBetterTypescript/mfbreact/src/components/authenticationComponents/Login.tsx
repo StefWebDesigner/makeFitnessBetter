@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 import Auth from "../../services/Auth";
 import {AuthContext} from "../../dataStore";
 import { Form, Button, FormGroup, FormLabel, FormControl, FormCheck } from 'react-bootstrap';
-// import {Button, FormCheck, FormControl, FormGroup, FormLabel} from "react-bootstrap";
 
 // @ts-ignore
 const Login = ({onSubmit ,username, setUsername, password, setPassword}) => {
@@ -12,40 +11,10 @@ const Login = ({onSubmit ,username, setUsername, password, setPassword}) => {
     let auth : Auth = new Auth();
     const authContext = useContext(AuthContext);
 
-    // const [username, setUsername] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [remember, setRemember] = useState(false);
     const [error,setError]=useState(false);
     const [message,setMessage]=useState("")
     const navigate=useNavigate();
 
-    // function loginUser(e:any){
-    //     e.preventDefault();
-    //     auth.login(username,password).then((response)=>{
-    //         console.log(response.data);
-    //
-    //         if(response.data.token){
-    //             localStorage.setItem("token",response.data.token);
-    //             localStorage.setItem("email", response.data.email);
-    //             localStorage.setItem("role",response.data.role);
-    //             authContext.setToken(response.data.token);
-    //         }
-    //
-    //         const currentUser = auth.getUser(username).then((response) => {
-    //             if(response.data){
-    //                 localStorage.setItem("id",response.data.memberId);
-    //                 localStorage.setItem("username",response.data.username);
-    //             }
-    //         });
-    //
-    //         navigate("/");
-    //
-    //     }).catch(err=>{
-    //         setMessage(err.response.data.exception);
-    //         setError(true)
-    //     });
-    //     // localStorage.setItem("remember-me",String(remember));
-    // }
 
 
     // @ts-ignore
@@ -105,15 +74,10 @@ const Login = ({onSubmit ,username, setUsername, password, setPassword}) => {
                             Enter
                         </Button>
                     </div>
-
-
                     <div>
                         {error && (<>{message}</>)}
                     </div>
-
                 </div>
-
-
             </Form>
             
         </>
