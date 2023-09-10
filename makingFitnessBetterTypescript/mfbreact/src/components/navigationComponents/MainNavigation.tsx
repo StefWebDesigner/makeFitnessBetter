@@ -69,6 +69,11 @@ const MainNavigation = () => {
         // localStorage.setItem("remember-me",String(remember));
     }
 
+    function logOutUser(){
+        auth.logout();
+
+    }
+
 
 
     // @ts-ignore
@@ -111,18 +116,29 @@ const MainNavigation = () => {
                             >
                                 Logs
                             </Link>
-                            {/*<Link*/}
-                            {/*    to="/login"*/}
-                            {/*    className="main-nav-link"*/}
-                            {/*>*/}
-                            {/*    Login*/}
-                            {/*</Link>*/}
 
-                            <div>
-                                <Button variant="primary" onClick={handleShow}>
-                                    Login
-                                </Button>
-                            </div>
+                            {
+                                authContext.token ?
+
+                                    <div>
+                                        <Button variant="primary" onClick={logOutUser}>
+                                            Logout
+                                        </Button>
+                                    </div>
+
+                                    :
+
+                                    <div>
+                                        <Button variant="primary" onClick={handleShow}>
+                                            Login
+                                        </Button>
+                                    </div>
+
+
+                            }
+
+
+
 
 
 

@@ -35,15 +35,6 @@ const HomepageComponent = () => {
                 {/* Warning label....Frontend Section is a work on progress. Backend read for binding content*/}
                 <cite className="progress-warning"> *Frontend application is still undergoing progress. Backend ready for round one of binding endpoints *</cite>
 
-                <p>Test Login Modal</p>
-
-
-
-
-
-
-
-
                 <h1 className="home-title"> Making Fitness Better</h1>
 
                 <div className="home-description-group">

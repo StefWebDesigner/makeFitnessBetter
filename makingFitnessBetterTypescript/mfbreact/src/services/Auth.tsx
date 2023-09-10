@@ -23,6 +23,8 @@ class Auth {
         localStorage.removeItem("id");
         localStorage.removeItem("role");
         localStorage.removeItem("remember-me");
+        localStorage.removeItem("email");
+        localStorage.removeItem("username");
     }
 
 }
