@@ -60,6 +60,8 @@
     display: none;
 }
 
+
+
 /*.me-auto {*/
 /*    margin-right: unset;*/
 /*}*/
@@ -169,4 +171,52 @@
     justify-content: center;
     margin-top: 30px;
 }
+
+/*Logs */
+
+.log-title{
+    text-align: center;
+}
+
+.log-card {
+    border-style: outset;
+    border-color: green;
+    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+
+}
+
+.log-card-header{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/*Bootstrap trying to override me again*/
+.form-label {
+    display : revert;
+}
+.btn {
+    display: revert;
+}
+
+.log-card-label-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.log-card-label{
+    text-align: center;
+}
+
+.log-card-button-group {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.log-card-button{
+    justify-content: center;
+    /*margin: auto;*/
+}
+
 
