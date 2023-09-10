@@ -49,10 +49,29 @@
 
 .main-nav-brand-title {
     /*font-family: 'Tulpen One', cursive;*/
+    font-size: 30px;
+    color : green;
 }
+
+
 
 .main-nav-link {
     text-align: center;
+    text-decoration: none;
+    border: 1px solid green;
+    border-radius: 10px;
+    padding-left: 9px;
+    padding-right: 9px;
+    background-color: green;
+    color : white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.main-nav-link-text {
+    justify-content: center;
 }
 
 .me-auto {
@@ -61,6 +80,10 @@
 
 .main-nav-link-group{
     display: none;
+}
+
+.link-login-button{
+    background-color: green;
 }
 
 

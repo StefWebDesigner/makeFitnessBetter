@@ -31,9 +31,7 @@ const HomepageComponent = () => {
             <MainNavigation/>
 
             <Container className = 'page-container'>
-
-                {/* Warning label....Frontend Section is a work on progress. Backend read for binding content*/}
-                <cite className="progress-warning"> *Frontend application is still undergoing progress. Backend ready for round one of binding endpoints *</cite>
+                <cite className="progress-warning"> *Frontend and backend application is still undergoing progress and introducing updates on newly planned features soon *</cite>
 
                 <h1 className="home-title"> Making Fitness Better</h1>
 

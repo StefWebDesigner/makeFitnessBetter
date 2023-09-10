@@ -89,7 +89,9 @@ const MainNavigation = () => {
                             height="30"
                             className=" main-nav-brand-title d-inline-block align-top "
                         />
+                    <h1 className="main-nav-brand-title">
                         Make Fitness Better
+                    </h1>
                     {/*</Navbar.Brand>*/}
                     {/*<Navbar.Toggle aria-controls="basic-navbar-nav" />*/}
                     {/*<Navbar.Collapse id="basic-navbar-nav">*/}
@@ -105,7 +107,7 @@ const MainNavigation = () => {
                                 home
                             </Link>
                             <Link
-                                to="/register"
+                                to="/registration"
                                 className="main-nav-link"
                             >
                                 register
@@ -121,7 +123,11 @@ const MainNavigation = () => {
                                 authContext.token ?
 
                                     <div>
-                                        <Button variant="primary" onClick={logOutUser}>
+                                        <Button
+                                            variant="primary"
+                                            onClick={logOutUser}
+                                            className="link-login-button"
+                                        >
                                             Logout
                                         </Button>
                                     </div>
@@ -129,7 +135,11 @@ const MainNavigation = () => {
                                     :
 
                                     <div>
-                                        <Button variant="primary" onClick={handleShow}>
+                                        <Button
+                                            className="link-login-button"
+                                            variant="primary"
+                                            onClick={handleShow}
+                                        >
                                             Login
                                         </Button>
                                     </div>
