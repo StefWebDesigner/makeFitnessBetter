@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {IoMdLogIn} from "react-icons/io";
 import {FiLogOut} from "react-icons/fi";
 import {MdAccountCircle} from "react-icons/md";
@@ -10,29 +10,67 @@ import {GrLogin} from "react-icons/gr";
 import {LuLogOut} from "react-icons/lu";
 import {GiHamburgerMenu} from "react-icons/gi";
 import {FaClipboardList} from "react-icons/fa";
-
-
-
-
 import {MdOutlineAssignmentInd} from "react-icons/md";
 import brandLogo from '../images/placeholder.png';
-
-
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Container } from 'react-bootstrap';
+import {Button, Container, Modal} from 'react-bootstrap';
+import Auth from "../../services/Auth";
+import {AuthContext} from "../../dataStore";
+import Login from "../authenticationComponents/Login";
 
 // import brandLogo from './images/placeholder.png';
 
-
-
-
-
-
-
-
 const MainNavigation = () => {
+
+    const navigate=useNavigate();
+
+    let auth : Auth = new Auth();
+    const authContext = useContext(AuthContext);
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    // const [remember, setRemember] = useState(false);
+    const [error,setError]=useState(false);
+    const [message,setMessage]=useState("")
+
+
+    function loginUser(e:any){
+        e.preventDefault();
+        auth.login(username,password).then((response)=>{
+            console.log(response.data);
+
+            if(response.data.token){
+                localStorage.setItem("token",response.data.token);
+                localStorage.setItem("email", response.data.email);
+                localStorage.setItem("role",response.data.role);
+                authContext.setToken(response.data.token);
+            }
+
+            const currentUser = auth.getUser(username).then((response) => {
+                if(response.data){
+                    localStorage.setItem("id",response.data.memberId);
+                    localStorage.setItem("username",response.data.username);
+                }
+            });
+
+            navigate("/");
+
+            handleClose();
+
+        }).catch(err=>{
+            setMessage(err.response.data.exception);
+            setError(true)
+        });
+        // localStorage.setItem("remember-me",String(remember));
+    }
+
+
+
     // @ts-ignore
     return (
         <>
@@ -55,118 +93,62 @@ const MainNavigation = () => {
 
                         <div className="main-nav-link-group">
                             <Link to="/" className="main-nav-link">
-                                <ImHome
-                                    size={35}
-                                    color="green"
-                                />
+                                {/*<ImHome*/}
+                                {/*    size={35}*/}
+                                {/*    color="green"*/}
+                                {/*/>*/}
+                                home
                             </Link>
                             <Link
                                 to="/register"
                                 className="main-nav-link"
                             >
-                                <MdOutlineAssignmentInd size = {35} color="green"
-                                />
+                                register
                             </Link>
                             <Link
                                 to="/logs"
                                 className="main-nav-link"
                             >
-                                <FaClipboardList size={35} color="green"/>
+                                Logs
                             </Link>
-                            <Link
-                                to="/login"
-                                className="main-nav-link"
-                            >
-                                <GrLogin size={35} color="green"/>
-                            </Link>
+                            {/*<Link*/}
+                            {/*    to="/login"*/}
+                            {/*    className="main-nav-link"*/}
+                            {/*>*/}
+                            {/*    Login*/}
+                            {/*</Link>*/}
+
+                            <div>
+                                <Button variant="primary" onClick={handleShow}>
+                                    Login
+                                </Button>
+                            </div>
+
+
+
+                            <Modal show={show} onHide={handleClose}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Login Form</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <Login onSubmit={loginUser} username={username} setUsername={setUsername} password={password}
+                                           setPassword={setPassword} />
+
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleClose}>
+                                        Close Modal
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
+
+
+
+
                         </div>
-
-
-                                {/*To be added after optomiozing the menu*/}
-                                {/*<Link*/}
-                                {/*    className=""*/}
-                                {/*    to="/"*/}
-                                {/*>*/}
-                                {/*    <LuLogOut size={35}/>*/}
-                                {/*</Link>*/}
-
-                            {/*<Nav.Link href="#home">Home</Nav.Link>*/}
-                            {/*<Nav.Link href="#link">Link</Nav.Link>*/}
-                            {/*<NavDropdown title="Dropdown" id="basic-nav-dropdown">*/}
-                            {/*    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Item href="#action/3.2">*/}
-                            {/*        Another action*/}
-                            {/*    </NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Divider />*/}
-                            {/*    <NavDropdown.Item href="#action/3.4">*/}
-                            {/*        Separated link*/}
-                            {/*    </NavDropdown.Item>*/}
-                            {/*</NavDropdown>*/}
-                        {/*</Nav>*/}
-                    {/*</Navbar.Collapse>*/}
                 </Container>
             </Navbar>
 
-
-
-
-
-
-
-        {/*<Container>*/}
-        {/*                <Nav className="main-nav-container">*/}
-        {/*                    /!*Container for the brand related content*!/*/}
-        {/*                    <div className="main-nav-brand-container">*/}
-        {/*                        <img src = {brandLogo} className = "brand-logo"/>*/}
-        {/*                        <h1> Brand</h1>*/}
-        {/*                    </div>*/}
-
-        {/*                    /!*Container for the links that will change throughout the application*!/*/}
-
-        {/*                    <div>*/}
-
-
-        {/*                        <Button*/}
-        {/*                        >*/}
-        {/*                            <GiHamburgerMenu className="main-nav-sandwich-icon" size={35} />*/}
-        {/*                        </Button>*/}
-
-        {/*                        <div className="main-nav-link-container">*/}
-        {/*                            <Link to="/">*/}
-        {/*                                <ImHome*/}
-        {/*                                    size={35}*/}
-        {/*                                />*/}
-        {/*                            </Link>*/}
-        {/*                            <Link*/}
-        {/*                                className=""*/}
-        {/*                                to="/register"*/}
-        {/*                            >*/}
-        {/*                                <MdOutlineAssignmentInd size = {35}/>*/}
-        {/*                            </Link>*/}
-        {/*                            <Link*/}
-        {/*                                className=""*/}
-        {/*                                to="/login"*/}
-        {/*                            >*/}
-        {/*                                <GrLogin*/}
-        {/*                                    size={35}*/}
-        {/*                                />*/}
-        {/*                            </Link>*/}
-
-        {/*                            /!*To be added after optomiozing the menu*!/*/}
-        {/*                            /!*<Link*!/*/}
-        {/*                            /!*    className=""*!/*/}
-        {/*                            /!*    to="/"*!/*/}
-        {/*                            /!*>*!/*/}
-        {/*                            /!*    <LuLogOut size={35}/>*!/*/}
-        {/*                            /!*</Link>*!/*/}
-        {/*                        </div>*/}
-        {/*                    </div>*/}
-
-
-
-        {/*                </Nav>*/}
-        {/*</Container>*/}
 
 
 

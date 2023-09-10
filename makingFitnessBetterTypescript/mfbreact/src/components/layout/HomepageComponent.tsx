@@ -70,10 +70,9 @@ const HomepageComponent = () => {
         <>
 
             <MainNavigation/>
-            {/*<Login onSubmit={undefined}/>*/}
             <div>
                 <Button variant="primary" onClick={handleShow}>
-                    Launch Form modal
+                    Login
                 </Button>
             </div>
 
