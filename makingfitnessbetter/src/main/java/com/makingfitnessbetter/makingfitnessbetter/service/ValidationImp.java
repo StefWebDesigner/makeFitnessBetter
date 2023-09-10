@@ -59,11 +59,17 @@ public class ValidationImp implements ValidationService {
 
             System.out.println(finalList);
 
-            if(finalList.isEmpty()){
+//            if(finalList.isEmpty()){
+//                submitExerciseLogVO.setActionCd(transactionCode.CRE_EXE_LOG);
+//            } else {
+//                submitExerciseLogVO.setActionCd(transactionCode.EXE_EXE_LOG);
+//                submitExerciseLogVO.setEntryId(finalList.get(0).getEntryId());
+//            }
+
+            if(submitExerciseLogVO.getExerciseId() == null){
                 submitExerciseLogVO.setActionCd(transactionCode.CRE_EXE_LOG);
             } else {
                 submitExerciseLogVO.setActionCd(transactionCode.EXE_EXE_LOG);
-                submitExerciseLogVO.setEntryId(finalList.get(0).getEntryId());
             }
 
             return  validationResults;

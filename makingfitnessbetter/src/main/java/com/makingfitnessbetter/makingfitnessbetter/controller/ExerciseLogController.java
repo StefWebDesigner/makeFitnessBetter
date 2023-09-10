@@ -47,12 +47,12 @@ public class ExerciseLogController {
         }
     }
 
-    @PostMapping("/submitExerciseSet")
-    public ResponseEntity<Object> submitExerciseLog(@RequestBody SubmitExerciseLogVO submitExerciseLogVO, @RequestParam Integer id) {
+    @PutMapping("/submitExerciseSet")
+    public ResponseEntity<Object> submitExerciseLog(@RequestBody SubmitExerciseLogVO submitExerciseLogVO) {
 
         try {
-            SubmitExerciseLogVO results = exerciseLogService.submitExerciseLog(submitExerciseLogVO, id);
-            return ExerciseLogVO.generateResponse("Post Exercise Set", HttpStatus.CREATED, results);
+            SubmitExerciseLogVO results = exerciseLogService.submitExerciseLog(submitExerciseLogVO);
+            return ExerciseLogVO.generateResponse("Post Exercise Set", HttpStatus.OK, results);
         } catch (EntryLogException e) {
             throw new EntryLogException("Unable to submit the exercise log");
         }
