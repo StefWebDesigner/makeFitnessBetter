@@ -15,7 +15,7 @@ public class transactionCode extends TransactionLogServiceImp {
     public static final String ENT_CRE = "New Entry Creation";
 
     //Exercise LOG CD
-    public static final String ADD_LOG = "Add Exercise Log";
-    public static final String MOD_LOG = "Modify Exercise Log";
+    public static final String CRE_EXE_LOG = "Add Exercise Log";
+    public static final String EXE_EXE_LOG = "Modify Exercise Log";
 
 }

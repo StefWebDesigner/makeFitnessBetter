@@ -18,5 +18,12 @@ public interface ExerciseLogService {
     public List<ExerciseLog> findAllExerciseLogPerEntry(Integer id, Integer entryId);
 
     //Submit Exercise flow
-    public SubmitExerciseLogVO submitExerciseLog(SubmitExerciseLogVO submitExerciseLogVO, Integer id);
+    public SubmitExerciseLogVO submitExerciseLog(SubmitExerciseLogVO submitExerciseLogVO);
+
+    // Create Exercise Flow
+    public EntryLog createExerciseLog(SubmitExerciseLogVO submitExerciseLogVO);
+
+    // Modify/Update Exercise Flow
+    public EntryLog modifyExerciseLog(SubmitExerciseLogVO submitExerciseLogVO);
+
 }

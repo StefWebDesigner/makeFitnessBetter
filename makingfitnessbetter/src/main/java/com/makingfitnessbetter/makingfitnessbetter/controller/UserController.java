@@ -41,7 +41,7 @@ public class UserController {
     public ResponseEntity<Object> sumbitRegistration(@RequestBody SubmitRegistrationVO submitRegistrationVO){
         try{
             User result = userService.submitRegistration(submitRegistrationVO);
-            return UserVO.generateResponse("User created", HttpStatus.OK, result);
+            return UserVO.generateResponse("User created", HttpStatus.CREATED, result);
         } catch(UserException e){
             throw new UserException("Make sure to enter all information");
         }

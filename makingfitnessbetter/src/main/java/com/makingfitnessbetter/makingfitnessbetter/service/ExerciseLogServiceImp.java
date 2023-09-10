@@ -2,13 +2,17 @@ package com.makingfitnessbetter.makingfitnessbetter.service;
 
 import com.makingfitnessbetter.makingfitnessbetter.entities.EntryLog;
 import com.makingfitnessbetter.makingfitnessbetter.entities.ExerciseLog;
+import com.makingfitnessbetter.makingfitnessbetter.entities.TransactionLog;
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.EntryLogException;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.ExerciseLogException;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.EntryLogRepository;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.ExerciseLogRepository;
+import com.makingfitnessbetter.makingfitnessbetter.repositories.TransactionLogRepository;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.UserRepository;
+import com.makingfitnessbetter.makingfitnessbetter.utility.transactionCode;
 import com.makingfitnessbetter.makingfitnessbetter.vo.AddingEntryLogVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.EntryExecTransactionLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.ExerciseLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitExerciseLogVO;
 import org.modelmapper.ModelMapper;
@@ -31,7 +35,19 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
     EntryLogRepository entryLogRepository;
 
     @Autowired
+    ValidationService validationService;
+
+    @Autowired
+    EntryLogService entryLogService;
+
+    @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TransactionLogService transactionLogService;
+
+    @Autowired
+    TransactionLogRepository transactionLogRepository;
 
     //CREATE AN EXERCISELOG
     public User createEntryLog(Integer entryId, ExerciseLogVO exerciseLogVO, Integer id) {
@@ -65,12 +81,135 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
         }
     }
 
+    // Create Exercise Flow
+
+    public EntryLog createExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
+
+        EntryLog submitEntry = new EntryLog();
+        ExerciseLog submitExerciseLog = new ExerciseLog();
+        EntryExecTransactionLogVO transLog = new EntryExecTransactionLogVO();
+
+        try {
+            submitEntry = entryLogRepository.findById(submitExerciseLogVO.getEntryId()).get();
+
+            // the exercise id isn't being generated
+
+            // continue with setting the thing
+            submitExerciseLog.setMemberId(submitExerciseLogVO.getMemberId());
+            submitExerciseLog.setExerciseName(submitExerciseLogVO.getExerciseName());
+            submitExerciseLog.setSets(submitExerciseLogVO.getSets());
+            submitExerciseLog.setReps(submitExerciseLogVO.getReps());
+            submitExerciseLog.setEntryId(submitExerciseLogVO.getEntryId());
+            submitExerciseLog.setComments(submitExerciseLogVO.getComments());
+            submitExerciseLog.setActionCd(transactionCode.CRE_EXE_LOG);
+
+
+            List<ExerciseLog> allExistingExeForIndivEntry = submitEntry.getExerciseLogList();
+            allExistingExeForIndivEntry.add(submitExerciseLog);
+
+            exerciseLogRepository.save(submitExerciseLog);
+
+            submitEntry.setExerciseLogList(allExistingExeForIndivEntry);
+
+            entryLogRepository.save(submitEntry);
+
+            transLog.setMemberId(submitExerciseLogVO.getMemberId());
+            transLog.setExerciseName(submitExerciseLogVO.getExerciseName());
+            transLog.setSets(submitExerciseLogVO.getSets());
+            transLog.setComments(submitExerciseLogVO.getComments());
+            transLog.setActionCd(transactionCode.CRE_EXE_LOG);
+
+            transactionLogService.createModifyExerciseTransactionLog(transLog);
+
+            return submitEntry;
+        } catch(ExerciseLogException e){
+            throw new ExerciseLogException("something");
+        }
+    }
+
+
+    // Modify/Update Exercise Flow
+    public EntryLog modifyExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
+        EntryLog submitEntry = new EntryLog();
+        ExerciseLog submitExerciseLog = new ExerciseLog();
+        EntryExecTransactionLogVO transLog = new EntryExecTransactionLogVO();
+
+        try {
+            submitEntry = entryLogRepository.findById(submitExerciseLogVO.getEntryId()).get();
+
+//            submitExerciseLog = exerciseLogRepository.findById(submitExerciseLogVO.getExerciseId()).get();
+            submitExerciseLog = exerciseLogRepository.findById(submitExerciseLogVO.getExerciseId()).get();
+
+            submitExerciseLog.setMemberId(submitExerciseLogVO.getMemberId());
+            submitExerciseLog.setExerciseName(submitExerciseLogVO.getExerciseName());
+            submitExerciseLog.setSets(submitExerciseLogVO.getSets());
+            submitExerciseLog.setReps(submitExerciseLogVO.getReps());
+            submitExerciseLog.setEntryId(submitExerciseLogVO.getEntryId());
+            submitExerciseLog.setComments(submitExerciseLogVO.getComments());
+//            submitExerciseLog.setActionCd(transactionCode.CRE_EXE_LOG);
+//            submitExerciseLog.setExerciseId(submitExerciseLog.getExerciseId());
+
+
+            List<ExerciseLog> allExistingExeForIndivEntry = submitEntry.getExerciseLogList();
+            allExistingExeForIndivEntry.add(submitExerciseLog);
+
+            exerciseLogRepository.save(submitExerciseLog);
+
+            submitEntry.setExerciseLogList(allExistingExeForIndivEntry);
+
+//            entryLogRepository.save(submitEntry);
+            entryLogRepository.save(submitEntry);
+
+            transLog.setMemberId(submitExerciseLogVO.getMemberId());
+            transLog.setExerciseName(submitExerciseLogVO.getExerciseName());
+            transLog.setSets(submitExerciseLogVO.getSets());
+            transLog.setComments(submitExerciseLogVO.getComments());
+            transLog.setActionCd(transactionCode.CRE_EXE_LOG);
+
+            transactionLogService.createModifyExerciseTransactionLog(transLog);
+
+            return submitEntry;
+        } catch(ExerciseLogException e){
+            throw new ExerciseLogException("something");
+        }
+    }
+
     //Submit Exercise flow
-    public SubmitExerciseLogVO submitExerciseLog(SubmitExerciseLogVO submitExerciseLogVO, Integer id){
+    public SubmitExerciseLogVO submitExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
+
+        List<EntryLog> liExistingEntryLog = new ArrayList<>();
+
+        //Set the member Id from the UI
+//        submitExerciseLogVO.setMemberId(id);
+//        submitExerciseLogVO.setEntryId(entryId);
+//        submitExerciseLogVO.setExerciseId(exeId);
+
+        // Find all the entry/Exercise logs and add the to the object
+        liExistingEntryLog = entryLogService.fetchAllEntryRecords(submitExerciseLogVO.getMemberId());
+        submitExerciseLogVO.setLiExistingEntryLog(liExistingEntryLog);
 
 
+        // PUSHING TO A MODIFY OR CREATE FLOW - VALIDATION FLOW
+        validationService.validateExerciseLog(submitExerciseLogVO);
 
-        return null;
+        if(submitExerciseLogVO.getActionCd().equals(transactionCode.CRE_EXE_LOG)){
+            // Go through the creation flow
+            EntryLog processedEntry = createExerciseLog(submitExerciseLogVO);
+//            submitExerciseLogVO.setProcessedEntry(processedEntry);
+
+        } else {
+            // Go through the modifdy flow
+            EntryLog processedExercise = modifyExerciseLog(submitExerciseLogVO);
+//            submitExerciseLogVO.setProcessedEntry(processedExercise);
+
+        }
+
+        return submitExerciseLogVO;
+
+        // 4) create a transaction log for it
+
+
+//        return submitExerciseLogVO;
     }
 
 

@@ -60,6 +60,8 @@
     display: none;
 }
 
+
+
 /*.me-auto {*/
 /*    margin-right: unset;*/
 /*}*/
@@ -162,6 +164,8 @@
 .home-signup-button {
     background-color: #A2C579;
     color : white;
+    border-color: #bbbbbb;
+    box-shadow: 7px 5px 10px #bbbbbb;
 }
 
 .home-signup-button-container {
@@ -170,3 +174,153 @@
     margin-top: 30px;
 }
 
+/*Logs */
+
+.log-title{
+    text-align: center;
+}
+
+.log-card {
+    border-style: outset;
+    border-color: #A2C579;
+    box-shadow: 7px 5px 10px #bbbbbb;
+
+}
+
+.log-card-header{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/*Bootstrap trying to override me again*/
+.form-label {
+    display : revert;
+}
+.btn {
+    display: revert;
+}
+
+.log-card-label-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.log-card-label{
+    text-align: center;
+    color: olivedrab;
+}
+
+.log-card-button-group {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.log-card-button{
+    justify-content: center;
+    background-color: #A2C579;
+
+    /*margin: auto;*/
+}
+
+.log-entry-group{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.log-entry-set-label{
+    text-align: center;
+    font-weight: bold;
+}
+
+.log-entry-label{
+    text-align: center;
+    font-weight: bold;
+}
+
+.log-entry-exercise-title{
+    text-align: center;
+    color: olivedrab;
+}
+
+.log-entry-exercise-card{
+    margin-top: 40px;
+    box-shadow: 7px 5px 10px #bbbbbb;
+    border-color: #A2C579;
+
+}
+
+.log-entry-comment{
+    text-align: center;
+}
+
+.log-entry-data {
+    text-align: center;
+}
+
+.log-entry-divider{
+    margin-top: 20px;
+    border-top: 3px dotted #bbb;
+    margin-bottom: 20px;
+
+}
+
+.log-entry-button{
+    background-color: #A2C579;
+    color : white;
+    border-color: #bbbbbb;
+    box-shadow: 7px 5px 10px #bbbbbb;
+}
+
+
+/* Registration Componetns*/
+
+
+.registration-card-container{
+    margin-top: 40px;
+    box-shadow: 7px 5px 10px #bbbbbb;
+    border-color: #A2C579;
+
+}
+
+.registration-form-label{
+    text-align: center;
+    font-weight: bold;
+    color: olivedrab;
+
+}
+
+.registration-form-title{
+    text-align: center;
+    color: olivedrab;
+}
+
+.registration-form-button-group{
+    display : flex;
+    justify-content: center;
+
+}
+
+.registration-form-label{
+    text-align: center;
+}
+
+.registration-form-button{
+    background-color: #A2C579;
+    color : white;
+    border-color: #bbbbbb;
+    box-shadow: 7px 5px 10px #bbbbbb;
+    width: 100%;
+}
+
+.registration-title{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.registration-form-placeholder {
+    text-align: center;
+}

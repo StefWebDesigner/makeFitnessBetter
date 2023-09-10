@@ -27,7 +27,7 @@ public class EntryLogController {
     public ResponseEntity<Object> createEntryLog(@RequestBody CreateEntryLogVO createEntryLogVo, @RequestParam Integer id){
         try{
             Object result = entryLogService.createEntry(createEntryLogVo, id);
-            return CreateEntryLogVO.generateResponse("Entry creation was sucessful", HttpStatus.OK, result);
+            return CreateEntryLogVO.generateResponse("Entry creation was sucessful", HttpStatus.CREATED, result);
         } catch(EntryLogException e) {
             throw new EntryLogException("Missing required information");
         }
@@ -48,7 +48,7 @@ public class EntryLogController {
     public ResponseEntity<Object>submitEntryLog(@RequestBody SubmitEntryLog submitEntryLog){
         try{
             EntryLog result = entryLogService.submitEntryLog(submitEntryLog);
-            return ExerciseLogVO.generateResponse("Retrieved all exercises", HttpStatus.OK, result);
+            return ExerciseLogVO.generateResponse("Retrieved all exercises", HttpStatus.CREATED, result);
 
         }catch(EntryLogException e){
         throw new EntryLogException("Posting log didn't go throuhg. Please try again");
