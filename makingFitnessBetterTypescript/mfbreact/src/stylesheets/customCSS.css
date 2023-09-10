@@ -180,8 +180,8 @@
 
 .log-card {
     border-style: outset;
-    border-color: green;
-    box-shadow: 2px 4px 12px rgba(0,0,0,.08);
+    border-color: #A2C579;
+    box-shadow: 7px 5px 10px #bbbbbb;
 
 }
 
@@ -216,6 +216,8 @@
 
 .log-card-button{
     justify-content: center;
+    background-color: #A2C579;
+
     /*margin: auto;*/
 }
 
@@ -242,6 +244,8 @@
 
 .log-entry-exercise-card{
     margin-top: 40px;
+    box-shadow: 7px 5px 10px #bbbbbb;
+
 }
 
 .log-entry-comment{
@@ -258,5 +262,13 @@
     margin-bottom: 20px;
 
 }
+
+.log-entry-button{
+    background-color: #A2C579;
+    color : white;
+    border-color: #bbbbbb;
+    box-shadow: 7px 5px 10px #bbbbbb;
+}
+
 
 

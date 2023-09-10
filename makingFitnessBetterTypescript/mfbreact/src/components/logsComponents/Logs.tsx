@@ -85,7 +85,7 @@ const Logs = () => {
                         <Col></Col>
                         <div className="log-card-button-group">
                             <Button
-                                className="log-card-button"
+                                className="log-entry-button"
                                 type="submit"
                             >
                                 Create New Entry
@@ -107,7 +107,7 @@ const Logs = () => {
                                 <p className="log-entry-data">  Bicep Curls</p>
                             </Col>
                             <Col>
-                                <Button>Edit</Button>
+                                <Button className="log-entry-button">Edit</Button>
                             </Col>
                         </Row>
                         <Row>
@@ -119,7 +119,7 @@ const Logs = () => {
                             </Col>
 
                             <Col>
-                                <Button>Edit</Button>
+                                <Button className="log-entry-button">Edit</Button>
                             </Col>
                         </Row>
                         <Row>
@@ -130,7 +130,7 @@ const Logs = () => {
                                 <p className="log-entry-data">  3</p>
                             </Col>
                             <Col>
-                                <Button>Edit</Button>
+                                <Button className="log-entry-button">Edit</Button>
                             </Col>
                         </Row>
                     </CardGroup>
@@ -140,13 +140,13 @@ const Logs = () => {
                     <CardGroup className = "log-entry-group">
                         <Row>
                             <Col xs={5}>
-                                <p className="log-entry-set-label">Exercise Two</p>
+                                <p className="log-entry-label">Exercise Two</p>
                             </Col>
                             <Col xs={4}>
                                 <p className="log-entry-data">  Bicep Curls</p>
                             </Col>
                             <Col>
-                                <Button>Edit</Button>
+                                <Button className="log-entry-button">Edit</Button>
                             </Col>
                         </Row>
                         <Row>
@@ -158,18 +158,18 @@ const Logs = () => {
                             </Col>
 
                             <Col>
-                                <Button>Edit</Button>
+                                <Button className="log-entry-button">Edit</Button>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={5}>
-                                <p className="log-entry-set-label">Reps</p>
+                                <p className="log-entry-label">Reps</p>
                             </Col>
                             <Col xs={4}>
                                 <p className="log-entry-data">  3</p>
                             </Col>
                             <Col>
-                                <Button>Edit</Button>
+                                <Button className="log-entry-button">Edit</Button>
                             </Col>
                         </Row>
                     </CardGroup>
@@ -179,13 +179,13 @@ const Logs = () => {
                     <CardGroup className = "log-entry-group">
                         <Row>
                             <Col xs={5}>
-                                <p className="log-entry-set-label">Exercise Two</p>
+                                <p className="log-entry-label">Exercise Two</p>
                             </Col>
                             <Col xs={4}>
                                 <p className="log-entry-data">  Bicep Curls</p>
                             </Col>
                             <Col>
-                                <Button>Edit</Button>
+                                <Button className="log-entry-button">Edit</Button>
                             </Col>
                         </Row>
                         <Row>
@@ -197,18 +197,18 @@ const Logs = () => {
                             </Col>
 
                             <Col>
-                                <Button>Edit</Button>
+                                <Button className="log-entry-button">Edit</Button>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={5}>
-                                <p className="log-entry-set-label">Reps</p>
+                                <p className="log-entry-label">Reps</p>
                             </Col>
                             <Col xs={4}>
                                 <p className="log-entry-data">  3</p>
                             </Col>
                             <Col>
-                                <Button>Edit</Button>
+                                <Button className="log-entry-button">Edit</Button>
                             </Col>
                         </Row>
                     </CardGroup>
@@ -217,7 +217,7 @@ const Logs = () => {
 
                     <p className="log-entry-comment">OverAll Comments</p>
 
-                    <Button>Add Another Exercise</Button>
+                    <Button className="log-entry-button" >Add Another Exercise</Button>
 
                 </Card>
 
