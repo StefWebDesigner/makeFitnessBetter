@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Login from "../authenticationComponents/Login";
 
 // @ts-ignore
@@ -7,11 +7,16 @@ import {Button, Card, Container, Form, Modal} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import LoginModal from "../authenticationComponents/LoginModal";
 import styles from "./Modal.module.css";
+import Auth from "../../services/Auth";
+import {AuthContext} from "../../dataStore";
 
 
 const HomepageComponent = () => {
 
     const navigate=useNavigate();
+
+    let auth : Auth = new Auth();
+    const authContext = useContext(AuthContext);
 
 
     function NavigateToRegistrationForm(){
@@ -21,19 +26,43 @@ const HomepageComponent = () => {
 
     const [show, setShow] = useState(false);
 
-
     const handleClose = () => setShow(false);
-
     const handleShow = () => setShow(true);
 
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    // const [remember, setRemember] = useState(false);
+    const [error,setError]=useState(false);
+    const [message,setMessage]=useState("")
 
-    const onLoginFormSubmit = (e : any) => {
 
+    function loginUser(e:any){
         e.preventDefault();
+        auth.login(username,password).then((response)=>{
+            console.log(response.data);
 
-        handleClose();
+            if(response.data.token){
+                localStorage.setItem("token",response.data.token);
+                localStorage.setItem("email", response.data.email);
+                localStorage.setItem("role",response.data.role);
+                authContext.setToken(response.data.token);
+            }
 
-    };
+            const currentUser = auth.getUser(username).then((response) => {
+                if(response.data){
+                    localStorage.setItem("id",response.data.memberId);
+                    localStorage.setItem("username",response.data.username);
+                }
+            });
+
+            navigate("/");
+
+        }).catch(err=>{
+            setMessage(err.response.data.exception);
+            setError(true)
+        });
+        // localStorage.setItem("remember-me",String(remember));
+    }
 
 
 
@@ -42,47 +71,27 @@ const HomepageComponent = () => {
         <>
 
             <MainNavigation/>
-            <Login/>
-            <div
-
-                // className="d-flex align-items-center justify-content-center"
-                //
-                // style={{ height: "100vh" }}
-
-            >
-
+            {/*<Login onSubmit={undefined}/>*/}
+            <div>
                 <Button variant="primary" onClick={handleShow}>
-
                     Launch Form modal
-
                 </Button>
-
             </div>
 
             <Modal show={show} onHide={handleClose}>
-
                 <Modal.Header closeButton>
-
                     <Modal.Title>Login Form</Modal.Title>
-
                 </Modal.Header>
-
                 <Modal.Body>
-
-                    <LoginModal onSubmit={onLoginFormSubmit} />
+                    <Login onSubmit={loginUser} username={username} setUsername={setUsername} password={password}
+                           setPassword={setPassword} />
 
                 </Modal.Body>
-
                 <Modal.Footer>
-
                     <Button variant="secondary" onClick={handleClose}>
-
                         Close Modal
-
                     </Button>
-
                 </Modal.Footer>
-
             </Modal>
 
 
