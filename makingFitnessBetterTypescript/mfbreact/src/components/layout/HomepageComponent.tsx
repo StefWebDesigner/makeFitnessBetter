@@ -1,31 +1,37 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import Login from "../authenticationComponents/Login";
+
 // @ts-ignore
 import MainNavigation from "../navigationComponents/MainNavigation";
-import {Button, Card, Container} from "react-bootstrap";
+import {Button, Card, Container, Form, Modal} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
+import LoginModal from "../authenticationComponents/LoginModal";
+import styles from "./Modal.module.css";
+import Auth from "../../services/Auth";
+import {AuthContext} from "../../dataStore";
+
 
 const HomepageComponent = () => {
 
     const navigate=useNavigate();
 
+    let auth : Auth = new Auth();
+    const authContext = useContext(AuthContext);
+
 
     function NavigateToRegistrationForm(){
         navigate("/registration");
-
     }
 
 
+    // @ts-ignore
     return (
         <>
-            <MainNavigation/>
-            <Login/>
 
+            <MainNavigation/>
 
             <Container className = 'page-container'>
-
-                {/* Warning label....Frontend Section is a work on progress. Backend read for binding content*/}
-                <cite className="progress-warning"> *Frontend application is still undergoing progress. Backend ready for round one of binding endpoints *</cite>
+                <cite className="progress-warning"> *Frontend and backend application is still undergoing progress and introducing updates on newly planned features soon *</cite>
 
                 <h1 className="home-title"> Making Fitness Better</h1>
 
@@ -82,8 +88,7 @@ const HomepageComponent = () => {
             </Container>
 
 
-
-        </>
+            </>
     );
 };
 
