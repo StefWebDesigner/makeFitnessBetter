@@ -222,6 +222,7 @@
 .log-entry-group{
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
 }
 
 .log-entry-set-label{
@@ -229,12 +230,33 @@
     font-weight: bold;
 }
 
+.log-entry-label{
+    text-align: center;
+    font-weight: bold;
+}
+
 .log-entry-exercise-title{
     text-align: center;
+
 }
 
 .log-entry-exercise-card{
     margin-top: 40px;
+}
+
+.log-entry-comment{
+    text-align: center;
+}
+
+.log-entry-data {
+    text-align: center;
+}
+
+.log-entry-divider{
+    margin-top: 20px;
+    border-top: 3px dotted #bbb;
+    margin-bottom: 20px;
+
 }
 
 

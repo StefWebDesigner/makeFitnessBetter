@@ -100,24 +100,34 @@ const Logs = () => {
                     <CardHeader className="log-entry-exercise-title">Entry Title</CardHeader>
                     <CardGroup className = "log-entry-group">
                         <Row>
-                            <Col xs={8}>
-                                <p className="log-entry-set-label">Exercise Two</p>
+                            <Col xs={5}>
+                                <p className="log-entry-label">Exercise Two</p>
+                            </Col>
+                            <Col xs={4}>
+                                <p className="log-entry-data">  Bicep Curls</p>
                             </Col>
                             <Col>
                                 <Button>Edit</Button>
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={8}>
+                            <Col xs={5}>
                                 <p className="log-entry-set-label">Sets</p>
                             </Col>
+                            <Col xs={4}>
+                                <p className="log-entry-data">  3</p>
+                            </Col>
+
                             <Col>
                                 <Button>Edit</Button>
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={8}>
-                                <p className="log-entry-set-label">Reps</p>
+                            <Col xs={5}>
+                                <p className="log-entry-label">Reps</p>
+                            </Col>
+                            <Col xs={4}>
+                                <p className="log-entry-data">  3</p>
                             </Col>
                             <Col>
                                 <Button>Edit</Button>
@@ -125,28 +135,38 @@ const Logs = () => {
                         </Row>
                     </CardGroup>
 
-                    <span> _________________________</span>
+                    <span className="log-entry-divider"></span>
 
                     <CardGroup className = "log-entry-group">
                         <Row>
-                            <Col xs={8}>
+                            <Col xs={5}>
                                 <p className="log-entry-set-label">Exercise Two</p>
                             </Col>
+                            <Col xs={4}>
+                                <p className="log-entry-data">  Bicep Curls</p>
+                            </Col>
                             <Col>
                                 <Button>Edit</Button>
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={8}>
+                            <Col xs={5}>
                                 <p className="log-entry-set-label">Sets</p>
                             </Col>
+                            <Col xs={4}>
+                                <p className="log-entry-data">  3</p>
+                            </Col>
+
                             <Col>
                                 <Button>Edit</Button>
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={8}>
+                            <Col xs={5}>
                                 <p className="log-entry-set-label">Reps</p>
+                            </Col>
+                            <Col xs={4}>
+                                <p className="log-entry-data">  3</p>
                             </Col>
                             <Col>
                                 <Button>Edit</Button>
@@ -154,40 +174,51 @@ const Logs = () => {
                         </Row>
                     </CardGroup>
 
-                    <span> _________________________</span>
+                    <span className="log-entry-divider"></span>
 
                     <CardGroup className = "log-entry-group">
                         <Row>
-                            <Col xs={8}>
+                            <Col xs={5}>
                                 <p className="log-entry-set-label">Exercise Two</p>
                             </Col>
+                            <Col xs={4}>
+                                <p className="log-entry-data">  Bicep Curls</p>
+                            </Col>
                             <Col>
                                 <Button>Edit</Button>
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={8}>
+                            <Col xs={5}>
                                 <p className="log-entry-set-label">Sets</p>
                             </Col>
+                            <Col xs={4}>
+                                <p className="log-entry-data">  3</p>
+                            </Col>
+
                             <Col>
                                 <Button>Edit</Button>
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={8}>
+                            <Col xs={5}>
                                 <p className="log-entry-set-label">Reps</p>
+                            </Col>
+                            <Col xs={4}>
+                                <p className="log-entry-data">  3</p>
                             </Col>
                             <Col>
                                 <Button>Edit</Button>
                             </Col>
                         </Row>
                     </CardGroup>
-                    <span> _________________________</span>
+
+                    <span className="log-entry-divider"></span>
+
+                    <p className="log-entry-comment">OverAll Comments</p>
 
                     <Button>Add Another Exercise</Button>
 
-
-                    <p>OverAll Comments</p>
                 </Card>
 
 
