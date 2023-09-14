@@ -15,8 +15,10 @@ import com.makingfitnessbetter.makingfitnessbetter.vo.AddingEntryLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.EntryExecTransactionLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.ExerciseLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitExerciseLogVO;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
+@Slf4j
 public class ExerciseLogServiceImp implements ExerciseLogService{
 
     @Autowired
@@ -52,31 +55,43 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
     //CREATE AN EXERCISELOG
     public User createEntryLog(Integer entryId, ExerciseLogVO exerciseLogVO, Integer id) {
         try {
-            User findMemId = userRepository.findById(id).get();
-            EntryLog selectedEntry = entryLogRepository.findById(entryId).get();
-            List<EntryLog> entryLogList = new ArrayList<>(Collections.singleton(selectedEntry));
+            User findMemId = userRepository.findById(id).orElseThrow(() -> new EntryLogException("User not found"));
+            EntryLog selectedEntry = entryLogRepository.findById(entryId).orElseThrow(() -> new EntryLogException("EntryLog not found"));
 
-            findMemId.setEntryLogList(entryLogList);
-
+            // Create the new ExerciseLog.
             ExerciseLog newExerciseLog = new ExerciseLog();
             newExerciseLog.setExerciseName(exerciseLogVO.getExerciseName());
-            newExerciseLog.setEntryId(selectedEntry.getEntryId());
+            newExerciseLog.setEntryId(selectedEntry.getEntryId());  // Assuming this method sets the EntryLog entity and not just an ID.
             newExerciseLog.setMemberId(findMemId.getMemberId());
             newExerciseLog.setSets(exerciseLogVO.getSets());
             newExerciseLog.setReps(exerciseLogVO.getReps());
             newExerciseLog.setComments(exerciseLogVO.getComments());
+
+            // Link the ExerciseLog to the EntryLog.
+            newExerciseLog.setEntryLog(selectedEntry);  // This is assuming that there's a setEntry() method in ExerciseLog entity.
+
+            // Save the new ExerciseLog to the database.
             exerciseLogRepository.save(newExerciseLog);
 
-            List<ExerciseLog> allExerciseLog = selectedEntry.getExerciseLogList();
-                allExerciseLog.add(newExerciseLog);
+            // If the EntryLog's ExerciseLogList is null, initialize it. Then, add the new ExerciseLog.
+            if(selectedEntry.getExerciseLogList() == null) {
+                selectedEntry.setExerciseLogList(new ArrayList<>());
+            }
+            selectedEntry.getExerciseLogList().add(newExerciseLog);
 
-            selectedEntry.setExerciseLogList(allExerciseLog);
+            // Update the EntryLog in the database.
             entryLogRepository.save(selectedEntry);
 
+            // Update the user's entry logs.
+            if(findMemId.getEntryLogList() == null) {
+                findMemId.setEntryLogList(new ArrayList<>());
+            }
+            findMemId.getEntryLogList().add(selectedEntry);
             userRepository.save(findMemId);
 
             return findMemId;
-        } catch (EntryLogException e) {
+
+        } catch (Exception e) {
             throw new EntryLogException("Some required information was missing. Please try again");
         }
     }
@@ -122,7 +137,7 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
             transactionLogService.createModifyExerciseTransactionLog(transLog);
 
             return submitEntry;
-        } catch(ExerciseLogException e){
+        } catch(Exception e){
             throw new ExerciseLogException("something");
         }
     }
@@ -146,8 +161,8 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
             submitExerciseLog.setReps(submitExerciseLogVO.getReps());
             submitExerciseLog.setEntryId(submitExerciseLogVO.getEntryId());
             submitExerciseLog.setComments(submitExerciseLogVO.getComments());
-//            submitExerciseLog.setActionCd(transactionCode.CRE_EXE_LOG);
-//            submitExerciseLog.setExerciseId(submitExerciseLog.getExerciseId());
+            submitExerciseLog.setActionCd(transactionCode.CRE_EXE_LOG);
+            submitExerciseLog.setExerciseId(submitExerciseLog.getExerciseId());
 
 
             List<ExerciseLog> allExistingExeForIndivEntry = submitEntry.getExerciseLogList();
@@ -158,7 +173,6 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
 
             submitEntry.setExerciseLogList(allExistingExeForIndivEntry);
 
-//            entryLogRepository.save(submitEntry);
             entryLogRepository.save(submitEntry);
 
             transLog.setMemberId(submitExerciseLogVO.getMemberId());
@@ -170,7 +184,7 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
             transactionLogService.createModifyExerciseTransactionLog(transLog);
 
             return submitEntry;
-        } catch(ExerciseLogException e){
+        } catch(Exception e){
             throw new ExerciseLogException("something");
         }
     }
@@ -178,52 +192,36 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
     //Submit Exercise flow
     public SubmitExerciseLogVO submitExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
 
-        List<EntryLog> liExistingEntryLog = new ArrayList<>();
+        try {
+            List<EntryLog> liExistingEntryLog = new ArrayList<>();
 
-        //Set the member Id from the UI
-//        submitExerciseLogVO.setMemberId(id);
-//        submitExerciseLogVO.setEntryId(entryId);
-//        submitExerciseLogVO.setExerciseId(exeId);
-
-        // Find all the entry/Exercise logs and add the to the object
-        liExistingEntryLog = entryLogService.fetchAllEntryRecords(submitExerciseLogVO.getMemberId());
-        submitExerciseLogVO.setLiExistingEntryLog(liExistingEntryLog);
+            // Find all the entry/Exercise logs and add the to the object
+            liExistingEntryLog = entryLogService.fetchAllEntryRecords(submitExerciseLogVO.getMemberId());
+            submitExerciseLogVO.setLiExistingEntryLog(liExistingEntryLog);
 
 
-        // PUSHING TO A MODIFY OR CREATE FLOW - VALIDATION FLOW
-        validationService.validateExerciseLog(submitExerciseLogVO);
+            // PUSHING TO A MODIFY OR CREATE FLOW - VALIDATION FLOW
+            validationService.validateExerciseLog(submitExerciseLogVO);
 
-        if(submitExerciseLogVO.getActionCd().equals(transactionCode.CRE_EXE_LOG)){
-            // Go through the creation flow
-            EntryLog processedEntry = createExerciseLog(submitExerciseLogVO);
+            if(submitExerciseLogVO.getActionCd().equals(transactionCode.CRE_EXE_LOG)){
+                // Go through the creation flow
+                EntryLog processedEntry = createExerciseLog(submitExerciseLogVO);
 //            submitExerciseLogVO.setProcessedEntry(processedEntry);
 
-        } else {
-            // Go through the modifdy flow
-            EntryLog processedExercise = modifyExerciseLog(submitExerciseLogVO);
-//            submitExerciseLogVO.setProcessedEntry(processedExercise);
+            } else {
+                EntryLog processedExercise = modifyExerciseLog(submitExerciseLogVO);
 
+            }
+
+            log.info("excercice log is updated successfully");
+            return submitExerciseLogVO;
+
+        } catch (Exception e){
+            log.error("error in updating excercice log");
+            throw new EntryLogException("Unable to submit the exercise log");
         }
 
-        return submitExerciseLogVO;
-
-        // 4) create a transaction log for it
-
-
-//        return submitExerciseLogVO;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     //Find All Exercise logS FOR A SINGLE ENTRY
@@ -241,7 +239,7 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
             } else {
                 throw new ExerciseLogException("No user exists");
             }
-        } catch (ExerciseLogException e){
+        } catch (Exception e){
             throw new ExerciseLogException("There was an issue, please try again");
         }
     }

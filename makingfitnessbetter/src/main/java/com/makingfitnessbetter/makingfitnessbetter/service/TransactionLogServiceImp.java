@@ -61,7 +61,7 @@ public class TransactionLogServiceImp implements TransactionLogService {
                 // leave out the userMod and date for now
 
                 return transactionLogRepository.save(transactionLog);
-        } catch (EntryLogException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 

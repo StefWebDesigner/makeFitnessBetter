@@ -31,29 +31,38 @@ public class UserServiceImp implements UserService {
 
     //CREATE A NEW USER
     public User create(User user){
-        user.setFailedAttempt(0);
-        user.setAccountNotLocked(true);
-        user.setPassword(encoder.encode(user.getPassword()));
-        User userModel = userRepository.save(user);
-        return userModel;
+        try{
+            user.setFailedAttempt(0);
+            user.setAccountNotLocked(true);
+            user.setPassword(encoder.encode(user.getPassword()));
+            User userModel = userRepository.save(user);
+            return userModel;
+        } catch (Exception e){
+            throw new UserException("Make sure to fill out all fields");
+        }
+
 
     }
 
 
     public User submitRegistration(SubmitRegistrationVO submitRegistrationVO){
+        try{
+            User user = new User();
 
-        User user = new User();
+            // validation layer --- found out if they have an already existing user
+            user =  validationService.userValidation(submitRegistrationVO);
 
-        // validation layer --- found out if they have an already existing user
-        user =  validationService.userValidation(submitRegistrationVO);
+            //If they don't exist, create the user
+            User submitUser = create(user);
 
-        //If they don't exist, create the user
-         User submitUser = create(user);
+            // Adding the translog for creation and existing
+            transactionLogService.createUserLog(user);
 
-        // Adding the translog for creation and existing
-        transactionLogService.createUserLog(user);
+            return submitUser;
+        } catch(Exception e){
+            throw new UserException("Missing field information, try again");
+        }
 
-        return submitUser;
 
     }
 
@@ -67,7 +76,7 @@ public class UserServiceImp implements UserService {
         try{
             String role = userRepository.findByUsername(email).get().getRole();
             return role;
-        } catch(UserException e){
+        } catch(Exception e){
             throw new UserException("NO ROLE OF THE USER FOUND. CHECK IF THE EMAIL IS CORRECT");
         }
 
@@ -78,7 +87,7 @@ public class UserServiceImp implements UserService {
         try{
             String role = userRepository.findByUsername(username).get().getRole();
             return role;
-        }catch(UserException e){
+        }catch(Exception e){
             throw new UserException("NO ROLE OF THE USER FOUND. CHECK IF THE USERNAME IS CORRECT");
         }
     }
@@ -91,7 +100,7 @@ public class UserServiceImp implements UserService {
 //            UserResponse userresponse =modelMapper.map(user,UserResponse.class);
 //            return userresponse;
             return user;
-        } catch(UserException e){
+        } catch(Exception e){
             throw new UserException("NO USER FOUND. CHECK IF THE EMAIL IS CORRECT");
         }
 
@@ -106,7 +115,7 @@ public class UserServiceImp implements UserService {
                 throw new BadCredentialsException("user not found exception");
             }
             return user.get();
-        }catch(UserException e){
+        }catch(Exception e){
             throw new UserException("NO USER FOUND. CHECK IF THE USERNAME IS CORRECT");
         }
 
@@ -127,7 +136,7 @@ public class UserServiceImp implements UserService {
                 throw new BadCredentialsException("user not found exception");
             }
             return userLoginVO;
-        }catch(UserException e){
+        }catch(Exception e){
             throw new UserException("NO USER FOUND. CHECK IF THE USERNAME IS CORRECT");
         }
 
@@ -141,7 +150,7 @@ public class UserServiceImp implements UserService {
             user.setFailedAttempt(failAttempts);
             userRepository.save(user);
         }
-        catch(UserException e){
+        catch(Exception e){
             throw new UserException("UNABLE TO UPDATE FAILEDATTEMPTS");
         }
 
@@ -154,7 +163,7 @@ public class UserServiceImp implements UserService {
             int newFailAttempts = user.getFailedAttempt() + 1;
             updateFailedAttempts(newFailAttempts, user.getEmail());
         }
-        catch(UserException e){
+        catch(Exception e){
             throw new UserException("UNABLE TO INCREASE FAILED ATTEMPTS");
         }
     }
@@ -165,7 +174,7 @@ public class UserServiceImp implements UserService {
         try{
             updateFailedAttempts(0, email);
         }
-        catch(UserException e){
+        catch(Exception e){
             throw new UserException("UNABLE TO RESEST THE FAILED ATTEMPTS");
         }
     }
@@ -178,7 +187,7 @@ public class UserServiceImp implements UserService {
             user.setLockTime(new Date());
             userRepository.save(user);
         }
-        catch(UserException e){
+        catch(Exception e){
             throw new UserException("UNABLE TO ACCESS ACCOUNT, YOU HAVE BEEN LOCKED");
         }
     }
@@ -199,7 +208,7 @@ public class UserServiceImp implements UserService {
             }
             return false;
         }
-        catch(UserException e){
+        catch(Exception e){
             throw new UserException("ERROR SETTING UP UNLOCK COUNTDOWN");
         }
     }

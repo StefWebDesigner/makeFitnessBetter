@@ -22,10 +22,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //All Permited
 
                 //**** User (Permit All) *****
-                .antMatchers(HttpMethod.POST, "/user/create").permitAll()
+//                .antMatchers(HttpMethod.POST, "/user/create").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/getUser").permitAll()
-//                .antMatchers(HttpMethod.PUT, "/user/updateemail").permitAll()
-//                .antMatchers(HttpMethod.PUT, "/user/updatepassword").permitAll()
+                .antMatchers(HttpMethod.GET, "/entry/fetchAllExercises").permitAll()
+                .antMatchers(HttpMethod.PUT, "/exercise/submitExerciseSet").permitAll()
+                .antMatchers(HttpMethod.POST, "/entry/create").permitAll()
+                .antMatchers(HttpMethod.POST, "/exercise/create").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/submitRegistration").permitAll()
 
                 //**** User (Admin Only) *****
 //                .antMatchers(HttpMethod.GET, "/user/all").hasRole("ADMIN")

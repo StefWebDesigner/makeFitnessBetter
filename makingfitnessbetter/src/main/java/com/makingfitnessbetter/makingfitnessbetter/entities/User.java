@@ -1,5 +1,6 @@
 package com.makingfitnessbetter.makingfitnessbetter.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,8 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
 
-
-    //
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer memberId;
@@ -33,10 +32,9 @@ public class User {
     private String verifcationCode;
     private String actionCd;
 
-
-
-    @OneToMany
-    List<EntryLog> entryLogList;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<EntryLog> entryLogList;
 
     public User( String email, String password, String username, String role) {
 

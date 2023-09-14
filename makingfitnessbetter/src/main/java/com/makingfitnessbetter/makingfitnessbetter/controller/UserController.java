@@ -19,22 +19,21 @@ public class UserController {
     UserService userService;
 
     //CREATE A USER
-    @PostMapping("/create")
-    public ResponseEntity<Object> createNewUser(@RequestBody User user){
-        try{
-            User result = userService.create(user);
-            return UserVO.generateResponse("User created", HttpStatus.OK, result);
-        } catch(UserException e){
-            throw new UserException("Make sure to enter all information");
-        }
-
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<Object> createNewUser(@RequestBody User user){
+//        try{
+//            User result = userService.create(user);
+//            return UserVO.generateResponse("User created", HttpStatus.CREATED, result);
+//        } catch(UserException e){
+//            throw new UserException("Make sure to enter all information");
+//        }
+//
+//    }
 
     @GetMapping("/getUser")
     public UserLoginVO getUserViaUsername(@RequestParam String username){
         UserLoginVO user = userService.getUserVOByUsername(username);
         return user;
-
     }
 
     @PostMapping("/submitRegistration")

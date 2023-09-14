@@ -40,29 +40,38 @@ public class EntryLogServiceImp implements EntryLogService {
 
     public EntryLog createEntry(CreateEntryLogVO entryLogVo, Integer id){
         try{
-            Optional<User> user = userRepository.findById(id);
-            if(user.isPresent()) {
+            Optional<User> userOpt = userRepository.findById(id);
+//            Optional<User> userOpt = userRepository.findAllById(id);
+
+            if(userOpt.isPresent()) {
+                User user = userOpt.get();
+
                 EntryLog newEntry = new EntryLog();
-                newEntry.setMemberId(user.get().getMemberId());
+                newEntry.setUser(user);  // Setting the user relationship here
                 newEntry.setEntryName(entryLogVo.getEntryName());
                 newEntry.setOverallComments(entryLogVo.getOverallComments());
+                newEntry.setMemberId(user.getMemberId());
                 entryLogRepository.save(newEntry);
                 return newEntry;
             } else {
                 throw new EntryLogException("User not present");
             }
-        } catch(EntryLogException e){
+        } catch(Exception e){
             throw new EntryLogException("All indicated fields not properly filled in");
         }
-
     }
+
 
     public List<EntryLog> fetchAllEntryRecords(Integer id){
         //Find all entries by memeber Id
         try{
+            //     List<EntryLog> myallEntries = entryLogRepository.findAll();
+            //   List<EntryLog> myallEntries2 = entryLogRepository.findAllByEntryName("Test");
             List<EntryLog> allEntries = entryLogRepository.findAllByMemberId(id);
+            //  List<EntryLog> allEntries3 = entryLogRepository.findAllByUserMemberId(id);
+
             return allEntries;
-        } catch(EntryLogException e){
+        } catch(Exception e){
             throw new EntryLogException("No entries were found");
         }
 

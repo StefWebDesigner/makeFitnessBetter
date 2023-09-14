@@ -73,7 +73,7 @@ public class ValidationImp implements ValidationService {
             }
 
             return  validationResults;
-        } catch (ExerciseLogException e){
+        } catch (Exception e){
             throw new ExerciseLogException("Error validation Exercise");
         }
 
