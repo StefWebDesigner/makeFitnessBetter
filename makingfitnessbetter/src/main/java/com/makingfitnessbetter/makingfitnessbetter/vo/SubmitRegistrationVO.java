@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import javax.persistence.Column;
-import java.util.Date;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 @AllArgsConstructor
@@ -14,9 +17,22 @@ import java.util.Date;
 public class SubmitRegistrationVO {
 
 
+    @Column(unique = true)
+    @Pattern( regexp = "[A-Za-z0-9@._-]{8,50}$", message = "Username format is incorrect")
+    @NotNull
+    @NotEmpty
     private String username;
+    @Column(unique = true)
+    @NotNull
+    @NotEmpty
     private String password;
+    @Column(unique = true)
+    @Pattern( regexp = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._]+\\.[a-zA-Z]{2,4}$", message = "Email format is incorrect")
+    @NotNull
+    @NotEmpty
     private String email;
+    @NotNull
+    @NotEmpty
     private String role;
 
 
