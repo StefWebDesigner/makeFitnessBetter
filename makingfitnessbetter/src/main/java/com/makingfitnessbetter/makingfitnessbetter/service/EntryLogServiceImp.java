@@ -8,6 +8,7 @@ import com.makingfitnessbetter.makingfitnessbetter.repositories.EntryLogReposito
 import com.makingfitnessbetter.makingfitnessbetter.repositories.UserRepository;
 import com.makingfitnessbetter.makingfitnessbetter.vo.CreateEntryLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitEntryLog;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class EntryLogServiceImp implements EntryLogService {
 
     @Autowired
@@ -25,26 +27,13 @@ public class EntryLogServiceImp implements EntryLogService {
     UserRepository userRepository;
 
     //CREATE ENTRYLOG
-//    public EntryLog createEntry(CreateEntryLogVO entryLogVo){
-//        try{
-//            EntryLog newEntry = new EntryLog();
-//            newEntry.setEntryName(entryLogVo.getEntryName());
-//            newEntry.setOverallComments(entryLogVo.getOverallComments());
-//            entryLogRepository.save(newEntry);
-//            return newEntry;
-//        } catch(EntryLogException e){
-//            throw new EntryLogException("All indicated fields not properly filled in");
-//        }
-//
-//    }
-
     public EntryLog createEntry(CreateEntryLogVO entryLogVo, Integer id){
+        log.info("Entry Log Creation : Entering the Entry Service");
         try{
             Optional<User> userOpt = userRepository.findById(id);
-//            Optional<User> userOpt = userRepository.findAllById(id);
-
             if(userOpt.isPresent()) {
                 User user = userOpt.get();
+                log.info("Entry Log Creation : Getting the User information and saving the new entry");
 
                 EntryLog newEntry = new EntryLog();
                 newEntry.setUser(user);  // Setting the user relationship here
@@ -54,6 +43,7 @@ public class EntryLogServiceImp implements EntryLogService {
                 entryLogRepository.save(newEntry);
                 return newEntry;
             } else {
+                log.error("Entry Log Creation : User wasn't present");
                 throw new EntryLogException("User not present");
             }
         } catch(Exception e){
@@ -63,39 +53,12 @@ public class EntryLogServiceImp implements EntryLogService {
 
 
     public List<EntryLog> fetchAllEntryRecords(Integer id){
-        //Find all entries by memeber Id
         try{
-            //     List<EntryLog> myallEntries = entryLogRepository.findAll();
-            //   List<EntryLog> myallEntries2 = entryLogRepository.findAllByEntryName("Test");
             List<EntryLog> allEntries = entryLogRepository.findAllByMemberId(id);
-            //  List<EntryLog> allEntries3 = entryLogRepository.findAllByUserMemberId(id);
-
             return allEntries;
         } catch(Exception e){
             throw new EntryLogException("No entries were found");
         }
-
-
-
     }
-
-    public EntryLog submitEntryLog(SubmitEntryLog submitEntryLog){
-        // Check if the post entry is already an entry
-
-        // If it is a new entry, go to the create new entry flow
-
-        // If it is an existing, go to the edit exisitn entry flow
-
-        // If it is an entry to be deleted, then enter delete entry flow
-
-        // Log according to the actionCd Status
-
-
-        return null;
-
-    }
-
-
-
 
 }
