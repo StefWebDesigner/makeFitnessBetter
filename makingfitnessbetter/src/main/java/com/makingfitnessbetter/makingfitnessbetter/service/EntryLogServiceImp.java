@@ -51,12 +51,13 @@ public class EntryLogServiceImp implements EntryLogService {
         }
     }
 
-
     public List<EntryLog> fetchAllEntryRecords(Integer id){
         try{
+            log.info("Fetch All Exercises : Starting the process of finding all the user");
             List<EntryLog> allEntries = entryLogRepository.findAllByMemberId(id);
             return allEntries;
         } catch(Exception e){
+            log.error("Fetch All Exercises : No records were found");
             throw new EntryLogException("No entries were found");
         }
     }
