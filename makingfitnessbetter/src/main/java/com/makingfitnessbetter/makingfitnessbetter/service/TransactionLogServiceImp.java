@@ -63,7 +63,8 @@ public class TransactionLogServiceImp implements TransactionLogService {
                 transactionLog.setTransCd(transLog.getActionCd());
                 // leave out the userMod and date for now
 
-                return transactionLogRepository.save(transactionLog);
+            log.info("Submiting Exercise Set : Creating the transaction log ");
+            return transactionLogRepository.save(transactionLog);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

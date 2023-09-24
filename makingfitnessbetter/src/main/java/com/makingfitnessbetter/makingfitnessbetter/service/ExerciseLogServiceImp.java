@@ -97,9 +97,8 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
     }
 
     // Create Exercise Flow
-
     public EntryLog createExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
-
+        log.info("Submiting Exercise Set : Entering the creation flow");
         EntryLog submitEntry = new EntryLog();
         ExerciseLog submitExerciseLog = new ExerciseLog();
         EntryExecTransactionLogVO transLog = new EntryExecTransactionLogVO();
@@ -107,9 +106,6 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
         try {
             submitEntry = entryLogRepository.findById(submitExerciseLogVO.getEntryId()).get();
 
-            // the exercise id isn't being generated
-
-            // continue with setting the thing
             submitExerciseLog.setMemberId(submitExerciseLogVO.getMemberId());
             submitExerciseLog.setExerciseName(submitExerciseLogVO.getExerciseName());
             submitExerciseLog.setSets(submitExerciseLogVO.getSets());
@@ -118,14 +114,13 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
             submitExerciseLog.setComments(submitExerciseLogVO.getComments());
             submitExerciseLog.setActionCd(transactionCode.CRE_EXE_LOG);
 
-
+            log.info("Submiting Exercise Set : convering the list to the object");
             List<ExerciseLog> allExistingExeForIndivEntry = submitEntry.getExerciseLogList();
             allExistingExeForIndivEntry.add(submitExerciseLog);
 
             exerciseLogRepository.save(submitExerciseLog);
-
             submitEntry.setExerciseLogList(allExistingExeForIndivEntry);
-
+            log.info("Submiting Exercise Set : Saving the newly exercise log");
             entryLogRepository.save(submitEntry);
 
             transLog.setMemberId(submitExerciseLogVO.getMemberId());
@@ -134,6 +129,7 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
             transLog.setComments(submitExerciseLogVO.getComments());
             transLog.setActionCd(transactionCode.CRE_EXE_LOG);
 
+            log.info("Submiting Exercise Set : Creating a transaction log for newly creately exervicse log");
             transactionLogService.createModifyExerciseTransactionLog(transLog);
 
             return submitEntry;
@@ -142,17 +138,15 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
         }
     }
 
-
     // Modify/Update Exercise Flow
     public EntryLog modifyExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
+        log.info("Submiting Exercise Set : Entering the modify log flow ");
         EntryLog submitEntry = new EntryLog();
         ExerciseLog submitExerciseLog = new ExerciseLog();
         EntryExecTransactionLogVO transLog = new EntryExecTransactionLogVO();
 
         try {
             submitEntry = entryLogRepository.findById(submitExerciseLogVO.getEntryId()).get();
-
-//            submitExerciseLog = exerciseLogRepository.findById(submitExerciseLogVO.getExerciseId()).get();
             submitExerciseLog = exerciseLogRepository.findById(submitExerciseLogVO.getExerciseId()).get();
 
             submitExerciseLog.setMemberId(submitExerciseLogVO.getMemberId());
@@ -164,15 +158,12 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
             submitExerciseLog.setActionCd(transactionCode.CRE_EXE_LOG);
             submitExerciseLog.setExerciseId(submitExerciseLog.getExerciseId());
 
-
             List<ExerciseLog> allExistingExeForIndivEntry = submitEntry.getExerciseLogList();
             allExistingExeForIndivEntry.add(submitExerciseLog);
 
-
             exerciseLogRepository.save(submitExerciseLog);
-
             submitEntry.setExerciseLogList(allExistingExeForIndivEntry);
-
+            log.info("Submiting Exercise Set : Saving the modified exercise log ");
             entryLogRepository.save(submitEntry);
 
             transLog.setMemberId(submitExerciseLogVO.getMemberId());
@@ -181,48 +172,46 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
             transLog.setComments(submitExerciseLogVO.getComments());
             transLog.setActionCd(transactionCode.CRE_EXE_LOG);
 
+            log.info("Submiting Exercise Set : Creating a log for the modify log ");
             transactionLogService.createModifyExerciseTransactionLog(transLog);
-
             return submitEntry;
         } catch(Exception e){
+            log.error("Submiting Exercise Set : something");
             throw new ExerciseLogException("something");
         }
     }
 
     //Submit Exercise flow
     public SubmitExerciseLogVO submitExerciseLog(SubmitExerciseLogVO submitExerciseLogVO){
+        log.info("Submiting Exercise Set : Central method intiation submit Exercise process");
 
         try {
             List<EntryLog> liExistingEntryLog = new ArrayList<>();
 
-            // Find all the entry/Exercise logs and add the to the object
+            log.info("Submiting Exercise Set : Gathering all records");
             liExistingEntryLog = entryLogService.fetchAllEntryRecords(submitExerciseLogVO.getMemberId());
             submitExerciseLogVO.setLiExistingEntryLog(liExistingEntryLog);
 
-
-            // PUSHING TO A MODIFY OR CREATE FLOW - VALIDATION FLOW
+            log.info("Submiting Exercise Set : Validating the the exerice log and attachign action_cd");
             validationService.validateExerciseLog(submitExerciseLogVO);
 
+            log.info("Submiting Exercise Set : Checking the flow using the newly added action_cd");
             if(submitExerciseLogVO.getActionCd().equals(transactionCode.CRE_EXE_LOG)){
-                // Go through the creation flow
+                log.info("Submiting Exercise Set : Going through the creation flow");
                 EntryLog processedEntry = createExerciseLog(submitExerciseLogVO);
-//            submitExerciseLogVO.setProcessedEntry(processedEntry);
-
             } else {
+                log.info("Submiting Exercise Set : Going through the modify exercise flow");
                 EntryLog processedExercise = modifyExerciseLog(submitExerciseLogVO);
-
             }
 
-            log.info("excercice log is updated successfully");
+            log.info("Submiting Exercise Set : returning create/or modified exercise set");
             return submitExerciseLogVO;
 
         } catch (Exception e){
             log.error("error in updating excercice log");
             throw new EntryLogException("Unable to submit the exercise log");
         }
-
     }
-
 
     //Find All Exercise logS FOR A SINGLE ENTRY
     public List<ExerciseLog> findAllExerciseLogPerEntry(Integer id, Integer entryId) {
@@ -243,11 +232,6 @@ public class ExerciseLogServiceImp implements ExerciseLogService{
             throw new ExerciseLogException("There was an issue, please try again");
         }
     }
-
-
-
-
-
 
 
 }
