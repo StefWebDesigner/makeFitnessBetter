@@ -20,19 +20,15 @@ public class SubmitRegistrationVO {
     @Column(unique = true)
     @Pattern( regexp = "[A-Za-z0-9@._-]{8,50}$", message = "Username format is incorrect")
     @NotNull
-    @NotEmpty
     private String username;
     @Column(unique = true)
     @NotNull
-    @NotEmpty
     private String password;
     @Column(unique = true)
     @Pattern( regexp = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._]+\\.[a-zA-Z]{2,4}$", message = "Email format is incorrect")
     @NotNull
-    @NotEmpty
     private String email;
     @NotNull
-    @NotEmpty
     private String role;
 
 

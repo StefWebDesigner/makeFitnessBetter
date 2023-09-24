@@ -42,7 +42,7 @@ public class UserController {
             User result = userService.submitRegistration(submitRegistrationVO);
             return UserVO.generateResponse("User created", HttpStatus.CREATED, result);
         } catch(UserException e){
-            throw new UserException("Make sure to enter all information");
+            throw new UserException(e.getMessage());
         }
 
     }
