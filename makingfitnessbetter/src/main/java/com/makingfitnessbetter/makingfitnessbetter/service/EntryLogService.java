@@ -13,5 +13,4 @@ public interface EntryLogService{
 
     List<EntryLog> fetchAllEntryRecords(Integer id);
 
-    public EntryLog submitEntryLog(SubmitEntryLog submitEntryLog);
 }

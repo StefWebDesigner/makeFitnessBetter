@@ -7,22 +7,24 @@ import com.makingfitnessbetter.makingfitnessbetter.exceptions.EntryLogException;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.TransactionLogRepository;
 import com.makingfitnessbetter.makingfitnessbetter.utility.transactionCode;
 import com.makingfitnessbetter.makingfitnessbetter.vo.EntryExecTransactionLogVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
+@Slf4j
 public class TransactionLogServiceImp implements TransactionLogService {
-
 
     @Autowired
     private TransactionLogRepository transactionLogRepository;
-
 
     public TransactionLog createUserLog(User user) {
         TransactionLog transactionLog = new TransactionLog();
 
         if (user.getActionCd().equals("USER_EXISTS")) {
+            log.info("User registration : Setting the translog for the user already existing");
+
             transactionLog.setMemberId(user.getMemberId());
             transactionLog.setEntryId(null);
             transactionLog.setExerciseId(null);
@@ -33,9 +35,10 @@ public class TransactionLogServiceImp implements TransactionLogService {
 
             TransactionLog sumbitedLog = transactionLogRepository.save(transactionLog);
 
+            log.info("User registration : Returning the translog for the user already existing");
             return sumbitedLog;
-
         } else {
+            log.info("User registration : Setting the translog for the new user");
             transactionLog.setMemberId(user.getMemberId());
             transactionLog.setEntryId(null);
             transactionLog.setExerciseId(null);
@@ -44,8 +47,8 @@ public class TransactionLogServiceImp implements TransactionLogService {
             transactionLog.setLogDateMade(null);
             transactionLog.setUserMod(user.getUsername());
 
+            log.info("User registration : Returning the translog for the new user");
             TransactionLog sumbitedLog = transactionLogRepository.save(transactionLog);
-
             return sumbitedLog;
         }
     }
@@ -60,13 +63,10 @@ public class TransactionLogServiceImp implements TransactionLogService {
                 transactionLog.setTransCd(transLog.getActionCd());
                 // leave out the userMod and date for now
 
-                return transactionLogRepository.save(transactionLog);
+            log.info("Submiting Exercise Set : Creating the transaction log ");
+            return transactionLogRepository.save(transactionLog);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
-
-
-
 }

@@ -9,6 +9,7 @@ import com.makingfitnessbetter.makingfitnessbetter.service.ExerciseLogService;
 import com.makingfitnessbetter.makingfitnessbetter.vo.AddingEntryLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.ExerciseLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitExerciseLogVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/exercise")
+@Slf4j
 public class ExerciseLogController {
     @Autowired
     ExerciseLogService exerciseLogService;
@@ -49,22 +51,14 @@ public class ExerciseLogController {
 
     @PutMapping("/submitExerciseSet")
     public ResponseEntity<Object> submitExerciseLog(@RequestBody SubmitExerciseLogVO submitExerciseLogVO) {
-
+        log.info("Submiting Exercise Set : Intalizin");
         try {
             SubmitExerciseLogVO results = exerciseLogService.submitExerciseLog(submitExerciseLogVO);
             return ExerciseLogVO.generateResponse("Post Exercise Set", HttpStatus.OK, results);
         } catch (EntryLogException e) {
+            log.error("Submiting Exercise Set : Error trying to submit the exercise log");
             throw new EntryLogException("Unable to submit the exercise log");
         }
     }
-
-
-    // make a processingExeriseLog
-    //1) Check the log is existing or not
-    // 2) check if the entnry exists or not
-        // add the log
-    // 3) check if the exercise is to be modified instead of a new entry
-    // 4) create a transaction log for it
-
 
 }

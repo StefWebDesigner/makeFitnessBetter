@@ -5,6 +5,7 @@ import com.makingfitnessbetter.makingfitnessbetter.exceptions.UserException;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.UserRepository;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitRegistrationVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserServiceImp implements UserService {
 
     @Autowired
@@ -28,38 +30,36 @@ public class UserServiceImp implements UserService {
     @Autowired
     PasswordEncoder encoder;
 
-
     //CREATE A NEW USER
     public User create(User user){
         try{
+            log.info("User registration");
             user.setFailedAttempt(0);
             user.setAccountNotLocked(true);
             user.setPassword(encoder.encode(user.getPassword()));
             User userModel = userRepository.save(user);
+            log.info("User registration : Returning the new the new user");
             return userModel;
         } catch (Exception e){
+            log.error("User registration : Error when processing user, not validation related");
             throw new UserException("Make sure to fill out all fields");
         }
-
-
     }
 
 
     public User submitRegistration(SubmitRegistrationVO submitRegistrationVO){
         try{
             User user = new User();
-
             // validation layer --- found out if they have an already existing user
             user =  validationService.userValidation(submitRegistrationVO);
-
-            //If they don't exist, create the user
+            log.info("User registration : Entering the user validation layer");
             User submitUser = create(user);
-
-            // Adding the translog for creation and existing
+            log.info("User registration : entering the create user method");
             transactionLogService.createUserLog(user);
-
+            log.info("User registration : Returning registered user");
             return submitUser;
         } catch(Exception e){
+            log.error("User registration : user validation failed");
             throw new UserException("Missing field information, try again");
         }
 
