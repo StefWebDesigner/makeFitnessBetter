@@ -44,15 +44,12 @@ public class ValidationImp implements ValidationService {
             log.error("Invalid entry, all fields need to be inputed");
             throw new UserException("Invalid entry, all fields need to be inputed");
         }
-
-        //Checking if user already exists
         if(user != null) {
             Optional<User> formUser = userRepository.findByUsername(user.getUsername());
             if(formUser.isPresent()) {
                 user.setActionCd("USER_EXISTS");
                 log.error("User regsistration : User already exists exists");
                 throw new UserException("Account already exist, please log in to existing account");
-
             }
             user.setActionCd("USER_CREATED");
             log.info("User regsistration : User was created");
@@ -69,25 +66,21 @@ public class ValidationImp implements ValidationService {
         try{
             List<EntryLog> checkingList = submitExerciseLogVO.getLiExistingEntryLog();
             finalList = checkingList.stream().filter(valCheck -> Objects.equals(valCheck.getEntryId(), submitExerciseLogVO.getExerciseId())).collect(Collectors.toList());
-            log.info("Exercise Validation : filtering out the the list of existing entry logs");
 
+            log.info("Exercise Validation : filtering out the the list of existing entry logs");
             if(submitExerciseLogVO.getExerciseId() == null){
                 submitExerciseLogVO.setActionCd(transactionCode.CRE_EXE_LOG);
+                log.info("Exercise Validation : Creating the entry log");
             } else {
                 submitExerciseLogVO.setActionCd(transactionCode.EXE_EXE_LOG);
+                log.info("Exercise Validation : Finding out the entry log is already existing");
             }
-
+            log.info("Exercise Validation : Return positive validation result");
             return  validationResults;
         } catch (Exception e){
+            log.error("Exercise Validation : Validation failed for exercise log");
             throw new ExerciseLogException("Error validation Exercise");
         }
-
-
-
     }
-
-
-
-
 
 }
