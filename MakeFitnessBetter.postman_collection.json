@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "12b6f411-c978-4159-8150-cafa71f3fc6d",
+		"name": "MakeFitnessBetter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create a new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"nobody\",\r\n    \"email\" : \"stefan.riley@icloud.com\",\r\n    \"password\" : \"stefan\",\r\n    \"role\" : \"ROLE_ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/submitRegistration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"submitRegistration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new user Copy",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "submitRegistration(better creation)",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserByUsername",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/getUser?username=ona",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"getUser"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "ona"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"username\" : \"life\",\r\n    \"password\" : \"life\"\r\n}\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logging",
+			"item": [
+				{
+					"name": "Create a new entry",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Add a exercise log to entry group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"exerciseName\" : \"Pull ups\",\r\n        \"sets\" : 3,\r\n        \"reps\" : 10,\r\n        \"comments\" : \"Need to up the numbers\"\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/exercise/create?entryId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"exercise",
+								"create"
+							],
+							"query": [
+								{
+									"key": "entryId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all exerices in a single entry",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/exercise/allExercisesInLog?id=1&entryId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"exercise",
+								"allExercisesInLog"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								},
+								{
+									"key": "entryId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Entries/Execrise Records",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5NDk5NDgwOX0.ZkfEV2W-9-ySDpfNI5VA0gDtqOQwHdt_YHPewPpaLuaDUcjAvH4ZcZYPx8UnI3MFgh_BK1N0jcjBsc34VElSow",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/entry/fetchAllExercises?id=82",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"entry",
+								"fetchAllExercises"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "82"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submitExerciseLog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY5NDk5NDgwOX0.ZkfEV2W-9-ySDpfNI5VA0gDtqOQwHdt_YHPewPpaLuaDUcjAvH4ZcZYPx8UnI3MFgh_BK1N0jcjBsc34VElSow",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"entryId\": 2,\r\n    \"memberId\": 1,\r\n    \"exerciseId\" : 3,\r\n    \"sets\": 19,\r\n    \"reps\": 102,\r\n    \"comments\": \"test5\",\r\n    \"actionCd\": \"\",\r\n    \"exerciseName\": \"Debug5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/exercise/submitExerciseSet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"exercise",
+								"submitExerciseSet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
