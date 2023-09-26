@@ -13,14 +13,13 @@ const Logs = () => {
     // const [allLogs, setAllLogs] = useState([]);
     const [allLogs, setAllLogs] = useState<any[]>([])
     const [exerciseLogMyList, setExerciseLogList] = useState<any[]>([])
+    const [entryName, setEntryName] = useState("");
+    const [entryComment, setEntryComment] = useState("");
 
 
     async function getAllRecords(memberId : number) {
 
-
-
-
-      await  logService.getAllEntryRecords(memberId).then(response => {
+        await  logService.getAllEntryRecords(memberId).then(response => {
             const myresult=response.data.response;
             // Used to join to list together -- could come in handy for a different senario
             const flattenedList = myresult.reduce((acc: string | any[], currentObject: {
@@ -31,22 +30,41 @@ const Logs = () => {
 
             setExerciseLogList(flattenedList)
             setAllLogs(myresult);
-        }).catch(err=>console.log(err))
+        }).catch(err=>console.log(err));
+
+        getAllRecords(memberId);
 
         //  const data = logService.getAllEntryRecords(memberId);
         //
         // const response = logService.getAllEntryRecords(memberId);
         //
 
-        }
+    }
+
+
+
+
+    async function submitEntryLog(e : any){
+        e.preventDefault()
+        await logService.createEntryLog(memberId, entryName, entryComment).then(response => {
+            if(response.data){
+                setEntryName(response.data.entryName);
+                setEntryComment(response.data.overallComments);
+            }
+            console.log("Not entering")
+        }).catch(err => console.log(err) );
+        setEntryName("");
+        setEntryComment("");
+    }
 
     useEffect( () => {
 
         //async requires this and the callback of the records
         async function getAllMyRecords() {
-           await getAllRecords(memberId);
+            await getAllRecords(memberId);
         }
         getAllMyRecords()
+
     }, [])
 
 
@@ -65,27 +83,29 @@ const Logs = () => {
             <Container>
                 <Card className = "log-card">
                     <CardHeader className = "log-card-header" >Make an Entry</CardHeader>
-                    <Form>
+                    <Form onSubmit={submitEntryLog}>
                         <FormGroup className="log-card-label-group">
                             <FormLabel className="log-card-label"> Entry name </FormLabel>
                             <FormControl
                                 className="log-card-label"
                                 type = "text"
                                 name = "entryName"
-                                placeholder = "Entry Log Name"
+                                placeholder = "Name"
+                                onChange = {e => (setEntryName(e.target.value))}
                             />
                         </FormGroup>
                         <FormGroup>
-                                <FormLabel className="log-card-label">
-                                    <p className="log-card-label">
-                                        Entry name
-                                    </p>
-                                </FormLabel>
+                            <FormLabel className="log-card-label">
+                                <p className="log-card-label">
+                                    Comment
+                                </p>
+                            </FormLabel>
                             <FormControl
                                 className="log-card-label"
                                 type = "text"
-                                name = "entryName"
-                                placeholder = "Entry Log Name"
+                                name = "overallComments"
+                                placeholder = "Optional"
+                                onChange = {e => (setEntryComment(e.target.value))}
                             />
                         </FormGroup>
                         <Col></Col>
@@ -100,7 +120,7 @@ const Logs = () => {
                     </Form>
                 </Card>
 
-            {/* ENTRY FORMS */}
+                {/* ENTRY FORMS */}
 
                 {
                     allLogs.map(
@@ -156,84 +176,6 @@ const Logs = () => {
                                         )
                                     }
 
-
-
-                                    {/*<CardGroup className = "log-entry-group">*/}
-                                    {/*    <Row>*/}
-                                    {/*        <Col xs={5}>*/}
-                                    {/*            <p className="log-entry-label">Exercise Two</p>*/}
-                                    {/*        </Col>*/}
-                                    {/*        <Col xs={4}>*/}
-                                    {/*            <p className="log-entry-data">  Bicep Curls</p>*/}
-                                    {/*        </Col>*/}
-                                    {/*        <Col>*/}
-                                    {/*            <Button className="log-entry-button">Edit</Button>*/}
-                                    {/*        </Col>*/}
-                                    {/*    </Row>*/}
-                                    {/*    <Row>*/}
-                                    {/*        <Col xs={5}>*/}
-                                    {/*            <p className="log-entry-set-label">Sets</p>*/}
-                                    {/*        </Col>*/}
-                                    {/*        <Col xs={4}>*/}
-                                    {/*            <p className="log-entry-data">  3</p>*/}
-                                    {/*        </Col>*/}
-
-                                    {/*        <Col>*/}
-                                    {/*            <Button className="log-entry-button">Edit</Button>*/}
-                                    {/*        </Col>*/}
-                                    {/*    </Row>*/}
-                                    {/*    <Row>*/}
-                                    {/*        <Col xs={5}>*/}
-                                    {/*            <p className="log-entry-label">Reps</p>*/}
-                                    {/*        </Col>*/}
-                                    {/*        <Col xs={4}>*/}
-                                    {/*            <p className="log-entry-data">  3</p>*/}
-                                    {/*        </Col>*/}
-                                    {/*        <Col>*/}
-                                    {/*            <Button className="log-entry-button">Edit</Button>*/}
-                                    {/*        </Col>*/}
-                                    {/*    </Row>*/}
-                                    {/*</CardGroup>*/}
-
-                                    {/*<span className="log-entry-divider"></span>*/}
-
-                                    {/*<CardGroup className = "log-entry-group">*/}
-                                    {/*    <Row>*/}
-                                    {/*        <Col xs={5}>*/}
-                                    {/*            <p className="log-entry-label">Exercise Two</p>*/}
-                                    {/*        </Col>*/}
-                                    {/*        <Col xs={4}>*/}
-                                    {/*            <p className="log-entry-data">  Bicep Curls</p>*/}
-                                    {/*        </Col>*/}
-                                    {/*        <Col>*/}
-                                    {/*            <Button className="log-entry-button">Edit</Button>*/}
-                                    {/*        </Col>*/}
-                                    {/*    </Row>*/}
-                                    {/*    <Row>*/}
-                                    {/*        <Col xs={5}>*/}
-                                    {/*            <p className="log-entry-set-label">Sets</p>*/}
-                                    {/*        </Col>*/}
-                                    {/*        <Col xs={4}>*/}
-                                    {/*            <p className="log-entry-data">  3</p>*/}
-                                    {/*        </Col>*/}
-
-                                    {/*        <Col>*/}
-                                    {/*            <Button className="log-entry-button">Edit</Button>*/}
-                                    {/*        </Col>*/}
-                                    {/*    </Row>*/}
-                                    {/*    <Row>*/}
-                                    {/*        <Col xs={5}>*/}
-                                    {/*            <p className="log-entry-label">Reps</p>*/}
-                                    {/*        </Col>*/}
-                                    {/*        <Col xs={4}>*/}
-                                    {/*            <p className="log-entry-data">  3</p>*/}
-                                    {/*        </Col>*/}
-                                    {/*        <Col>*/}
-                                    {/*            <Button className="log-entry-button">Edit</Button>*/}
-                                    {/*        </Col>*/}
-                                    {/*    </Row>*/}
-                                    {/*</CardGroup>*/}
-
                                     <span className="log-entry-divider"></span>
 
                                     <p className="log-entry-comment">OverAll Comments</p>
@@ -247,208 +189,11 @@ const Logs = () => {
 
                 }
 
-
-
-                {/*<Card className="log-entry-exercise-card">*/}
-                {/*    <CardHeader className="log-entry-exercise-title">Entry Title</CardHeader>*/}
-                {/*    <CardGroup className = "log-entry-group">*/}
-                {/*        <Row>*/}
-                {/*            <Col xs={5}>*/}
-                {/*                <p className="log-entry-label">Exercise Two</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col xs={4}>*/}
-                {/*                <p className="log-entry-data">  Bicep Curls</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col>*/}
-                {/*                <Button className="log-entry-button">Edit</Button>*/}
-                {/*            </Col>*/}
-                {/*        </Row>*/}
-                {/*        <Row>*/}
-                {/*            <Col xs={5}>*/}
-                {/*                <p className="log-entry-set-label">Sets</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col xs={4}>*/}
-                {/*                <p className="log-entry-data">  3</p>*/}
-                {/*            </Col>*/}
-
-                {/*            <Col>*/}
-                {/*                <Button className="log-entry-button">Edit</Button>*/}
-                {/*            </Col>*/}
-                {/*        </Row>*/}
-                {/*        <Row>*/}
-                {/*            <Col xs={5}>*/}
-                {/*                <p className="log-entry-label">Reps</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col xs={4}>*/}
-                {/*                <p className="log-entry-data">  3</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col>*/}
-                {/*                <Button className="log-entry-button">Edit</Button>*/}
-                {/*            </Col>*/}
-                {/*        </Row>*/}
-                {/*    </CardGroup>*/}
-
-                {/*    <span className="log-entry-divider"></span>*/}
-
-                {/*    <CardGroup className = "log-entry-group">*/}
-                {/*        <Row>*/}
-                {/*            <Col xs={5}>*/}
-                {/*                <p className="log-entry-label">Exercise Two</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col xs={4}>*/}
-                {/*                <p className="log-entry-data">  Bicep Curls</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col>*/}
-                {/*                <Button className="log-entry-button">Edit</Button>*/}
-                {/*            </Col>*/}
-                {/*        </Row>*/}
-                {/*        <Row>*/}
-                {/*            <Col xs={5}>*/}
-                {/*                <p className="log-entry-set-label">Sets</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col xs={4}>*/}
-                {/*                <p className="log-entry-data">  3</p>*/}
-                {/*            </Col>*/}
-
-                {/*            <Col>*/}
-                {/*                <Button className="log-entry-button">Edit</Button>*/}
-                {/*            </Col>*/}
-                {/*        </Row>*/}
-                {/*        <Row>*/}
-                {/*            <Col xs={5}>*/}
-                {/*                <p className="log-entry-label">Reps</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col xs={4}>*/}
-                {/*                <p className="log-entry-data">  3</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col>*/}
-                {/*                <Button className="log-entry-button">Edit</Button>*/}
-                {/*            </Col>*/}
-                {/*        </Row>*/}
-                {/*    </CardGroup>*/}
-
-                {/*    <span className="log-entry-divider"></span>*/}
-
-                {/*    <CardGroup className = "log-entry-group">*/}
-                {/*        <Row>*/}
-                {/*            <Col xs={5}>*/}
-                {/*                <p className="log-entry-label">Exercise Two</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col xs={4}>*/}
-                {/*                <p className="log-entry-data">  Bicep Curls</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col>*/}
-                {/*                <Button className="log-entry-button">Edit</Button>*/}
-                {/*            </Col>*/}
-                {/*        </Row>*/}
-                {/*        <Row>*/}
-                {/*            <Col xs={5}>*/}
-                {/*                <p className="log-entry-set-label">Sets</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col xs={4}>*/}
-                {/*                <p className="log-entry-data">  3</p>*/}
-                {/*            </Col>*/}
-
-                {/*            <Col>*/}
-                {/*                <Button className="log-entry-button">Edit</Button>*/}
-                {/*            </Col>*/}
-                {/*        </Row>*/}
-                {/*        <Row>*/}
-                {/*            <Col xs={5}>*/}
-                {/*                <p className="log-entry-label">Reps</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col xs={4}>*/}
-                {/*                <p className="log-entry-data">  3</p>*/}
-                {/*            </Col>*/}
-                {/*            <Col>*/}
-                {/*                <Button className="log-entry-button">Edit</Button>*/}
-                {/*            </Col>*/}
-                {/*        </Row>*/}
-                {/*    </CardGroup>*/}
-
-                {/*    <span className="log-entry-divider"></span>*/}
-
-                {/*    <p className="log-entry-comment">OverAll Comments</p>*/}
-
-                {/*    <Button className="log-entry-button" >Add Another Exercise</Button>*/}
-
-                {/*</Card>*/}
-
-
-
-
             </Container>
 
 
 
 
-
-
-
-            {/*{allLogs}*/}
-
-            {/*{*/}
-            {/*    allLogs.map((entry, index) => {*/}
-            {/*        return (*/}
-            {/*             <aside key={entry.entryId}>*/}
-            {/*                {entry.entryId}*/}
-            {/*                {entry.entryName}*/}
-            {/*                {entry.overallComments}*/}
-            {/*             </aside>*/}
-            {/*        );*/}
-            {/*    })*/}
-            {/*}*/}
-
-
-
-
-
-
-            {/*First --- GEt all Entries  and bind them*/}
-            {/*Second --- Make the Post ford and bind*/}
-            {/*third  --- */}
-
-
-
-            {/*Potential Plan
-                    1) use useEffect to get all the current entry of the user
-                        ** This information will be used to make fetching information easier
-
-                       --- AKA a gran submitEntryFlow
-                   2) For Creation Flow
-                        - have a form that will alow the user to create an entry
-                        This form will have two options
-                            A) blank
-
-
-                    3) Modify Entry Flow
-                        - Show all the current Entry and their Exervise logs
-                        - Show  a button to modidy the entry options
-
-
-                    4) Delete Entry Flow
-                        - Delete the current Entry or delete the exerice log
-
-
-
-
-
-
-
-
-
-            */}
-
-
-
-
-
-
-
-            {/*<p>{logs}</p>*/}
-
-
-            
         </>
     );
 };

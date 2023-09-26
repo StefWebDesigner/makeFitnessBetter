@@ -18,6 +18,13 @@ class LogService {
     //About to add get all exericses
     // aysnc getAllExpercises(id : number, entryId )
 
+    async createEntryLog(id : number, entryName : string, overallComments : string){
+        return await axios.post("http://localhost:8080/entry/create?id=" + id,
+            {
+                entryName, overallComments
+            });
+    }
+
 }
 
 export default LogService;
