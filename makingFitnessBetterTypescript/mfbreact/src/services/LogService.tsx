@@ -25,6 +25,13 @@ class LogService {
             });
     }
 
+    async createNewExercise(entryId : number, id : number, exerciseName : string, sets : number, reps : number, comments : string ){
+        return await axios.post("http://localhost:8080/exercise/create?entryId=" + entryId + "&id=" + id,
+            {
+                exerciseName, sets, reps, comments
+            });
+    }
+
 }
 
 export default LogService;

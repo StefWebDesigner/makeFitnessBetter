@@ -1,9 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import MainNavigation from "../navigationComponents/MainNavigation";
 import axios from "axios";
-import {Button, Card, CardGroup, Col, Container, Form, FormControl, FormGroup, FormLabel, Row} from "react-bootstrap";
+import {
+    Button,
+    Card,
+    CardGroup,
+    Col,
+    Container,
+    Form,
+    FormControl,
+    FormGroup,
+    FormLabel,
+    Modal,
+    Row
+} from "react-bootstrap";
 import LogService from "../../services/LogService";
 import CardHeader from "react-bootstrap/CardHeader";
+import Login from "../authenticationComponents/Login";
+import AddExerciseModal from "./AddExerciseModal";
 
 const Logs = () => {
 
@@ -15,6 +29,14 @@ const Logs = () => {
     const [exerciseLogMyList, setExerciseLogList] = useState<any[]>([])
     const [entryName, setEntryName] = useState("");
     const [entryComment, setEntryComment] = useState("");
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+const [exerciseName, setExerciseName] = useState("");
+    const [sets, setSets] = useState(null);
+    const [reps, setReps] = useState(null);
+    const [comments, setComments] = useState("");
 
 
     async function getAllRecords(memberId : number) {
@@ -32,7 +54,7 @@ const Logs = () => {
             setAllLogs(myresult);
         }).catch(err=>console.log(err));
 
-        getAllRecords(memberId);
+        // getAllRecords(memberId);
 
         //  const data = logService.getAllEntryRecords(memberId);
         //
@@ -40,9 +62,6 @@ const Logs = () => {
         //
 
     }
-
-
-
 
     async function submitEntryLog(e : any){
         e.preventDefault()
@@ -56,6 +75,22 @@ const Logs = () => {
         setEntryName("");
         setEntryComment("");
     }
+
+    // async function submitExercise(e : any){
+    //     e.preventDefault();
+    //
+    //     await logService.createNewExercise(mylog.entryId, memberId, exerciseName, sets, reps, comments).then(response => {
+    //
+    //
+    //         if(response.data){
+    //             setExerciseName(response.data.response.exerciseName);
+    //             setSets(response.data.response.sets);
+    //             setReps(response.data.response.reps);
+    //             setComments(response.data.response.comments);
+    //
+    //         }
+    //     });
+    // }
 
     useEffect( () => {
 
@@ -125,6 +160,8 @@ const Logs = () => {
                 {
                     allLogs.map(
                         mylog =>{
+                            // @ts-ignore
+                            // @ts-ignore
                             return (
                                 <Card className="log-entry-exercise-card">
                                     <CardHeader className="log-entry-exercise-title">{mylog.entryName}</CardHeader>
@@ -180,7 +217,107 @@ const Logs = () => {
 
                                     <p className="log-entry-comment">OverAll Comments</p>
 
-                                    <Button className="log-entry-button" >Add Another Exercise</Button>
+                                    <Button
+                                        className="log-entry-button"
+                                        onClick={handleShow}
+                                    >
+                                        Add Another Exercise
+                                    </Button>
+
+                                    <Modal show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>Add An Exercise</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            {/*<Login onSubmit={loginUser} username={username} setUsername={setUsername} password={password}*/}
+                                            {/*       setPassword={setPassword} />*/}
+                                            {/*<AddExerciseModal*/}
+                                            {/*    onSubmit = {submitExercise}*/}
+                                            {/*    // exerciseName={exerciseName}*/}
+                                            {/*    setExerciseName={setExerciseName}*/}
+                                            {/*    sets = {sets}*/}
+                                            {/*    setSets = {setSets}*/}
+                                            {/*    reps = {reps}*/}
+                                            {/*    setReps = {setReps}*/}
+                                            {/*    comments = {comments}*/}
+                                            {/*    setComments = {setComments}*/}
+                                            {/*/>*/}
+                                            <AddExerciseModal
+                                                // onSubmit = {submitExercise}
+                                                // // exerciseName={exerciseName}
+                                                // setExerciseName={setExerciseName}
+                                                // sets = {sets}
+                                                // setSets = {setSets}
+                                                // reps = {reps}
+                                                // setReps = {setReps}
+                                                // comments = {comments}
+                                                // setComments = {setComments}
+                                            />
+
+                                            {/*<Form onSubmit = {submitExercise}>*/}
+                                            {/*    <Card>*/}
+                                            {/*        <Card.Header>*/}
+                                            {/*            Add An Exercise*/}
+                                            {/*        </Card.Header>*/}
+                                            {/*        <Form >*/}
+                                            {/*            <FormGroup>*/}
+                                            {/*                <Form.Label>Exercise Name</Form.Label>*/}
+                                            {/*                <FormControl*/}
+                                            {/*                    type = "text"*/}
+                                            {/*                    name = "exerciseName"*/}
+                                            {/*                    placeholder = "8"*/}
+                                            {/*                    value={exerciseName}*/}
+                                            {/*                    onChange = {e => (setExerciseName(e.target.value))}*/}
+                                            {/*                    required*/}
+                                            {/*                />*/}
+                                            {/*            </FormGroup>*/}
+                                            {/*            <FormGroup>*/}
+                                            {/*                <Form.Label>Sets</Form.Label>*/}
+                                            {/*                <FormControl*/}
+                                            {/*                    type = "number"*/}
+                                            {/*                    name = "sets"*/}
+                                            {/*                    placeholder = "2"*/}
+                                            {/*                    value={sets}*/}
+                                            {/*                    onChange = {e => (setSets(e.target.value))}*/}
+                                            {/*                    required*/}
+                                            {/*                />*/}
+                                            {/*            </FormGroup>*/}
+                                            {/*            <FormGroup>*/}
+                                            {/*                <Form.Label>Reps</Form.Label>*/}
+                                            {/*                <FormControl*/}
+                                            {/*                    type = "number"*/}
+                                            {/*                    name = "reps"*/}
+                                            {/*                    placeholder = "8"*/}
+                                            {/*                    value = {reps}*/}
+                                            {/*                    onChange = {e => (setReps(e.target.value))}*/}
+                                            {/*                    required*/}
+                                            {/*                />*/}
+                                            {/*            </FormGroup>*/}
+                                            {/*            <FormGroup>*/}
+                                            {/*                <Form.Label>Comments</Form.Label>*/}
+                                            {/*                <FormControl*/}
+                                            {/*                    type = "text"*/}
+                                            {/*                    name = "comments"*/}
+                                            {/*                    placeholder = "optional"*/}
+                                            {/*                    value = {comments}*/}
+                                            {/*                    onChange = {e => (setComments(e.target.value))}*/}
+                                            {/*                />*/}
+                                            {/*            </FormGroup>*/}
+                                            {/*        </Form>*/}
+                                            {/*    </Card>*/}
+
+                                            {/*</Form>*/}
+
+
+
+
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button variant="secondary" onClick={handleClose}>
+                                                Close Modal
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Modal>
 
                                 </Card>
                             )

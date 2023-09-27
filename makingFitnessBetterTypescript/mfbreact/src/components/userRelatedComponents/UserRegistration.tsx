@@ -121,6 +121,7 @@ const UserRegistration = () => {
                                 name="username"
                                 placeholder="username"
                                 onChange={(e) => (setUsername(e.target.value))}
+                                required
                             />
                         </FormGroup>
                         <FormGroup>
@@ -135,6 +136,7 @@ const UserRegistration = () => {
                                 name="password"
                                 placeholder="password"
                                 onChange={e => (setPassword(e.target.value))}
+                                required
                             />
                         </FormGroup>
                         <FormGroup>
@@ -149,6 +151,7 @@ const UserRegistration = () => {
                                 name="email"
                                 placeholder="Email"
                                 onChange={e => (setEmail(e.target.value))}
+                                required
                             />
                         </FormGroup>
                         <FormGroup>
@@ -161,6 +164,7 @@ const UserRegistration = () => {
                                 name="role"
                                 placeholder="Role"
                                 onChange={e => (setRole(e.target.value))}
+                                required
                             >
                                 <option value=""> Select </option>
                                 <option value="ROLE_USER"> ROLE_USER</option>
