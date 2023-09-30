@@ -25,11 +25,14 @@ class LogService {
             });
     }
 
-    async createNewExercise(entryId : number, id : number, exerciseName : string, sets : number, reps : number, comments : string ){
-        return await axios.post("http://localhost:8080/exercise/create?entryId=" + entryId + "&id=" + id,
-            {
+    async createNewExercise(entryId : number, memberId : number, exerciseName : string, sets : number, reps : number, comments : string ){
+        console.log("Entry Id : " + memberId)
+        return await axios.post("http://localhost:8080/exercise/create?entryId=" + entryId + "&id=" + memberId,
+        {
                 exerciseName, sets, reps, comments
             });
+        console.log("Entry Id : " + memberId)
+
     }
 
 }
