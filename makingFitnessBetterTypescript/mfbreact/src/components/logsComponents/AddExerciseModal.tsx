@@ -13,13 +13,15 @@ const AddExerciseModal = ({entryId, memberId, exerciseName, setExerciseName, set
     let fetchedMemberId = memberId;
     let fetchedEntryId = entryId;
 
-    console.log("Entry Id  : " + entryId)
-    console.log("Memeber Id  : " + memberId);
+    console.log("Entry Id Outside  : " + fetchedMemberId)
+    console.log("Memeber Id  : " + fetchedEntryId);
 
     async function submitExercise(e : any){
         e.preventDefault();
 
         await logService.createNewExercise(fetchedEntryId, fetchedMemberId, exerciseName, sets, reps, comments).then(response => {
+
+            let entryIdFetched =
 
             console.log("Inside the function  : " + entryId)
             console.log("Inside the function : " + entryId);

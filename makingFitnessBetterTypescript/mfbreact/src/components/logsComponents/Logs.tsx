@@ -144,79 +144,78 @@ const [exerciseName, setExerciseName] = useState("");
 
                 {
                     allLogs.map(
-                        mylog =>{
+                        (mylog, index) =>{
                             // @ts-ignore
                             // @ts-ignore
                             // @ts-ignore
                             return (
-                                <Card className="log-entry-exercise-card">
+                                <Card className="log-entry-exercise-card" key = {mylog.entryId}>
 
                                     <CardHeader className="log-entry-exercise-title">{mylog.entryName}{mylog.entryId}</CardHeader>
                                     {
-                                        mylog.exerciseLogList.map(
-                                            (log:{exerciseName:any,sets:any,reps:any}) => {
+                                        mylog.exerciseLogList.length !== 0 ?
+
+
+                                            mylog.exerciseLogList.map(
+                                            (log:{exerciseName:any,sets:any,reps:any}, ) => {
 
                                                 return <>
-                                                    <CardGroup className = "log-entry-group">
-                                                    <Row>
-                                                        <Col xs={5}>
+                                                    <CardGroup className = "log-entry-group" key={mylog.entryId}>
+                                                        <Row>
+                                                            <Col xs={5}>
 
-                                                            <p className="log-entry-label">Exercise</p>
-                                                        </Col>
-                                                        <Col xs={4}>
-                                                            <p className="log-entry-data">  {log.exerciseName}</p>
-                                                        </Col>
-                                                        <Col>
-                                                            <Button className="log-entry-button">Edit</Button>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row>
-                                                        <Col xs={5}>
-                                                            <p className="log-entry-set-label">Sets</p>
-                                                        </Col>
-                                                        <Col xs={4}>
-                                                            <p className="log-entry-data">{log.sets}</p>
-                                                        </Col>
+                                                                <p className="log-entry-label">Exercise</p>
+                                                            </Col>
+                                                            <Col xs={4}>
+                                                                <p className="log-entry-data">  {log.exerciseName}</p>
+                                                            </Col>
+                                                            <Col>
+                                                                <Button className="log-entry-button">Edit</Button>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col xs={5}>
+                                                                <p className="log-entry-set-label">Sets</p>
+                                                            </Col>
+                                                            <Col xs={4}>
+                                                                <p className="log-entry-data">{log.sets}</p>
+                                                            </Col>
 
-                                                        <Col>
-                                                            <Button className="log-entry-button">Edit</Button>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row>
-                                                        <Col xs={5}>
-                                                            <p className="log-entry-label">Reps</p>
-                                                        </Col>
-                                                        <Col xs={4}>
-                                                            <p className="log-entry-data">{log.reps}</p>
-                                                        </Col>
-                                                        <Col>
-                                                            <Button className="log-entry-button">Edit</Button>
-                                                        </Col>
-                                                    </Row>
-                                                {/*</CardGroup>*/}
+                                                            <Col>
+                                                                <Button className="log-entry-button">Edit</Button>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col xs={5}>
+                                                                <p className="log-entry-label">Reps</p>
+                                                            </Col>
+                                                            <Col xs={4}>
+                                                                <p className="log-entry-data">{log.reps}</p>
+                                                            </Col>
+                                                            <Col>
+                                                                <Button className="log-entry-button">Edit</Button>
+                                                            </Col>
+                                                        </Row>
+                                                        {/*</CardGroup>*/}
 
-                                                    <span className="log-entry-divider"></span>
+                                                        <span className="log-entry-divider"></span>
 
-                                                    <p className="log-entry-comment">OverAll Comments</p>
+                                                        <p className="log-entry-comment">OverAll Comments</p>
 
-                                                    <Button
-                                                        className="log-entry-button"
-                                                        onClick={handleShow}
-                                                    >
-                                                        Add Another Exercise
-                                                    </Button>
+                                                        <Button
+                                                            className="log-entry-button"
+                                                            onClick={handleShow}
+
+                                                        >
+                                                            Add Another Exercise
+                                                        </Button>
                                                     </CardGroup>
-
 
                                                     <Modal show={show} onHide={handleClose}>
                                                         <Modal.Header closeButton>
                                                             <Modal.Title>Add An Exercise</Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body>
-
-
-
-
 
                                                             <AddExerciseModal
                                                                 // onSubmit = {submitExercise}
@@ -233,13 +232,6 @@ const [exerciseName, setExerciseName] = useState("");
                                                                 handleClose = {handleClose}
                                                             />
 
-
-
-
-
-
-
-
                                                         </Modal.Body>
                                                         <Modal.Footer>
                                                             <Button variant="secondary" onClick={handleClose}>
@@ -251,49 +243,43 @@ const [exerciseName, setExerciseName] = useState("");
                                                 </>
                                             }
                                         )
+                                            :
+                                            <div>
+
+                                                <Card className="log-entry-exercise-card" key = {mylog.entryId}>
+                                                    <span className="log-entry-divider"></span>
+
+                                                    <p className="log-entry-comment">OverAll Comments</p>
+
+                                                    <Button
+                                                        className="log-entry-button"
+                                                        onClick={handleShow}
+
+                                                    >
+                                                        Add Another Exercise
+                                                    </Button>
+                                                </Card>
+
+
+
+
+
+
+
+                                            </div>
                                     }
-
-                                    {/*<span className="log-entry-divider"></span>*/}
-
-                                    {/*<p className="log-entry-comment">OverAll Comments</p>*/}
-
-                                    {/*<Button*/}
-                                    {/*    className="log-entry-button"*/}
-                                    {/*    onClick={handleShow}*/}
-                                    {/*>*/}
-                                    {/*    Add Another Exercise*/}
-                                    {/*</Button>*/}
-
-                                    {/*<Modal show={show} onHide={handleClose}>*/}
-                                    {/*    <Modal.Header closeButton>*/}
-                                    {/*        <Modal.Title>Add An Exercise</Modal.Title>*/}
-                                    {/*    </Modal.Header>*/}
-                                    {/*    <Modal.Body>*/}
-                                    {/*        <AddExerciseModal*/}
-                                    {/*            // onSubmit = {submitExercise}*/}
-                                    {/*            entryId = {mylog.entryName}*/}
-                                    {/*            memberId = {memberId}*/}
-                                    {/*            exerciseName={exerciseName}*/}
-                                    {/*            setExerciseName={setExerciseName}*/}
-                                    {/*            sets = {sets}*/}
-                                    {/*            setSets = {setSets}*/}
-                                    {/*            reps = {reps}*/}
-                                    {/*            setReps = {setReps}*/}
-                                    {/*            comments = {comments}*/}
-                                    {/*            setComments = {setComments}*/}
-                                    {/*        />*/}
-                                    {/*    </Modal.Body>*/}
-                                    {/*    <Modal.Footer>*/}
-                                    {/*        <Button variant="secondary" onClick={handleClose}>*/}
-                                    {/*            Close Modal*/}
-                                    {/*        </Button>*/}
-                                    {/*    </Modal.Footer>*/}
-                                    {/*</Modal>*/}
-
                                 </Card>
                             )
                         }
                     )
+
+
+
+
+
+
+
+
 
                 }
 
@@ -303,6 +289,164 @@ const [exerciseName, setExerciseName] = useState("");
 
 
         </>
+        // <>
+        //     <MainNavigation/>
+        //     <h1 className="log-title">Logs</h1>
+        //
+        //     {/* FORM FOR THE ENTRY FORM SECTION */}
+        //     <Container>
+        //         <Card className = "log-card">
+        //             <CardHeader className = "log-card-header" >Make an Entry</CardHeader>
+        //             <Form onSubmit={submitEntryLog}>
+        //                 <FormGroup className="log-card-label-group">
+        //                     <FormLabel className="log-card-label"> Entry name </FormLabel>
+        //                     <FormControl
+        //                         className="log-card-label"
+        //                         type = "text"
+        //                         name = "entryName"
+        //                         placeholder = "Name"
+        //                         onChange = {e => (setEntryName(e.target.value))}
+        //                     />
+        //                 </FormGroup>
+        //                 <FormGroup>
+        //                     <FormLabel className="log-card-label">
+        //                         <p className="log-card-label">
+        //                             Comment
+        //                         </p>
+        //                     </FormLabel>
+        //                     <FormControl
+        //                         className="log-card-label"
+        //                         type = "text"
+        //                         name = "overallComments"
+        //                         placeholder = "Optional"
+        //                         onChange = {e => (setEntryComment(e.target.value))}
+        //                     />
+        //                 </FormGroup>
+        //                 <Col></Col>
+        //                 <div className="log-card-button-group">
+        //                     <Button
+        //                         className="log-entry-button"
+        //                         type="submit"
+        //                     >
+        //                         Create New Entry
+        //                     </Button>
+        //                 </div>
+        //             </Form>
+        //         </Card>
+        //
+        //         {/* ENTRY FORMS */}
+        //
+        //         {
+        //             allLogs.map(
+        //                 mylog =>{
+        //                     // @ts-ignore
+        //                     // @ts-ignore
+        //                     // @ts-ignore
+        //                     return (
+        //                         <Card className="log-entry-exercise-card">
+        //
+        //                             <CardHeader className="log-entry-exercise-title">{mylog.entryName}{mylog.entryId}</CardHeader>
+        //                             {
+        //                                 mylog.exerciseLogList.map(
+        //                                     (log:{exerciseName:any,sets:any,reps:any}) => {
+        //
+        //                                         return <>
+        //                                             <CardGroup className = "log-entry-group">
+        //                                             <Row>
+        //                                                 <Col xs={5}>
+        //
+        //                                                     <p className="log-entry-label">Exercise</p>
+        //                                                 </Col>
+        //                                                 <Col xs={4}>
+        //                                                     <p className="log-entry-data">  {log.exerciseName}</p>
+        //                                                 </Col>
+        //                                                 <Col>
+        //                                                     <Button className="log-entry-button">Edit</Button>
+        //                                                 </Col>
+        //                                             </Row>
+        //                                             <Row>
+        //                                                 <Col xs={5}>
+        //                                                     <p className="log-entry-set-label">Sets</p>
+        //                                                 </Col>
+        //                                                 <Col xs={4}>
+        //                                                     <p className="log-entry-data">{log.sets}</p>
+        //                                                 </Col>
+        //
+        //                                                 <Col>
+        //                                                     <Button className="log-entry-button">Edit</Button>
+        //                                                 </Col>
+        //                                             </Row>
+        //                                             <Row>
+        //                                                 <Col xs={5}>
+        //                                                     <p className="log-entry-label">Reps</p>
+        //                                                 </Col>
+        //                                                 <Col xs={4}>
+        //                                                     <p className="log-entry-data">{log.reps}</p>
+        //                                                 </Col>
+        //                                                 <Col>
+        //                                                     <Button className="log-entry-button">Edit</Button>
+        //                                                 </Col>
+        //                                             </Row>
+        //                                         {/*</CardGroup>*/}
+        //
+        //                                             <span className="log-entry-divider"></span>
+        //
+        //                                             <p className="log-entry-comment">OverAll Comments</p>
+        //
+        //                                             <Button
+        //                                                 className="log-entry-button"
+        //                                                 onClick={handleShow}
+        //                                             >
+        //                                                 Add Another Exercise
+        //                                             </Button>
+        //                                             </CardGroup>
+        //
+        //                                             <Modal show={show} onHide={handleClose}>
+        //                                                 <Modal.Header closeButton>
+        //                                                     <Modal.Title>Add An Exercise</Modal.Title>
+        //                                                 </Modal.Header>
+        //                                                 <Modal.Body>
+        //
+        //                                                     <AddExerciseModal
+        //                                                         // onSubmit = {submitExercise}
+        //                                                         entryId = {mylog.entryId}
+        //                                                         memberId = {memberId}
+        //                                                         exerciseName={exerciseName}
+        //                                                         setExerciseName={setExerciseName}
+        //                                                         sets = {sets}
+        //                                                         setSets = {setSets}
+        //                                                         reps = {reps}
+        //                                                         setReps = {setReps}
+        //                                                         comments = {comments}
+        //                                                         setComments = {setComments}
+        //                                                         handleClose = {handleClose}
+        //                                                     />
+        //
+        //                                                 </Modal.Body>
+        //                                                 <Modal.Footer>
+        //                                                     <Button variant="secondary" onClick={handleClose}>
+        //                                                         Close Modal
+        //                                                     </Button>
+        //                                                 </Modal.Footer>
+        //                                             </Modal>
+        //
+        //                                         </>
+        //                                     }
+        //                                 )
+        //                             }
+        //                         </Card>
+        //                     )
+        //                 }
+        //             )
+        //
+        //         }
+        //
+        //     </Container>
+        //
+        //
+        //
+        //
+        // </>
     );
 };
 
