@@ -147,11 +147,6 @@ const MainNavigation = () => {
 
                             }
 
-
-
-
-
-
                             <Modal show={show} onHide={handleClose}>
                                 <Modal.Header closeButton>
                                     <Modal.Title>Login Form</Modal.Title>

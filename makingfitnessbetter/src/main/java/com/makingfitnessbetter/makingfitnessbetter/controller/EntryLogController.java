@@ -27,7 +27,7 @@ public class EntryLogController {
     //CREATE AN ENTRY
     @PostMapping("/create")
     public ResponseEntity<Object> createEntryLog(@RequestBody CreateEntryLogVO createEntryLogVo, @RequestParam Integer id){
-        log.info("Entry Log Creation : Intalizing");
+//        log.info("Entry Log Creation : Intalizing");
         try{
             Object result = entryLogService.createEntry(createEntryLogVo, id);
             return CreateEntryLogVO.generateResponse("Entry creation was sucessful", HttpStatus.CREATED, result);
@@ -39,7 +39,7 @@ public class EntryLogController {
 
     @GetMapping("fetchAllExercises")
     public ResponseEntity<Object>fetchAllEntryRecords(@RequestParam Integer id){
-        log.info("Fetch All Exercises : Intalizing");
+//        log.info("Fetch All Exercises : Intalizing");
         try{
             List<EntryLog> result = entryLogService.fetchAllEntryRecords(id);
             return ExerciseLogVO.generateResponse("Retrieved all exercises", HttpStatus.OK, result);

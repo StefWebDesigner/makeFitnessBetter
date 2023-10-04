@@ -20,23 +20,6 @@ const Login = ({onSubmit ,username, setUsername, password, setPassword}) => {
     // @ts-ignore
     return (
         <>
-        {/* **************************** Best of making forms*/}
-        {/*<Form inline>*/}
-        {/*    <Row>*/}
-        {/*        <Col xs="auto">*/}
-        {/*            <Form.Control*/}
-        {/*                type="text"*/}
-        {/*                placeholder="Search"*/}
-        {/*                className=" mr-sm-2"*/}
-        {/*            />*/}
-        {/*        </Col>*/}
-        {/*        <Col xs="auto">*/}
-        {/*            <Button type="submit">Submit</Button>*/}
-        {/*        </Col>*/}
-        {/*    </Row>*/}
-        {/*</Form>*/}
-        {/*</Navbar>*/}
-
             <Form className="login-form-container" onSubmit={onSubmit}>
                 <div className="login-form-background">
                     <FormGroup>
