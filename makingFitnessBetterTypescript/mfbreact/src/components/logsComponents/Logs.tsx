@@ -30,8 +30,17 @@ const Logs = () => {
     const [entryName, setEntryName] = useState("");
     const [entryComment, setEntryComment] = useState("");
     const [show, setShow] = useState(false);
+    //For Adding Exercise Modals
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    //For Modifying the Exercise Modal
+    const handleCloseEdit = () => setShow(false);
+    const handleShowEdit = () => setShow(true);
+
+
+
+
 
 const [exerciseName, setExerciseName] = useState("");
     const [sets, setSets] = useState([]);
@@ -94,6 +103,7 @@ const [exerciseName, setExerciseName] = useState("");
     //     setLogs(response.data);
     // }
 
+    // @ts-ignore
     return (
         <>
             <MainNavigation/>
@@ -170,7 +180,7 @@ const [exerciseName, setExerciseName] = useState("");
                                                                 <p className="log-entry-data">  {log.exerciseName}</p>
                                                             </Col>
                                                             <Col>
-                                                                <Button className="log-entry-button">Edit</Button>
+                                                                {/*<Button className="log-entry-button">Edit</Button>*/}
                                                             </Col>
                                                         </Row>
                                                         <Row>
@@ -182,8 +192,12 @@ const [exerciseName, setExerciseName] = useState("");
                                                             </Col>
 
                                                             <Col>
-                                                                <Button className="log-entry-button">Edit</Button>
-                                                            </Col>
+                                                                <Button
+                                                                    className="log-entry-button"
+                                                                    onClick={handleShowEdit}
+                                                                >
+                                                                    Edit
+                                                                </Button>                                                            </Col>
                                                         </Row>
                                                         <Row>
                                                             <Col xs={5}>
@@ -193,7 +207,6 @@ const [exerciseName, setExerciseName] = useState("");
                                                                 <p className="log-entry-data">{log.reps}</p>
                                                             </Col>
                                                             <Col>
-                                                                <Button className="log-entry-button">Edit</Button>
                                                             </Col>
                                                         </Row>
                                                         {/*</CardGroup>*/}
@@ -269,10 +282,12 @@ const [exerciseName, setExerciseName] = useState("");
                                             </div>
                                     }
                                 </Card>
+
+
+
                             )
                         }
                     )
-
 
 
 
@@ -285,7 +300,34 @@ const [exerciseName, setExerciseName] = useState("");
 
             </Container>
 
+            <Modal show={show} onHide={handleCloseEdit}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit An Exercise</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
 
+                    {/*<AddExerciseModal*/}
+                    {/*    // onSubmit = {submitExercise}*/}
+                    {/*    // entryId = {mylog.entryId}*/}
+                    {/*    memberId = {memberId}*/}
+                    {/*    exerciseName={exerciseName}*/}
+                    {/*    setExerciseName={setExerciseName}*/}
+                    {/*    sets = {sets}*/}
+                    {/*    setSets = {setSets}*/}
+                    {/*    reps = {reps}*/}
+                    {/*    setReps = {setReps}*/}
+                    {/*    comments = {comments}*/}
+                    {/*    setComments = {setComments}*/}
+                    {/*    handleClose = {handleClose}*/}
+                    {/*/>*/}
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close Modal
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
 
         </>
