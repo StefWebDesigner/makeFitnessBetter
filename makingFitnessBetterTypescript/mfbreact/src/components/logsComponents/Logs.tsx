@@ -232,8 +232,9 @@ const [exerciseName, setExerciseName] = useState("");
                                                         </Modal.Header>
                                                         <Modal.Body>
                                                             <EditExerciseModal
-                                                                newExerciseName={log.exerciseName}
-                                                                newSetExerciseName={setExerciseName}
+                                                                oldExerciseName={log.exerciseName}
+                                                                oldSet={log.sets}
+                                                                oldRep={log.reps}
 
 
                                                             />

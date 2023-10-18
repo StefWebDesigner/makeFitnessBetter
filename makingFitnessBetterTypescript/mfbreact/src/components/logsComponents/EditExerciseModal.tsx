@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Button, Form, FormControl, FormGroup, FormLabel} from "react-bootstrap";
 
-const EditExerciseModal = ({newExerciseName, newSetExerciseName} : { newExerciseName : any, newSetExerciseName : any}) => {
+const EditExerciseModal = ({oldExerciseName, oldSet, oldRep} : { oldExerciseName : any, oldSet : any, oldRep : any}) => {
 
-    console.log(newExerciseName)
+    console.log(oldExerciseName)
     //Problem : its fetching everything instead of only the one I'm looking at
     // const[oldExeName, setOldExeName] = useState("");
 
@@ -19,7 +19,7 @@ const EditExerciseModal = ({newExerciseName, newSetExerciseName} : { newExercise
                     <FormControl
                         type= "text"
                         name = "newExercise"
-                        placeholder = {newExerciseName}
+                        placeholder = {oldExerciseName}
                     />
                 </FormGroup>
                 <FormGroup>
@@ -29,7 +29,7 @@ const EditExerciseModal = ({newExerciseName, newSetExerciseName} : { newExercise
                     <FormControl
                         type= "number"
                         name = "newSet"
-                        placeholder = 'Going to pick up the older state'
+                        placeholder = {oldSet}
                     />
                 </FormGroup>
                 <FormGroup>
@@ -39,7 +39,7 @@ const EditExerciseModal = ({newExerciseName, newSetExerciseName} : { newExercise
                     <FormControl
                         type= "number"
                         name = "newRep"
-                        placeholder = 'Going to pick up the older state'
+                        placeholder = {oldRep}
                     />
                 </FormGroup>
                 <div className="">
