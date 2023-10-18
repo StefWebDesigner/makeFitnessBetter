@@ -235,6 +235,11 @@ const [exerciseName, setExerciseName] = useState("");
                                                                 oldExerciseName={log.exerciseName}
                                                                 oldSet={log.sets}
                                                                 oldRep={log.reps}
+                                                                updateExerciseName={setExerciseName}
+                                                                updateSet={setSets}
+                                                                updateRep={setReps}
+                                                                handleClose={handleClose}
+
 
 
                                                             />
