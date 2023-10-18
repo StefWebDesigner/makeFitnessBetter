@@ -18,6 +18,7 @@ import LogService from "../../services/LogService";
 import CardHeader from "react-bootstrap/CardHeader";
 import Login from "../authenticationComponents/Login";
 import AddExerciseModal from "./AddExerciseModal";
+import EditExerciseModal from "./EditExerciseModal";
 
 const Logs = () => {
 
@@ -103,6 +104,7 @@ const [exerciseName, setExerciseName] = useState("");
     //     setLogs(response.data);
     // }
 
+    // @ts-ignore
     // @ts-ignore
     return (
         <>
@@ -224,26 +226,18 @@ const [exerciseName, setExerciseName] = useState("");
                                                         </Button>
                                                     </CardGroup>
 
-                                                    <Modal show={show} onHide={handleClose}>
-                                                        <Modal.Header closeButton>
-                                                            <Modal.Title>Add An Exercise</Modal.Title>
+                                                    <Modal show={show} onHide={handleCloseEdit} id = "edit" >
+                                                        <Modal.Header>
+                                                            <Modal.Title>Edit An Exercise</Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body>
+                                                            <EditExerciseModal
+                                                                newExerciseName={log.exerciseName}
+                                                                newSetExerciseName={setExerciseName}
 
-                                                            <AddExerciseModal
-                                                                // onSubmit = {submitExercise}
-                                                                entryId = {mylog.entryId}
-                                                                memberId = {memberId}
-                                                                exerciseName={exerciseName}
-                                                                setExerciseName={setExerciseName}
-                                                                sets = {sets}
-                                                                setSets = {setSets}
-                                                                reps = {reps}
-                                                                setReps = {setReps}
-                                                                comments = {comments}
-                                                                setComments = {setComments}
-                                                                handleClose = {handleClose}
+
                                                             />
+
 
                                                         </Modal.Body>
                                                         <Modal.Footer>
@@ -252,6 +246,36 @@ const [exerciseName, setExerciseName] = useState("");
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Modal>
+
+
+
+
+                                                    {/*<Modal show={show} onHide={handleClose}>*/}
+                                                    {/*    <Modal.Header closeButton>*/}
+                                                    {/*        <Modal.Title>Add An Exercise</Modal.Title>*/}
+                                                    {/*    </Modal.Header>*/}
+                                                    {/*    <Modal.Body>*/}
+                                                    {/*        <AddExerciseModal*/}
+                                                    {/*            // onSubmit = {submitExercise}*/}
+                                                    {/*            entryId = {mylog.entryId}*/}
+                                                    {/*            memberId = {memberId}*/}
+                                                    {/*            exerciseName={exerciseName}*/}
+                                                    {/*            setExerciseName={setExerciseName}*/}
+                                                    {/*            sets = {sets}*/}
+                                                    {/*            setSets = {setSets}*/}
+                                                    {/*            reps = {reps}*/}
+                                                    {/*            setReps = {setReps}*/}
+                                                    {/*            comments = {comments}*/}
+                                                    {/*            setComments = {setComments}*/}
+                                                    {/*            handleClose = {handleClose}*/}
+                                                    {/*        />*/}
+                                                    {/*    </Modal.Body>*/}
+                                                    {/*    <Modal.Footer>*/}
+                                                    {/*        <Button variant="secondary" onClick={handleClose}>*/}
+                                                    {/*            Close Modal*/}
+                                                    {/*        </Button>*/}
+                                                    {/*    </Modal.Footer>*/}
+                                                    {/*</Modal>*/}
 
                                                 </>
                                             }
@@ -300,34 +324,26 @@ const [exerciseName, setExerciseName] = useState("");
 
             </Container>
 
-            <Modal show={show} onHide={handleCloseEdit}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit An Exercise</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            {/*<Modal show={show} onHide={handleCloseEdit} id = "edit" >*/}
+            {/*    <Modal.Header>*/}
+            {/*        <Modal.Title>Edit An Exercise</Modal.Title>*/}
+            {/*    </Modal.Header>*/}
+            {/*    <Modal.Body>*/}
+            {/*        <EditExerciseModal*/}
+            {/*            newExerciseName={exerciseName}*/}
+            {/*            newSetExerciseName={setExerciseName}*/}
 
-                    {/*<AddExerciseModal*/}
-                    {/*    // onSubmit = {submitExercise}*/}
-                    {/*    // entryId = {mylog.entryId}*/}
-                    {/*    memberId = {memberId}*/}
-                    {/*    exerciseName={exerciseName}*/}
-                    {/*    setExerciseName={setExerciseName}*/}
-                    {/*    sets = {sets}*/}
-                    {/*    setSets = {setSets}*/}
-                    {/*    reps = {reps}*/}
-                    {/*    setReps = {setReps}*/}
-                    {/*    comments = {comments}*/}
-                    {/*    setComments = {setComments}*/}
-                    {/*    handleClose = {handleClose}*/}
-                    {/*/>*/}
 
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close Modal
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            {/*        />*/}
+            {/*        */}
+
+            {/*    </Modal.Body>*/}
+            {/*    <Modal.Footer>*/}
+            {/*        <Button variant="secondary" onClick={handleClose}>*/}
+            {/*            Close Modal*/}
+            {/*        </Button>*/}
+            {/*    </Modal.Footer>*/}
+            {/*</Modal>*/}
 
 
         </>
