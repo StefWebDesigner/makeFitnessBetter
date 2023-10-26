@@ -8,7 +8,6 @@ import LogService from "../../services/LogService";
 // const AddExerciseModal = () => {
 const AddExerciseModal = ({entryId, memberId, exerciseName, setExerciseName, sets, setSets, reps, setReps, comments, setComments, handleClose}) => {
 
-
     let logService = new LogService();
     let fetchedMemberId = memberId;
     let fetchedEntryId = entryId;
