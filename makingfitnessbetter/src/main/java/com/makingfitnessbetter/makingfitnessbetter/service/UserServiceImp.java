@@ -74,10 +74,6 @@ public class UserServiceImp implements UserService {
         resultUser.setActionCd(userSettingsFormVO.getActionCd());
         resultUser.setMemberId(memberId);
 
-
-
-
-
         // validation phase
         // Check if the action code generated from the request is get or update
         //They make have this set
@@ -92,17 +88,13 @@ public class UserServiceImp implements UserService {
 
         } else if(resultUser.getActionCd().equals("UPD_USR_INFO")) {
             resultUser =  updateUserSettings(resultUser, userSettingsFormVO);
-
-
-
-            //Enter the update user info
         }
 
         //an if condition to : either get the information or update
 
         // add the transaction logs
 
-        return null;
+        return resultUser;
 
     }
 
@@ -119,6 +111,7 @@ public class UserServiceImp implements UserService {
             resultUser.setVerifcationCode(selectedUser.get().getVerifcationCode());
 
             return resultUser;
+
         } else {
             throw new UserException("User not found");
         }
@@ -128,14 +121,32 @@ public class UserServiceImp implements UserService {
     public UserSettingVO updateUserSettings(UserSettingVO resultUser, UserSettingsFormVO userSettingsFormVO){
         UserSettingVO selectedUser =  getUserSettingDetails(resultUser);
 
-        
+        if(!selectedUser.getEmail().equals(userSettingsFormVO.getEmail())){
+            resultUser.setEmail(userSettingsFormVO.getEmail());
+        } else {
+            resultUser.setEmail(selectedUser.getEmail());
+        }
 
+        if (!selectedUser.getPassword().equals(userSettingsFormVO.getPassword())){
+            resultUser.setPassword(encoder.encode(userSettingsFormVO.getPassword()));
+            resultUser.setFailedAttempt(0);
+            resultUser.setVerifcationCode("");
+            resultUser.setAccountNotLocked(true);
+        } else {
+            resultUser.setPassword(selectedUser.getPassword());
+            resultUser.setFailedAttempt(selectedUser.getFailedAttempt());
+            resultUser.setVerifcationCode(selectedUser.getVerifcationCode());
+            resultUser.setAccountNotLocked(selectedUser.getAccountNotLocked());
+        }
 
+        if(!selectedUser.getUsername().equals(userSettingsFormVO.getUsername())){
+            resultUser.setUsername(userSettingsFormVO.getUsername());
+        } else {
+            resultUser.setUsername(selectedUser.getUsername());
+        }
 
+        return resultUser;
 
-
-
-        return null;
     }
 
 
