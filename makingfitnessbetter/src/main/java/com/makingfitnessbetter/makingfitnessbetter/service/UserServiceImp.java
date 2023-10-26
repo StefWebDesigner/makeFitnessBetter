@@ -5,6 +5,7 @@ import com.makingfitnessbetter.makingfitnessbetter.exceptions.UserException;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.UserRepository;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitRegistrationVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.UserSettingVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -65,6 +66,21 @@ public class UserServiceImp implements UserService {
 
 
     }
+
+    public UserSettingVO userSettings(UserSettingVO userSettingVO, Integer memberId){
+
+        // validation phase
+        // Check if the action code generated from the request is get or update
+        //They make have this set
+
+        //an if condition to : either get the information or update
+
+        // add the transaction logs
+
+        return null;
+
+    }
+
 
 
 
