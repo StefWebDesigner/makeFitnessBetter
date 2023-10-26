@@ -69,9 +69,21 @@ public class UserServiceImp implements UserService {
 
     public UserSettingVO userSettings(UserSettingVO userSettingVO, Integer memberId){
 
+
         // validation phase
         // Check if the action code generated from the request is get or update
         //They make have this set
+
+        if(userSettingVO.getActionCd().equals("FTC_USR_INFO")){
+            // Enter the get user info
+
+          UserSettingVO fetchUserInfo = new UserSettingVO();
+            fetchUserInfo =  getUserSettingDetails(userSettingVO, memberId);
+            return fetchUserInfo;
+
+        } else if(userSettingVO.getActionCd().equals("UPD_USR_INFO")) {
+            //Enter the update user info
+        }
 
         //an if condition to : either get the information or update
 
@@ -80,6 +92,26 @@ public class UserServiceImp implements UserService {
         return null;
 
     }
+
+
+    public UserSettingVO getUserSettingDetails(UserSettingVO userSettingVO, Integer memberId){
+
+        Optional<User> selectedUser = userRepository.findById(memberId);
+        if(selectedUser.isPresent()){
+            userSettingVO.setEmail(selectedUser.get().getEmail());
+            userSettingVO.setPassword(selectedUser.get().getPassword());
+            userSettingVO.setFailedAttempt(selectedUser.get().getFailedAttempt());
+            userSettingVO.setLockTime(selectedUser.get().getLockTime());
+            userSettingVO.setAccountNotLocked(selectedUser.get().getAccountNotLocked());
+            userSettingVO.setVerifcationCode(selectedUser.get().getVerifcationCode());
+
+            return userSettingVO;
+        } else {
+            throw new UserException("User not found");
+        }
+
+    }
+
 
 
 

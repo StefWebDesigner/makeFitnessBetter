@@ -29,6 +29,8 @@ public interface UserService {
 
     UserSettingVO userSettings(UserSettingVO userSettingVO, Integer memberId);
 
+    UserSettingVO getUserSettingDetails(UserSettingVO userSettingVO, Integer memberId);
+
 
 
     // ============== SECURITY RELATED REQUESTS ==============
