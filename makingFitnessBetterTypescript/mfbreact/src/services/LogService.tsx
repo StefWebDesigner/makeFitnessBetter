@@ -46,7 +46,7 @@ class LogService {
     // static submitExerciseLog(oldExerciseName: any, oldSet: any, oldRep: any) {
     //
     // }
-    async submitExerciseLog(oldExerciseName: any, oldSet: any, oldRep: any) {
+    async submitExerciseLog(oldExerciseName: any, oldSet: any, oldRep: any ) {
         return await axios.put("http://localhost:8080/exercise/submitExerciseSet",
             {
                 oldExerciseName, oldSet, oldRep

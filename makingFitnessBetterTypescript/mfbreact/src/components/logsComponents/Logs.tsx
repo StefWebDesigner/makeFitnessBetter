@@ -169,14 +169,17 @@ const [exerciseName, setExerciseName] = useState("");
 
 
                                             mylog.exerciseLogList.map(
-                                            (log:{exerciseName:any,sets:any,reps:any}, ) => {
+                                            (log:{exerciseId: number, exerciseName:any,sets:any,reps:any, }, ) => {
 
+                                                // @ts-ignore
+                                                // @ts-ignore
                                                 return <>
                                                     <CardGroup className = "log-entry-group" key={mylog.entryId}>
                                                         <Row>
                                                             <Col xs={5}>
 
-                                                                <p className="log-entry-label">Exercise</p>
+                                                                <p className="log-entry-label">Exercise{log.exerciseId}</p>
+
                                                             </Col>
                                                             <Col xs={4}>
                                                                 <p className="log-entry-data">  {log.exerciseName}</p>
@@ -232,16 +235,16 @@ const [exerciseName, setExerciseName] = useState("");
                                                         </Modal.Header>
                                                         <Modal.Body>
                                                             <EditExerciseModal
+                                                                // entryId = {mylog.entryId}
+                                                                // userMemberId = {memberId}
                                                                 oldExerciseName={log.exerciseName}
                                                                 oldSet={log.sets}
                                                                 oldRep={log.reps}
                                                                 updateExerciseName={setExerciseName}
                                                                 updateSet={setSets}
                                                                 updateRep={setReps}
+                                                                // exerciseId={log.exerciseId}
                                                                 handleClose={handleClose}
-
-
-
                                                             />
 
 
