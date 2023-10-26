@@ -3,10 +3,7 @@ package com.makingfitnessbetter.makingfitnessbetter.controller;
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.UserException;
 import com.makingfitnessbetter.makingfitnessbetter.service.UserService;
-import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitRegistrationVO;
-import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
-import com.makingfitnessbetter.makingfitnessbetter.vo.UserSettingVO;
-import com.makingfitnessbetter.makingfitnessbetter.vo.UserVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,8 +37,8 @@ public class UserController {
     }
 
     @PostMapping("/userSettings")
-    public ResponseEntity<Object> userSettings(@RequestBody UserSettingVO userSettingVO, Integer memeberId){
-        UserSettingVO result = userService.userSettings(userSettingVO, memeberId);
+    public ResponseEntity<Object> userSettings(@RequestBody UserSettingsFormVO userSettingsFormVO, Integer memeberId){
+        UserSettingVO result = userService.userSettings(userSettingsFormVO, memeberId);
         return UserVO.generateResponse("User information achieved", HttpStatus.OK, result);
     }
 

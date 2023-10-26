@@ -6,6 +6,7 @@ import com.makingfitnessbetter.makingfitnessbetter.repositories.UserRepository;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitRegistrationVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.UserSettingVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.UserSettingsFormVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -67,21 +68,33 @@ public class UserServiceImp implements UserService {
 
     }
 
-    public UserSettingVO userSettings(UserSettingVO userSettingVO, Integer memberId){
+    public UserSettingVO userSettings(UserSettingsFormVO userSettingsFormVO, Integer memberId){
+
+        UserSettingVO resultUser = new UserSettingVO();
+        resultUser.setActionCd(userSettingsFormVO.getActionCd());
+        resultUser.setMemberId(memberId);
+
+
+
 
 
         // validation phase
         // Check if the action code generated from the request is get or update
         //They make have this set
 
-        if(userSettingVO.getActionCd().equals("FTC_USR_INFO")){
+//        UserSettingVO fetchUserInfo = new UserSettingVO();
+
+
+        if(resultUser.getActionCd().equals("FTC_USR_INFO")){
             // Enter the get user info
+            resultUser =  getUserSettingDetails(resultUser);
+            return resultUser;
 
-          UserSettingVO fetchUserInfo = new UserSettingVO();
-            fetchUserInfo =  getUserSettingDetails(userSettingVO, memberId);
-            return fetchUserInfo;
+        } else if(resultUser.getActionCd().equals("UPD_USR_INFO")) {
+            resultUser =  updateUserSettings(resultUser, userSettingsFormVO);
 
-        } else if(userSettingVO.getActionCd().equals("UPD_USR_INFO")) {
+
+
             //Enter the update user info
         }
 
@@ -94,23 +107,37 @@ public class UserServiceImp implements UserService {
     }
 
 
-    public UserSettingVO getUserSettingDetails(UserSettingVO userSettingVO, Integer memberId){
+    public UserSettingVO getUserSettingDetails(UserSettingVO resultUser){
 
-        Optional<User> selectedUser = userRepository.findById(memberId);
+        Optional<User> selectedUser = userRepository.findById(resultUser.getMemberId());
         if(selectedUser.isPresent()){
-            userSettingVO.setEmail(selectedUser.get().getEmail());
-            userSettingVO.setPassword(selectedUser.get().getPassword());
-            userSettingVO.setFailedAttempt(selectedUser.get().getFailedAttempt());
-            userSettingVO.setLockTime(selectedUser.get().getLockTime());
-            userSettingVO.setAccountNotLocked(selectedUser.get().getAccountNotLocked());
-            userSettingVO.setVerifcationCode(selectedUser.get().getVerifcationCode());
+            resultUser.setEmail(selectedUser.get().getEmail());
+            resultUser.setPassword(selectedUser.get().getPassword());
+            resultUser.setFailedAttempt(selectedUser.get().getFailedAttempt());
+            resultUser.setLockTime(selectedUser.get().getLockTime());
+            resultUser.setAccountNotLocked(selectedUser.get().getAccountNotLocked());
+            resultUser.setVerifcationCode(selectedUser.get().getVerifcationCode());
 
-            return userSettingVO;
+            return resultUser;
         } else {
             throw new UserException("User not found");
         }
 
     }
+
+    public UserSettingVO updateUserSettings(UserSettingVO resultUser, UserSettingsFormVO userSettingsFormVO){
+        UserSettingVO selectedUser =  getUserSettingDetails(resultUser);
+
+        
+
+
+
+
+
+
+        return null;
+    }
+
 
 
 

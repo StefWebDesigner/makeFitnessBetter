@@ -2,10 +2,7 @@ package com.makingfitnessbetter.makingfitnessbetter.service;
 
 
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
-import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitRegistrationVO;
-import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
-import com.makingfitnessbetter.makingfitnessbetter.vo.UserSettingVO;
-import com.makingfitnessbetter.makingfitnessbetter.vo.UserVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.*;
 
 public interface UserService {
 
@@ -27,9 +24,9 @@ public interface UserService {
 
     User submitRegistration(SubmitRegistrationVO submitRegistrationVO);
 
-    UserSettingVO userSettings(UserSettingVO userSettingVO, Integer memberId);
-
-    UserSettingVO getUserSettingDetails(UserSettingVO userSettingVO, Integer memberId);
+    UserSettingVO userSettings(UserSettingsFormVO userSettingsFormVO, Integer memberId);
+    UserSettingVO getUserSettingDetails(UserSettingVO resultUser);
+    UserSettingVO updateUserSettings(UserSettingVO resultUser, UserSettingsFormVO userSettingsFormVO);
 
 
 
