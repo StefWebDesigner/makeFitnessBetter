@@ -24,12 +24,6 @@ public interface UserService {
 
     User submitRegistration(SubmitRegistrationVO submitRegistrationVO);
 
-    UserSettingVO userSettings(UserSettingsFormVO userSettingsFormVO, Integer memberId);
-    UserSettingVO getUserSettingDetails(UserSettingVO resultUser);
-    UserSettingVO updateUserSettings(UserSettingVO resultUser, UserSettingsFormVO userSettingsFormVO);
-
-
-
     // ============== SECURITY RELATED REQUESTS ==============
 
     // ***** GET ROLE OF USER BY EMAIL *****

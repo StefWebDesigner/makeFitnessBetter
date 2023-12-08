@@ -65,6 +65,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 //        String email = selectedUser.getEmail();
 
 //        System.out.println("id " + selectedUser.getMemberId());
+
 //        System.out.println("email " + selectedUser.getEmail());
 
 

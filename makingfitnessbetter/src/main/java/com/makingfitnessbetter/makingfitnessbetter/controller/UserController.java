@@ -36,11 +36,5 @@ public class UserController {
         }
     }
 
-    @PostMapping("/userSettings")
-    public ResponseEntity<Object> userSettings(@RequestBody UserSettingsFormVO userSettingsFormVO, Integer memeberId){
-        UserSettingVO result = userService.userSettings(userSettingsFormVO, memeberId);
-        return UserVO.generateResponse("User information achieved", HttpStatus.OK, result);
-    }
-
 
 }
