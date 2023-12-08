@@ -2,9 +2,7 @@ package com.makingfitnessbetter.makingfitnessbetter.service;
 
 
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
-import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitRegistrationVO;
-import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
-import com.makingfitnessbetter.makingfitnessbetter.vo.UserVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.*;
 
 public interface UserService {
 
@@ -25,8 +23,6 @@ public interface UserService {
     User create(User user);
 
     User submitRegistration(SubmitRegistrationVO submitRegistrationVO);
-
-
 
     // ============== SECURITY RELATED REQUESTS ==============
 

@@ -3,9 +3,7 @@ package com.makingfitnessbetter.makingfitnessbetter.controller;
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.UserException;
 import com.makingfitnessbetter.makingfitnessbetter.service.UserService;
-import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitRegistrationVO;
-import com.makingfitnessbetter.makingfitnessbetter.vo.UserLoginVO;
-import com.makingfitnessbetter.makingfitnessbetter.vo.UserVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,5 +35,6 @@ public class UserController {
             throw new UserException(e.getMessage());
         }
     }
+
 
 }

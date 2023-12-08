@@ -67,8 +67,6 @@ public class UserServiceImp implements UserService {
     }
 
 
-
-
     // ============== SECURITY  RELATED REQUESTS ==============
 
     // ***** GET ROLE OF USER BY EMAIL *****

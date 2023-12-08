@@ -9,6 +9,8 @@ public class transactionCode extends TransactionLogServiceImp {
     public static final String USR_CRE = "New User Created";
 //    final static String USR_EXT = "User ALREADY EXIST";
 
+    public static final String FTC_USR_INFO = "Fetch User Info";
+    public static final String UPD_USR_INFO = "Update User Info";
 
 
     //Entry CD

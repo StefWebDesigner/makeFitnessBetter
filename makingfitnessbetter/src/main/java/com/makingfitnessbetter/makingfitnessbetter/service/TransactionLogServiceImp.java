@@ -1,9 +1,7 @@
 package com.makingfitnessbetter.makingfitnessbetter.service;
 
-import com.makingfitnessbetter.makingfitnessbetter.entities.EntryLog;
 import com.makingfitnessbetter.makingfitnessbetter.entities.TransactionLog;
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
-import com.makingfitnessbetter.makingfitnessbetter.exceptions.EntryLogException;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.TransactionLogRepository;
 import com.makingfitnessbetter.makingfitnessbetter.utility.transactionCode;
 import com.makingfitnessbetter.makingfitnessbetter.vo.EntryExecTransactionLogVO;
@@ -69,4 +67,6 @@ public class TransactionLogServiceImp implements TransactionLogService {
             throw new RuntimeException(e);
         }
     }
+
+
 }
