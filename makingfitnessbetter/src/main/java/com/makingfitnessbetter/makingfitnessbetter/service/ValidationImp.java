@@ -87,7 +87,14 @@ public class ValidationImp implements ValidationService {
     public GoalCreationSubmitVO validateGoal(GoalCreationSubmitVO goalCreationSubmitVO){
         log.info("Starting the goal validation");
 
-        // TODO: Think about some valid validation for this or get rid of it
+        Integer currentMemberId = goalCreationSubmitVO.getMemberId();
+
+        Optional<User> currentUser = userRepository.findById(goalCreationSubmitVO.getMemberId());
+        if(currentUser.isPresent()){
+            goalCreationSubmitVO.setUser(currentUser.get());
+        } else {
+            throw new UserException("No User Id found");
+        }
 
         log.info("End the goal validation");
         return goalCreationSubmitVO;
