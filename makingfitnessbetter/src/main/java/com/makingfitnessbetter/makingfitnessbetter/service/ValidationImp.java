@@ -6,6 +6,7 @@ import com.makingfitnessbetter.makingfitnessbetter.exceptions.ExerciseLogExcepti
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.UserException;
 import com.makingfitnessbetter.makingfitnessbetter.repositories.UserRepository;
 import com.makingfitnessbetter.makingfitnessbetter.utility.transactionCode;
+import com.makingfitnessbetter.makingfitnessbetter.vo.GoalCreationSubmitVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitExerciseLogVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.SubmitRegistrationVO;
 import lombok.extern.slf4j.Slf4j;
@@ -81,6 +82,15 @@ public class ValidationImp implements ValidationService {
             log.error("Exercise Validation : Validation failed for exercise log");
             throw new ExerciseLogException("Error validation Exercise");
         }
+    }
+
+    public GoalCreationSubmitVO validateGoal(GoalCreationSubmitVO goalCreationSubmitVO){
+        log.info("Starting the goal validation");
+
+        // TODO: Think about some valid validation for this or get rid of it
+
+        log.info("End the goal validation");
+        return goalCreationSubmitVO;
     }
 
 }

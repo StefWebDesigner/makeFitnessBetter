@@ -16,4 +16,6 @@ public class GlobalExpectionHandler {
     @ExceptionHandler(ExerciseLogException.class)
     public ResponseEntity<String> ExerciseLogExceptionHandler(EntryLogException e){return ResponseEntity.ok(e.getMessage());}
 
+    @ExceptionHandler(GoalException.class)
+    public ResponseEntity<String> GoalExceptionHandler(GoalException e){return ResponseEntity.ok(e.getMessage());}
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class GoalCreationSubmit {
+public class GoalCreationSubmitVO {
 
     private Integer goalId;
     private String goalName;
