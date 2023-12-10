@@ -1,6 +1,5 @@
 package com.makingfitnessbetter.makingfitnessbetter.vo;
 
-import com.makingfitnessbetter.makingfitnessbetter.entities.Goal;
 import com.makingfitnessbetter.makingfitnessbetter.entities.GoalList;
 import lombok.Data;
 

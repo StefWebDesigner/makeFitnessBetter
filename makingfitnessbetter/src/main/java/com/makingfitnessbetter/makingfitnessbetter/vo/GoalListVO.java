@@ -7,21 +7,20 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Data
-public class GoalVO {
+public class GoalListVO {
 
-    private Integer goalId;
-    private String goalName;
-    private String actionCd;
-    private List<GoalList> goalLists;
     private Integer goalListId;
-    private String goalDescriptions;
-    private Boolean isCompleted;
-    private GoalEntry goalEntry;
+    private String goalName;
+    private Boolean isGoalCompleted;
+    private List<GoalEntry> goalEntryEntryList;
+    private String actionCd;
+    private Date dateCreated;
 
      public static ResponseEntity<Object> generateResponse(String message, HttpStatus status, Object objResponse){
          Map<String, Object> map = new HashMap<>();

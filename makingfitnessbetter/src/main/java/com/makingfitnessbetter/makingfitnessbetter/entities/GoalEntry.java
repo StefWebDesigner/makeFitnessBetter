@@ -1,32 +1,28 @@
 package com.makingfitnessbetter.makingfitnessbetter.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
-public class GoalList {
+public class GoalEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer goalEntryId;
     private Integer goalListId;
-    private String goalName;
-    private Boolean isGoalCompleted;
+    private String checkTaskName;
+    private Boolean isCompleted;
     private String actionCd;
     private Date dateCreated;
 
-    @OneToMany(mappedBy = "goalList", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private List<GoalEntry> goalEntryList;
-
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_memberId")
+    @JoinColumn(name="goalList_goalListId")
     @JsonBackReference
-    private User user;
+    private GoalList goalList;
+
+
+
 
 }

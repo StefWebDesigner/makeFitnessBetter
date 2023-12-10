@@ -1,10 +1,12 @@
 package com.makingfitnessbetter.makingfitnessbetter.controller;
 
-import com.makingfitnessbetter.makingfitnessbetter.entities.Goal;
+import com.makingfitnessbetter.makingfitnessbetter.entities.GoalEntry;
+import com.makingfitnessbetter.makingfitnessbetter.entities.GoalList;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.GoalException;
-import com.makingfitnessbetter.makingfitnessbetter.exceptions.UserException;
 import com.makingfitnessbetter.makingfitnessbetter.service.GoalService;
 import com.makingfitnessbetter.makingfitnessbetter.vo.GoalCreationSubmitVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.GoalListDTO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.GoalListVO;
 import com.makingfitnessbetter.makingfitnessbetter.vo.GoalVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +37,10 @@ public class GoalController {
     public ResponseEntity<Object> goalCreation(@RequestBody GoalCreationSubmitVO goalCreationSubmitVO){
         log.info("Starting Goal Creation Flow");
         try{
-            Goal result = goalService.goalCreation(goalCreationSubmitVO);
+            GoalListDTO result = goalService.goalCreation(goalCreationSubmitVO);
             if(goalCreationSubmitVO.getActionCd().equals("GlCr")){
                 log.info("Goal Created Succesfully returned");
-                return GoalVO.generateResponse("Goal created", HttpStatus.CREATED, result);
+                return GoalListVO.generateResponse("Goal created", HttpStatus.CREATED, result);
 
                 //Todo : Add the else if for the modify and delete methods
             } else {

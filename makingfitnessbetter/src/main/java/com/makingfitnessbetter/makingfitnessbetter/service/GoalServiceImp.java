@@ -1,9 +1,10 @@
 package com.makingfitnessbetter.makingfitnessbetter.service;
 
-import com.makingfitnessbetter.makingfitnessbetter.entities.Goal;
+import com.makingfitnessbetter.makingfitnessbetter.entities.GoalEntry;
 import com.makingfitnessbetter.makingfitnessbetter.entities.GoalList;
 import com.makingfitnessbetter.makingfitnessbetter.exceptions.GoalException;
 import com.makingfitnessbetter.makingfitnessbetter.vo.GoalCreationSubmitVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.GoalListDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class GoalServiceImp implements GoalService{
     @Autowired
     ValidationService validationService;
 
-    public Goal goalCreation(GoalCreationSubmitVO goalCreationSubmitVO){
+    public GoalListDTO goalCreation(GoalCreationSubmitVO goalCreationSubmitVO){
 
         //    Validation and checking for actionCd
         validationService.validateGoal(goalCreationSubmitVO);
@@ -39,38 +40,32 @@ public class GoalServiceImp implements GoalService{
         return null;
     }
 
-    public Goal createNewGoal(GoalCreationSubmitVO goalCreationSubmitVO){
+    public GoalListDTO createNewGoal(GoalCreationSubmitVO goalCreationSubmitVO){
         log.info("Entered in the create new goal flow");
-        Goal newlyCreatedGoal = new Goal();
-        List<GoalList> newlyCreatedGoalList = (List<GoalList>) new GoalList();
+
+
+
 
         try{
 
-            newlyCreatedGoal.setGoalName(goalCreationSubmitVO.getGoalName());
-            newlyCreatedGoal.setUser(goalCreationSubmitVO.getUser());
-            newlyCreatedGoal.setGoalLists(newlyCreatedGoalList);
-
-            newlyCreatedGoalList.setGoal(newlyCreatedGoal);
-            newlyCreatedGoalList.setGoalDescriptions(goalCreationSubmitVO.getGoalDescriptions());
 
 
+
+
+
+            log.info("Leaving in the create new goal flow");
+            return null;
 
 
         } catch (GoalException e){
             throw new GoalException("Error in creating the new goal");
         }
 
-
-
-
-
-        log.info("Leaving in the create new goal flow");
+    }
+    public GoalEntry modifyExistingGoal(GoalCreationSubmitVO goalCreationSubmitVO){
         return null;
     }
-    public Goal modifyExistingGoal(GoalCreationSubmitVO goalCreationSubmitVO){
-        return null;
-    }
-    public Goal deleteExistingGoal(GoalCreationSubmitVO goalCreationSubmitVO){
+    public GoalEntry deleteExistingGoal(GoalCreationSubmitVO goalCreationSubmitVO){
         return null;
     }
 

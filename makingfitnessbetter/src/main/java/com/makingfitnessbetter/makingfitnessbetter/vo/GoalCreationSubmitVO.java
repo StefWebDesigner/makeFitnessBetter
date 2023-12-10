@@ -1,6 +1,6 @@
 package com.makingfitnessbetter.makingfitnessbetter.vo;
 
-import com.makingfitnessbetter.makingfitnessbetter.entities.Goal;
+import com.makingfitnessbetter.makingfitnessbetter.entities.GoalEntry;
 import com.makingfitnessbetter.makingfitnessbetter.entities.GoalList;
 import com.makingfitnessbetter.makingfitnessbetter.entities.User;
 import lombok.Data;
@@ -18,7 +18,8 @@ public class GoalCreationSubmitVO {
     private Integer goalListId;
     private String goalDescriptions;
     private Boolean isCompleted;
-    private Goal goal;
+    private GoalEntry goalEntry;
     private User user;
+    private List<String> enteredGoalsList;
 
 }

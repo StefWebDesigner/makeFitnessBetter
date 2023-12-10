@@ -1,12 +1,13 @@
 package com.makingfitnessbetter.makingfitnessbetter.service;
 
-import com.makingfitnessbetter.makingfitnessbetter.entities.Goal;
+import com.makingfitnessbetter.makingfitnessbetter.entities.GoalEntry;
 import com.makingfitnessbetter.makingfitnessbetter.vo.GoalCreationSubmitVO;
+import com.makingfitnessbetter.makingfitnessbetter.vo.GoalListDTO;
 
 public interface GoalService {
-    public Goal goalCreation(GoalCreationSubmitVO goalCreationSubmitVO);
+    public GoalListDTO goalCreation(GoalCreationSubmitVO goalCreationSubmitVO);
 
-    public Goal createNewGoal(GoalCreationSubmitVO goalCreationSubmitVO);
-    public Goal modifyExistingGoal(GoalCreationSubmitVO goalCreationSubmitVO);
-    public Goal deleteExistingGoal(GoalCreationSubmitVO goalCreationSubmitVO);
+    public GoalListDTO createNewGoal(GoalCreationSubmitVO goalCreationSubmitVO);
+    public GoalEntry modifyExistingGoal(GoalCreationSubmitVO goalCreationSubmitVO);
+    public GoalEntry deleteExistingGoal(GoalCreationSubmitVO goalCreationSubmitVO);
 }

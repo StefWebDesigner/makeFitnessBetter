@@ -1,12 +1,10 @@
 package com.makingfitnessbetter.makingfitnessbetter.repositories;
 
-import com.makingfitnessbetter.makingfitnessbetter.entities.Goal;
+import com.makingfitnessbetter.makingfitnessbetter.entities.GoalEntry;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 
 @Repository
-public interface GoalRepository extends JpaRepository<Goal, Integer> {
+public interface GoalRepository extends JpaRepository<GoalEntry, Integer> {
 }
